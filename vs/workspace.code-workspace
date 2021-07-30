@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"templateutf8bom.h": "c",
+			"xstring": "c",
+			"system_error": "cpp",
+			"type_traits": "cpp",
+			"xlocnum": "cpp",
+			"xtr1common": "cpp",
+			"memory.h": "c",
+			"corecrt_memory.h": "c",
+			"corecrt_memcpy_s.h": "c",
+			"string.h": "c",
+			"xlocale": "c"
+		}
+	}
+}
