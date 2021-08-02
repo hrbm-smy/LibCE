@@ -83,6 +83,121 @@ extern "C"
 		int32_t* Buffer;
 	} RingedFrames;
 
+	/// <summary>
+	/// <para>フレームリングバッファを初期化する。</para>
+	/// </summary>
+	/// <param name="capacity">最大蓄積可能フレーム数。</param>
+	/// <param name="frameSize">最大フレームサイズ。</param>
+	/// <param name="buffer">動作に必要なバッファ。
+	/// RF_NEEDED_BUFFER_WORDS分の要素数を持つ領域を確保して指定すること。</param>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>なし。</returns>
+	void RingedFrames_Init(
+		int32_t capacity, int32_t frameSize,
+		int32_t* buffer,
+		RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>クリアする。</para>
+	/// </summary>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>なし。</returns>
+	void RingedFrames_Clear(
+		RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>現在のフレーム蓄積数を取得する。</para>
+	/// </summary>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>現在のフレーム蓄積数。</returns>
+	int32_t RingedFrames_Count(
+		const RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>現在のフレーム更新数を取得する。</para>
+	/// <para>フレームリングバッファは最古を上書きするが、蓄積数は最大で停止する。</para>
+	/// <para>更新数は、最大蓄積数を蓄積した後でも更新される。</para>
+	/// </summary>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>現在のフレーム更新数。</returns>
+	int64_t RingedFrames_UpdateCount(
+		const RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>最大蓄積可能フレーム数を取得する。</para>
+	/// </summary>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>最大蓄積可能フレーム数。</returns>
+	int32_t RingedFrames_Capacity(
+		const RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>最大フレームサイズを取得する。</para>
+	/// </summary>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>最大フレームサイズ。</returns>
+	int32_t RingedFrames_FrameSize(
+		const RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>フレームをPushする。</para>
+	/// <para>最大蓄積可能フレーム数まで蓄積されていると、最古を上書きする。</para>
+	/// </summary>
+	/// <param name="frame">フレーム。</param>
+	/// <param name="length">フレームの長さ。</param>
+	/// <param name="timestamp">タイムスタンプ。</param>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>なし。</returns>
+	void RingedFrames_Push(
+		const void* frame, int32_t length,
+		int64_t timestamp,
+		RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>最古を0としたインデックスで、フレームを参照する。</para>
+	/// <para>コピーせず、内部メモリを直接参照する。</para>
+	/// </summary>
+	/// <param name="index">最古を0としたインデックス。</param>
+	/// <param name="length">フレーム長の格納先。</param>
+	/// <param name="timestamp">タイムスタンプの格納先。</param>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>フレーム。nullでなし。</returns>
+	const void* RingedFrames_ReferWithOld(
+		int32_t index,
+		int32_t* length,
+		int64_t* timestamp,
+		const RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>最新を0としたインデックスで、フレームを参照する。</para>
+	/// <para>コピーせず、内部メモリを直接参照する。</para>
+	/// </summary>
+	/// <param name="index">最新を0としたインデックス。</param>
+	/// <param name="length">フレーム長の格納先。</param>
+	/// <param name="timestamp">タイムスタンプの格納先。</param>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>フレーム。nullでなし。</returns>
+	const void* RingedFrames_ReferWithNew(
+		int32_t index,
+		int32_t* length,
+		int64_t* timestamp,
+		const RingedFrames* ctxt);
+
+	/// <summary>
+	/// <para>最古のフレームをPopする。</para>
+	/// <para>フレームが無い場合は負を返す。</para>
+	/// <para>格納先が足りない場合は、格納できる分だけ返す。</para>
+	/// </summary>
+	/// <param name="buffer">フレームの格納先バッファ。</param>
+	/// <param name="bufferSize">フレーム格納先バッファのサイズ。</param>
+	/// <param name="timestamp">タイムスタンプの格納先。</param>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>フレーム長。</returns>
+	int32_t RingedFrames_Pop(
+		void* buffer, int32_t bufferSize,
+		int64_t* timestamp,
+		RingedFrames* ctxt);
+
 	void RingedFrames_UnitTest(void);
 
 #ifdef __cplusplus

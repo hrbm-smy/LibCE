@@ -3,12 +3,68 @@
 
 #include <iostream>
 #include "RingedFrames.h"
+#include "Assertions.h"
+
+static int32_t ShowResults(const Assertions* assertions)
+{
+	int32_t result = 0;
+
+	// 溜まっているアサーションを表示する
+	int32_t assCount = Assertions_Count(assertions);
+	for (int32_t ai = 0; ai < assCount; ai++)
+	{
+		const Assertions_Item* assItem = Assertions_Refer(ai, assertions);
+		if (assItem != nullptr)
+		{
+			std::cout
+				<< assItem->FileName
+				<< ":"
+				<< assItem->Line
+				<< std::endl;
+		}
+	}
+
+	// 何もなかった場合は正常終了表示
+	if (assCount <= 0)
+	{
+		std::cout << "Normally completed." << std::endl;;
+	}
+
+	// 結果コードはとりあえずエラー数とする
+	result = assCount;
+
+	return result;
+}
 
 int main()
 {
-	RingedFrames_UnitTest();
+	int result = 0;
 
-	std::cout << "Normally completed.";
+	// テストをするためにはAssertionsが必要
+	// <-AssertionsにはRingedFramesが必要
+	RingedFrames_UnitTest();
+	Assertions_UnitTest();
+
+	// 100個もエラーが出ればおよそげんなりできるのでこんなものでOK
+	// 割とスタック少な目っぽいのでstatic
+	static Assertions assertions;
+	static int32_t assBuffer[SA_NEEDED_BUFFER_WORDS(100)];
+	Assertions_Init(100, assBuffer, &assertions);
+
+	// ここに単体テストを追加していく。
+
+
+
+
+
+
+
+
+
+	// 結果を表示する
+	result = ShowResults(&assertions);
+
+	return result;
 }
 
 // プログラムの実行: Ctrl + F5 または [デバッグ] > [デバッグなしで開始] メニュー
