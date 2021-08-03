@@ -82,6 +82,41 @@ extern "C"
 		AvlContent Content;
 	} AvlNode;
 
+	/// <summary>
+	/// <para>AVLノードを初期化する。</para>
+	/// </summary>
+	/// <param name="key">内容のKey。</param>
+	/// <param name="value">内容のValue。</param>
+	/// <param name="node">ノード。</param>
+	/// <returns>なし。</returns>
+	void AvlNode_Init(
+		AvlKey_t key, const void* value,
+		AvlNode* node);
+
+	/// <summary>
+	/// <para>Keyに該当するノードを検索する。</para>
+	/// </summary>
+	/// <param name="key">検索する内容のKey。</param>
+	/// <param name="root">検索開始rootノード。</param>
+	/// <returns>該当するノード。</returns>
+	AvlNode* AvlTree_Search(
+		AvlKey_t key,
+		AvlNode* root);
+
+	/// <summary>
+	/// <para>ノードを挿入する。</para>
+	/// </summary>
+	/// <param name="node">挿入するノード。</param>
+	/// <param name="root">挿入先treeのrootノード。</param>
+	/// <returns>更新されたtreeのrootノード。</returns>
+	AvlNode* AvlTree_Insert(
+		AvlNode* node,
+		AvlNode* root);
+
+#ifdef _UNIT_TEST
+#include "Assertions.h"
+	void AvlTree_UnitTest(Assertions* assertions);
+#endif
 
 #ifdef __cplusplus
 }

@@ -4,6 +4,7 @@
 #include <iostream>
 #include "RingedFrames.h"
 #include "Assertions.h"
+#include "AvlTree.h"
 
 static int32_t ShowResults(const Assertions* assertions)
 {
@@ -17,6 +18,7 @@ static int32_t ShowResults(const Assertions* assertions)
 		if (assItem != nullptr)
 		{
 			std::cout
+				<< "Assertion failed at "
 				<< assItem->FileName
 				<< ":"
 				<< assItem->Line
@@ -53,6 +55,7 @@ int main()
 
 	// ここに単体テストを追加していく。
 
+	AvlTree_UnitTest(&assertions);
 
 
 

@@ -125,7 +125,9 @@ extern "C"
 		int32_t index,
 		const Assertions* ctxt);
 
+#ifdef _UNIT_TEST
 	void Assertions_UnitTest(void);
+#endif
 
 #ifdef __cplusplus
 }

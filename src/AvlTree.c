@@ -29,6 +29,7 @@ SOFTWARE.
 *
 */
 #include "AvlTree.h"
+#include <string.h>
 #include "nullptr.h"
 
 /* -------------------------------------------------------------------
@@ -160,17 +161,20 @@ static void AdoptAsRight(AvlNode* child, AvlNode* parent)
 		child->Parent = parent;
 	}
 }
-
 /// <summary>
-/// <para>ノードを置き換える。</para>
+/// <para>子ノードを置き換える。</para>
 /// </summary>
-static void Replace(const AvlNode* from, AvlNode* to)
+static void ReplaceChild(const AvlNode* from, AvlNode* to)
 {
-	// 親との縁組
+	// 親を取得
 	AvlNode* parent = ParentOf(from);
 	if (parent == nullptr)
 	{
-		// 親がとれない場合はつなげない
+		// 親->子はつなぐことが出来ないが、子->親はつなげられるならつなげる(親なし)
+		if (to != nullptr)
+		{
+			to->Parent = parent;
+		}
 	}
 	else if (parent->Left == from)
 	{
@@ -182,6 +186,14 @@ static void Replace(const AvlNode* from, AvlNode* to)
 		// 右につながれていた場合は右につなぐ
 		AdoptAsRight(to, parent);
 	}
+}
+/// <summary>
+/// <para>ノードを置き換える。</para>
+/// </summary>
+static void Replace(const AvlNode* from, AvlNode* to)
+{
+	// 親との縁組
+	ReplaceChild(from, to);
 
 	// 左との縁組
 	AvlNode* left = LeftOf(from);
@@ -207,17 +219,26 @@ static AvlNode* RotateRight(AvlNode* node)
 	// 回転中心(pivot)は左の子ノード
 	AvlNode* pivot = LeftOf(node);
 
+	// 回転中心と親を縁組
+	ReplaceChild(node, pivot);
+
 	// 移動する子ノードを取得
 	AvlNode* moveChild = RightOf(pivot);
 	// 移動する子ノードを、左の子として縁組
 	AdoptAsLeft(moveChild, node);
-	// 縁組したので高さを更新
-	UpdateHeight(node);
+	// 移動なので移動元はクリア
+	if (pivot != nullptr)
+	{
+		pivot->Right = nullptr;
+	}
 
 	// 回転中心の右の子ノードとして再縁組
 	AdoptAsRight(node, pivot);
-	// 縁組したので高さを更新
+
+	// 縁組したので高さを更新(子から親へ)
+	UpdateHeight(node);
 	UpdateHeight(pivot);
+	UpdateHeight(ParentOf(pivot));
 
 	// 新たなrootを返す
 	return pivot;
@@ -231,22 +252,30 @@ static AvlNode* RotateLeft(AvlNode* node)
 	// 回転中心(pivot)は右の子ノード
 	AvlNode* pivot = RightOf(node);
 
+	// 回転中心と親を縁組
+	ReplaceChild(node, pivot);
+
 	// 移動する子ノードを取得
 	AvlNode* moveChild = LeftOf(pivot);
 	// 移動する子ノードを、右の子として縁組
 	AdoptAsRight(moveChild, node);
-	// 縁組したので高さを更新
-	UpdateHeight(node);
+	// 移動なので移動元はクリア
+	if (pivot != nullptr)
+	{
+		pivot->Left = nullptr;
+	}
 
 	// 回転中心の左の子ノードとして再縁組
 	AdoptAsLeft(node, pivot);
-	// 縁組したので高さを更新
+
+	// 縁組したので高さを更新(子から親へ)
+	UpdateHeight(node);
 	UpdateHeight(pivot);
+	UpdateHeight(ParentOf(pivot));
 
 	// 新たなrootを返す
 	return pivot;
 }
-
 /// <summary>
 /// <para>右-左 2重回転を行う。</para>
 /// <para>更新されたrootを返す。</para>
@@ -290,9 +319,8 @@ static void Insert(
 				else
 				{
 					// 左がない -> 見つかった。ここに挿入
-					parent->Left = node;
+					AdoptAsLeft(node, parent);
 					node->Height = 1;
-					node->Parent = parent;
 					node->Left = nullptr;
 					node->Right = nullptr;
 
@@ -310,9 +338,8 @@ static void Insert(
 				else
 				{
 					// 右がない -> 見つかった。ここに挿入
-					parent->Right = node;
+					AdoptAsRight(node, parent);
 					node->Height = 1;
-					node->Parent = parent;
 					node->Left = nullptr;
 					node->Right = nullptr;
 
@@ -428,10 +455,9 @@ void AvlNode_Init(
 {
 	if (node != nullptr)
 	{
+		memset(node, 0, sizeof(AvlNode));
+
 		node->Height = 1;
-		node->Parent = nullptr;
-		node->Left = nullptr;
-		node->Right = nullptr;
 		node->Content.Key = key;
 		node->Content.Value = value;
 	}
@@ -492,10 +518,266 @@ AvlNode* AvlTree_Insert(
 *	Unit Test
 */
 #ifdef _UNIT_TEST
-#include <assert.h>
-void AvlTree_UnitTest(void)
+#include <stdlib.h>
+
+typedef struct _AvlTree_UnitTest_Value
 {
+	int32_t Member1;
+	int8_t Member2[4];
+} AvlTree_UnitTest_Value;
+
+static int32_t AvlTree_TracedHeightOf(const AvlNode* node)
+{
+	int32_t height = 0;
+	if (node != nullptr)
+	{
+		height += 1;
+		int32_t lh = AvlTree_TracedHeightOf(node->Left);
+		int32_t rh = AvlTree_TracedHeightOf(node->Right);
+		int32_t mh = (lh < rh) ? rh : lh;
+		height += mh;
+	}
+	return height;
+}
+
+static void AvlTree_Check(const AvlNode* root, Assertions* assertions)
+{
+	if (root != nullptr)
+	{
+		// 実際に構造を辿った高さと、記憶されている高さを取得
+		int32_t tlh = AvlTree_TracedHeightOf(root->Left);
+		int32_t trh = AvlTree_TracedHeightOf(root->Right);
+		int32_t slh = HeightOf(root->Left);
+		int32_t srh = HeightOf(root->Right);
+
+		// 左右の部分木の高さの差が1以下であること
+		Assertions_Assert(abs(tlh - trh) <= 1, assertions);
+
+		// 記憶された高さと、実際に辿った高さが同じであること
+		Assertions_Assert(tlh == slh, assertions);
+		Assertions_Assert(trh == srh, assertions);
+
+		// 部分木を再帰チェック
+		AvlTree_Check(root->Left, assertions);
+		AvlTree_Check(root->Right, assertions);
+	}
+}
+
+void AvlTree_UnitTest(Assertions* assertions)
+{
+	AvlNode* root;
+	AvlNode* searched;
+	AvlNode nodes[30];
+	AvlTree_UnitTest_Value values[30];
+	AvlKey_t dupKey;
+	const AvlTree_UnitTest_Value* foundValue;
+
 	// -----------------------------------------
-	// 1-1
+	// 1-1 Init(self==nullptr)
+	AvlNode_Init(0, nullptr, nullptr);
+
+	// -----------------------------------------
+	// 1-2 Init
+	AvlNode_Init(0, &values[0], &nodes[0]);
+	Assertions_Assert(nodes[0].Content.Key == 0, assertions);
+	Assertions_Assert(nodes[0].Content.Value == &values[0], assertions);
+
+	// -----------------------------------------
+	// 2-1 Insert(node==nullptr)
+	root = nullptr;
+	root = AvlTree_Insert(nullptr, root);
+	Assertions_Assert(root == nullptr, assertions);
+
+	// -----------------------------------------
+	// 2-2 Insert 1st node, become a root
+	root = nullptr;
+	AvlNode_Init(0, &values[0], &nodes[0]);
+	root = AvlTree_Insert(&nodes[0], root);
+	// Check structure
+	AvlTree_Check(root, assertions);
+	// Check searches
+	Assertions_Assert(root == &nodes[0], assertions);
+	searched = AvlTree_Search(0, root);
+	Assertions_Assert(searched == &nodes[0], assertions);
+	searched = AvlTree_Search(1, root);
+	Assertions_Assert(searched == nullptr, assertions);
+
+	// -----------------------------------------
+	// 3-1 Insert sequential nodes
+	for (int32_t i = 1; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// Check structure
+	AvlTree_Check(root, assertions);
+	// Check searches
+	for (int32_t i = 1; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		searched = AvlTree_Search(key, root);
+		Assertions_Assert(searched == &nodes[i], assertions);
+		searched = AvlTree_Search(key - 1, root);
+		Assertions_Assert(searched == nullptr, assertions);
+	}
+
+	// -----------------------------------------
+	// 3-2 Insert sequential nodes (descent order)
+	for (int32_t i = 11; i < 20; i++)
+	{
+		AvlKey_t key = -((i * 2) + 1);
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// Check structure
+	AvlTree_Check(root, assertions);
+	// Check searches
+	for (int32_t i = 11; i < 20; i++)
+	{
+		AvlKey_t key = -((i * 2) + 1);
+		searched = AvlTree_Search(key, root);
+		Assertions_Assert(searched == &nodes[i], assertions);
+		searched = AvlTree_Search(key - 1, root);
+		Assertions_Assert(searched == nullptr, assertions);
+	}
+
+	// -----------------------------------------
+	// 3-3 Re-Insert sequential nodes (descent order)
+	root = nullptr;
+	for (int32_t i = 11; i < 20; i++)
+	{
+		AvlKey_t key = -((i * 2) + 1);
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// Check structure
+	AvlTree_Check(root, assertions);
+	// Check searches
+	for (int32_t i = 11; i < 20; i++)
+	{
+		AvlKey_t key = -((i * 2) + 1);
+		searched = AvlTree_Search(key, root);
+		Assertions_Assert(searched == &nodes[i], assertions);
+		searched = AvlTree_Search(key - 1, root);
+		Assertions_Assert(searched == nullptr, assertions);
+	}
+
+	// -----------------------------------------
+	// 4-1 Insert oscillated nodes
+	for (int32_t i = 1; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		if ((i % 2) != 0)
+		{
+			key = -key;
+		}
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// Check structure
+	AvlTree_Check(root, assertions);
+	// Check searches
+	for (int32_t i = 1; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		if ((i % 2) != 0)
+		{
+			key = -key;
+		}
+		searched = AvlTree_Search(key, root);
+		Assertions_Assert(searched == &nodes[i], assertions);
+		searched = AvlTree_Search(key - 1, root);
+		Assertions_Assert(searched == nullptr, assertions);
+	}
+
+	// -----------------------------------------
+	// 4-2 Insert oscillated nodes
+	root = nullptr;
+	for (int32_t i = 11; i < 20; i++)
+	{
+		AvlKey_t key = ((i * 2) + 1);
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	for (int32_t i = 1; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		if ((i % 2) != 0)
+		{
+			key = -key;
+		}
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// Check structure
+	AvlTree_Check(root, assertions);
+	// Check searches
+	for (int32_t i = 1; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		if ((i % 2) != 0)
+		{
+			key = -key;
+		}
+		searched = AvlTree_Search(key, root);
+		Assertions_Assert(searched == &nodes[i], assertions);
+		searched = AvlTree_Search(key - 1, root);
+		Assertions_Assert(searched == nullptr, assertions);
+	}
+
+	// -----------------------------------------
+	// 5-1 Insert duplicated node
+	root = nullptr;
+	memset(values, 0, sizeof values);
+	// まず、いくつかノードを挿入する
+	for (int32_t i = 0; i < 5; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// 上書きされるノードを挿入する
+	dupKey = (5 * 2) + 1;
+	values[5].Member1 = (5 * 2) + 1 + 1;
+	AvlNode_Init(dupKey, &values[5], &nodes[5]);
+	root = AvlTree_Insert(&nodes[5], root);
+	// さらにノードを挿入して、木を変形させる
+	for (int32_t i = 6; i < 10; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+	// いったん構造をチェック
+	AvlTree_Check(root, assertions);
+	// この時点では上書きされる前のノードが検索できるはず
+	searched = AvlTree_Search(dupKey, root);
+	Assertions_Assert(searched != nullptr, assertions);
+	foundValue = searched->Content.Value;
+	Assertions_Assert(foundValue != nullptr, assertions);
+	Assertions_Assert(foundValue->Member1 == (5 * 2) + 1 + 1, assertions);
+
+	// 上書きするノードを挿入する
+	values[10].Member1 = (10 * 2) + 1 + 1;
+	AvlNode_Init(dupKey, &values[10], &nodes[10]);
+	root = AvlTree_Insert(&nodes[10], root);
+	// さらにノードを挿入して、木を変形させる
+	for (int32_t i = 11; i < 20; i++)
+	{
+		AvlKey_t key = (i * 2) + 1;
+		AvlNode_Init(key, &values[i], &nodes[i]);
+		root = AvlTree_Insert(&nodes[i], root);
+	}
+
+	// 構造をチェック
+	AvlTree_Check(root, assertions);
+	// 上書きされた後のノードが検索できるはず
+	searched = AvlTree_Search(dupKey, root);
+	Assertions_Assert(searched != nullptr, assertions);
+	foundValue = searched->Content.Value;
+	Assertions_Assert(foundValue != nullptr, assertions);
+	Assertions_Assert(foundValue->Member1 == (10 * 2) + 1 + 1, assertions);
+
 }
 #endif

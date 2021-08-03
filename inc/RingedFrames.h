@@ -198,7 +198,9 @@ extern "C"
 		int64_t* timestamp,
 		RingedFrames* ctxt);
 
+#ifdef _UNIT_TEST
 	void RingedFrames_UnitTest(void);
+#endif
 
 #ifdef __cplusplus
 }
