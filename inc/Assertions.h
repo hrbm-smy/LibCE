@@ -74,6 +74,13 @@ extern "C"
 	} Assertions;
 
 	/// <summary>
+	/// <para>共有インスタンスを取得する。</para>
+	/// <para>共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。</para>
+	/// </summary>
+	/// <returns>共有インスタンス。</returns>
+	Assertions* Assertions_Instance(void);
+
+	/// <summary>
 	/// <para>蓄積可能アサーションを初期化する。</para>
 	/// </summary>
 	/// <param name="capacity">蓄積可能数。</param>

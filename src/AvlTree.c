@@ -519,6 +519,7 @@ AvlNode* AvlTree_Insert(
 */
 #ifdef _UNIT_TEST
 #include <stdlib.h>
+#include "Assertions.h"
 
 typedef struct _AvlTree_UnitTest_Value
 {
@@ -563,8 +564,9 @@ static void AvlTree_Check(const AvlNode* root, Assertions* assertions)
 	}
 }
 
-void AvlTree_UnitTest(Assertions* assertions)
+void AvlTree_UnitTest(void)
 {
+	Assertions* assertions = Assertions_Instance();
 	AvlNode* root;
 	AvlNode* searched;
 	AvlNode nodes[30];

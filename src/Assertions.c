@@ -36,10 +36,27 @@ SOFTWARE.
 /* -------------------------------------------------------------------
 *	Privates
 */
+#define SA_CAP_INSTANCE (100)
+Assertions m_instance = { 0 };
+int32_t m_instanceBuffer[SA_NEEDED_BUFFER_WORDS(SA_CAP_INSTANCE)];
 
 /* -------------------------------------------------------------------
 *	Services
 */
+
+/// <summary>
+/// <para>共有インスタンスを取得する。</para>
+/// <para>共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。</para>
+/// </summary>
+/// <returns>共有インスタンス。</returns>
+Assertions* Assertions_Instance(void)
+{
+	if (m_instance.Items.Buffer == nullptr)
+	{
+		Assertions_Init(SA_CAP_INSTANCE, m_instanceBuffer, &m_instance);
+	}
+	return &m_instance;
+}
 
 /// <summary>
 /// <para>蓄積可能アサーションを初期化する。</para>

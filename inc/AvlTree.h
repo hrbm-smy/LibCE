@@ -114,8 +114,7 @@ extern "C"
 		AvlNode* root);
 
 #ifdef _UNIT_TEST
-#include "Assertions.h"
-	void AvlTree_UnitTest(Assertions* assertions);
+	void AvlTree_UnitTest(void);
 #endif
 
 #ifdef __cplusplus

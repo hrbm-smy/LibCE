@@ -47,15 +47,9 @@ int main()
 	RingedFrames_UnitTest();
 	Assertions_UnitTest();
 
-	// 100個もエラーが出ればおよそげんなりできるのでこんなものでOK
-	// 割とスタック少な目っぽいのでstatic
-	static Assertions assertions;
-	static int32_t assBuffer[SA_NEEDED_BUFFER_WORDS(100)];
-	Assertions_Init(100, assBuffer, &assertions);
-
 	// ここに単体テストを追加していく。
 
-	AvlTree_UnitTest(&assertions);
+	AvlTree_UnitTest();
 
 
 
@@ -65,7 +59,8 @@ int main()
 
 
 	// 結果を表示する
-	result = ShowResults(&assertions);
+	Assertions* assertions = Assertions_Instance();
+	result = ShowResults(assertions);
 
 	return result;
 }
