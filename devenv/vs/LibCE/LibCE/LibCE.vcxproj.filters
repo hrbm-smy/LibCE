@@ -15,33 +15,42 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\src\AvlTree.c">
+    <ClCompile Include="..\..\..\..\src\Assertions.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\RingedFrames.c">
+    <ClCompile Include="..\..\..\..\src\AvlTree.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Indices.c">
+    <ClCompile Include="..\..\..\..\src\Indices.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\src\Assertions.c">
+    <ClCompile Include="..\..\..\..\src\Map.c">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\RingedFrames.c">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\inc\AvlTree.h">
+    <ClInclude Include="..\..\..\..\inc\ArrayCap.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\inc\nullptr.h">
+    <ClInclude Include="..\..\..\..\inc\Assertions.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\inc\Indices.h">
+    <ClInclude Include="..\..\..\..\inc\AvlTree.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\inc\RingedFrames.h">
+    <ClInclude Include="..\..\..\..\inc\Indices.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\inc\Assertions.h">
+    <ClInclude Include="..\..\..\..\inc\Map.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\inc\nullptr.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\inc\RingedFrames.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

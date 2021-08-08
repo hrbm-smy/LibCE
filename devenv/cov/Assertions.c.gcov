@@ -1,0 +1,248 @@
+        -:    0:Source:../../src/Assertions.c
+        -:    0:Graph:obj/src/Assertions.gcno
+        -:    0:Data:obj/src/Assertions.gcda
+        -:    0:Runs:3
+        -:    0:Programs:3
+        -:    1:﻿/** ------------------------------------------------------------------
+        -:    2:*
+        -:    3:*	@file	Assertions.c
+        -:    4:*	@brief	Storable assertions
+        -:    5:*	@author	H.Someya
+        -:    6:*	@date	2021/08/02
+        -:    7:*
+        -:    8:MIT License
+        -:    9:
+        -:   10:Copyright (c) 2021 Hirobumi Someya
+        -:   11:
+        -:   12:Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:   13:of this software and associated documentation files (the "Software"), to deal
+        -:   14:in the Software without restriction, including without limitation the rights
+        -:   15:to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   16:copies of the Software, and to permit persons to whom the Software is
+        -:   17:furnished to do so, subject to the following conditions:
+        -:   18:
+        -:   19:The above copyright notice and this permission notice shall be included in all
+        -:   20:copies or substantial portions of the Software.
+        -:   21:
+        -:   22:THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   23:IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   24:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   25:AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   26:LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   27:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   28:SOFTWARE.
+        -:   29:*
+        -:   30:*/
+        -:   31:#include "Assertions.h"
+        -:   32:#include <string.h>
+        -:   33:#include "nullptr.h"
+        -:   34:#include "ArrayCap.h"
+        -:   35:
+        -:   36:/* -------------------------------------------------------------------
+        -:   37:*	Privates
+        -:   38:*/
+        -:   39:#define SA_CAP_INSTANCE (100)
+        -:   40:Assertions m_instance = { 0 };
+        -:   41:int32_t m_instanceBuffer[SA_NEEDED_BUFFER_WORDS(SA_CAP_INSTANCE)];
+        -:   42:
+        -:   43:/* -------------------------------------------------------------------
+        -:   44:*	Services
+        -:   45:*/
+        -:   46:
+        -:   47:/// <summary>
+        -:   48:/// <para>共有インスタンスを取得する。</para>
+        -:   49:/// <para>共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。</para>
+        -:   50:/// </summary>
+        -:   51:/// <returns>共有インスタンス。</returns>
+        9:   52:Assertions* Assertions_Instance(void)
+        -:   53:{
+        9:   54:	if (m_instance.Items.Buffer == nullptr)
+        -:   55:	{
+        3:   56:		Assertions_Init(SA_CAP_INSTANCE, m_instanceBuffer, &m_instance);
+        -:   57:	}
+        9:   58:	return &m_instance;
+        -:   59:}
+        -:   60:
+        -:   61:/// <summary>
+        -:   62:/// <para>蓄積可能アサーションを初期化する。</para>
+        -:   63:/// </summary>
+        -:   64:/// <param name="capacity">蓄積可能数。</param>
+        -:   65:/// <param name="buffer">動作に必要なバッファ。
+        -:   66:/// SA_NEEDED_BUFFER_WORDS分の要素数を持つ領域を確保して指定すること。</param>
+        -:   67:/// <param name="ctxt">コンテキスト。</param>
+        -:   68:/// <returns>なし。</returns>
+        9:   69:void Assertions_Init(
+        -:   70:	int32_t capacity,
+        -:   71:	int32_t* buffer,
+        -:   72:	Assertions* ctxt)
+        -:   73:{
+        9:   74:	if (ctxt != nullptr)
+        -:   75:	{
+        6:   76:		memset(ctxt, 0, sizeof(Assertions));
+        -:   77:
+        6:   78:		RingedFrames_Init(
+        -:   79:			capacity, sizeof(Assertions_Item), buffer,
+        -:   80:			&ctxt->Items);
+        -:   81:	}
+        9:   82:}
+        -:   83:
+        -:   84:/// <summary>
+        -:   85:/// <para>条件の偽(0)を表示する。</para>
+        -:   86:/// </summary>
+        -:   87:/// <param name="condition">条件。0(偽)の場合に表示される。</param>
+        -:   88:/// <param name="fileName">ファイル名。</param>
+        -:   89:/// <param name="line">行番号。</param>
+        -:   90:/// <param name="ctxt">コンテキスト。</param>
+        -:   91:/// <returns>なし。</returns>
+     1419:   92:void Assertions_AssertWith(
+        -:   93:	int condition,
+        -:   94:	const char* fileName, int32_t line,
+        -:   95:	Assertions* ctxt)
+        -:   96:{
+     1419:   97:	if ((ctxt != nullptr) &&
+        -:   98:		(condition == 0))
+        -:   99:	{
+        -:  100:		// Assertionは、最古を上書きしない、最初のn個を記録するものとする
+       24:  101:		if (RingedFrames_Count(&ctxt->Items) <
+       12:  102:			RingedFrames_Capacity(&ctxt->Items))
+        -:  103:		{
+        -:  104:			// アイテムを作成
+        -:  105:			Assertions_Item item;
+        9:  106:			item.Line = line;
+        -:  107:			// ターミネータを含めたサイズをコピー
+        9:  108:			int32_t fnl = strlen(fileName) + 1;
+        9:  109:			if (fnl > sizeof item.FileName)
+        -:  110:			{
+    #####:  111:				fnl = sizeof item.FileName;
+        -:  112:			}
+        9:  113:			memcpy(item.FileName, fileName, fnl);
+        -:  114:			// バッファ末尾のターミネータは常時つけてしまう
+        9:  115:			item.FileName[CAPACITY_OF(item.FileName) - 1] = '\0';
+        -:  116:
+        -:  117:			// リングバッファに追加
+        9:  118:			RingedFrames_Push(&item, sizeof item, 0, &ctxt->Items);
+        -:  119:		}
+        -:  120:	}
+     1419:  121:}
+        -:  122:
+        -:  123:/// <summary>
+        -:  124:/// <para>記憶されている項目の数を取得する。</para>
+        -:  125:/// </summary>
+        -:  126:/// <param name="ctxt">コンテキスト。</param>
+        -:  127:/// <returns>項目数。</returns>
+       27:  128:int32_t Assertions_Count(
+        -:  129:	const Assertions* ctxt)
+        -:  130:{
+       27:  131:	int32_t result = 0;
+       27:  132:	if (ctxt != nullptr)
+        -:  133:	{
+       24:  134:		result = RingedFrames_Count(&ctxt->Items);
+        -:  135:	}
+       27:  136:	return result;
+        -:  137:}
+        -:  138:
+        -:  139:/// <summary>
+        -:  140:/// <para>指定されたインデックス位置に記憶されている項目を取得する。</para>
+        -:  141:/// </summary>
+        -:  142:/// <param name="index">インデックス(0～、最古基準)。</param>
+        -:  143:/// <param name="ctxt">コンテキスト。</param>
+        -:  144:/// <returns>項目。</returns>
+       24:  145:const Assertions_Item* Assertions_Refer(
+        -:  146:	int32_t index,
+        -:  147:	const Assertions* ctxt)
+        -:  148:{
+       24:  149:	const Assertions_Item* result = nullptr;
+       24:  150:	if (ctxt != nullptr)
+        -:  151:	{
+       21:  152:		result = RingedFrames_ReferWithOld(
+        -:  153:			index, nullptr, nullptr, &ctxt->Items);
+        -:  154:	}
+       24:  155:	return result;
+        -:  156:}
+        -:  157:
+        -:  158:/* -------------------------------------------------------------------
+        -:  159:*	Unit Test
+        -:  160:*/
+        -:  161:#ifdef _UNIT_TEST
+        -:  162:#include <assert.h>
+        3:  163:void Assertions_UnitTest(void)
+        -:  164:{
+        -:  165:	Assertions assertions;
+        -:  166:	int32_t assBuffer[SA_NEEDED_BUFFER_WORDS(3)];
+        -:  167:	int32_t lines[4];
+        -:  168:	const Assertions_Item* assItem;
+        -:  169:
+        -:  170:
+        -:  171:	// -----------------------------------------
+        -:  172:	// 1-1 Init(self==nullptr)
+        3:  173:	Assertions_Init(0, nullptr, nullptr);
+        -:  174:
+        -:  175:	// -----------------------------------------
+        -:  176:	// 1-2 Init
+        3:  177:	memset(&assertions, -1, sizeof assertions);
+        3:  178:	Assertions_Init(3, assBuffer, &assertions);
+       3*:  179:	assert(Assertions_Count(&assertions) == 0);
+        3:  180:	assItem = Assertions_Refer(0, &assertions);
+       3*:  181:	assert(assItem == nullptr);
+        -:  182:
+        -:  183:	// -----------------------------------------
+        -:  184:	// 2-1 Assert(self==nullptr)
+        3:  185:	Assertions_Assert(1, nullptr);
+       3*:  186:	assert(Assertions_Count(&assertions) == 0);
+        3:  187:	assItem = Assertions_Refer(0, &assertions);
+       3*:  188:	assert(assItem == nullptr);
+        -:  189:
+        -:  190:	// -----------------------------------------
+        -:  191:	// 2-2 Assert(condition!=0)
+        3:  192:	Assertions_Assert(1, &assertions);
+       3*:  193:	assert(Assertions_Count(&assertions) == 0);
+        3:  194:	assItem = Assertions_Refer(0, &assertions);
+       3*:  195:	assert(assItem == nullptr);
+        -:  196:
+        -:  197:	// -----------------------------------------
+        -:  198:	// 2-3 Assert 1st item
+        3:  199:	lines[0] = __LINE__;
+        3:  200:	Assertions_Assert(0, &assertions);
+       3*:  201:	assert(Assertions_Count(&assertions) == 1);
+        3:  202:	assItem = Assertions_Refer(0, &assertions);
+       3*:  203:	assert(assItem != nullptr);
+       3*:  204:	assert(assItem->Line == lines[0] + 1);
+       3*:  205:	assert(strcmp(assItem->FileName, __FILE__) == 0);
+        -:  206:
+        -:  207:	// -----------------------------------------
+        -:  208:	// 2-4 Assert 2nd item
+        3:  209:	lines[1] = __LINE__;
+        3:  210:	Assertions_Assert(0, &assertions);
+       3*:  211:	assert(Assertions_Count(&assertions) == 2);
+        3:  212:	assItem = Assertions_Refer(1, &assertions);
+       3*:  213:	assert(assItem != nullptr);
+       3*:  214:	assert(assItem->Line == lines[1] + 1);
+       3*:  215:	assert(strcmp(assItem->FileName, __FILE__) == 0);
+        -:  216:
+        -:  217:	// -----------------------------------------
+        -:  218:	// 2-5 Assert 3rd item
+        3:  219:	lines[2] = __LINE__;
+        3:  220:	Assertions_Assert(0, &assertions);
+       3*:  221:	assert(Assertions_Count(&assertions) == 3);
+        3:  222:	assItem = Assertions_Refer(2, &assertions);
+       3*:  223:	assert(assItem != nullptr);
+       3*:  224:	assert(assItem->Line == lines[2] + 1);
+       3*:  225:	assert(strcmp(assItem->FileName, __FILE__) == 0);
+        -:  226:
+        -:  227:	// -----------------------------------------
+        -:  228:	// 2-6 Assert 4th item, but ignored
+        3:  229:	lines[3] = __LINE__;
+        3:  230:	Assertions_Assert(0, &assertions);
+       3*:  231:	assert(Assertions_Count(&assertions) == 3);
+        3:  232:	assItem = Assertions_Refer(3, &assertions);
+       3*:  233:	assert(assItem == nullptr);
+        -:  234:
+        -:  235:	// -----------------------------------------
+        -:  236:	// 3-1 Count(self==nullptr)
+       3*:  237:	assert(Assertions_Count(nullptr) == 0);
+        -:  238:
+        -:  239:	// -----------------------------------------
+        -:  240:	// 4-1 Refer(self==nullptr)
+       3*:  241:	assert(Assertions_Refer(0, nullptr) == nullptr);
+        3:  242:}
+        -:  243:#endif

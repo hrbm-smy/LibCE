@@ -97,8 +97,9 @@ extern "C"
 	/// <returns>更新された値</returns>
 	int32_t NextWithin(int32_t minimum, int32_t maximum, int32_t value);
 
-
+#ifdef _UNIT_TEST
 	void Indices_UnitTest(void);
+#endif
 
 #ifdef __cplusplus
 }

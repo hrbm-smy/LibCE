@@ -1,0 +1,189 @@
+        -:    0:Source:../../src/Indices.c
+        -:    0:Graph:obj/src/Indices.gcno
+        -:    0:Data:obj/src/Indices.gcda
+        -:    0:Runs:2
+        -:    0:Programs:2
+        -:    1:﻿/** ------------------------------------------------------------------
+        -:    2:*
+        -:    3:*	@file	Indices.c
+        -:    4:*	@brief	Index Operations
+        -:    5:*	@author	H.Someya
+        -:    6:*	@date	2019/12/12
+        -:    7:*
+        -:    8:MIT License
+        -:    9:
+        -:   10:Copyright (c) 2019 Hirobumi Someya
+        -:   11:
+        -:   12:Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:   13:of this software and associated documentation files (the "Software"), to deal
+        -:   14:in the Software without restriction, including without limitation the rights
+        -:   15:to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   16:copies of the Software, and to permit persons to whom the Software is
+        -:   17:furnished to do so, subject to the following conditions:
+        -:   18:
+        -:   19:The above copyright notice and this permission notice shall be included in all
+        -:   20:copies or substantial portions of the Software.
+        -:   21:
+        -:   22:THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   23:IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   24:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   25:AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   26:LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   27:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   28:SOFTWARE.
+        -:   29:*
+        -:   30:*/
+        -:   31:#include "Indices.h"
+        -:   32:
+        -:   33:/* -------------------------------------------------------------------
+        -:   34:*	Privates
+        -:   35:*/
+        -:   36:
+        -:   37:/* -------------------------------------------------------------------
+        -:   38:*	Services
+        -:   39:*/
+        -:   40:
+        -:   41:/// <summary>
+        -:   42:/// 次インデックス取得
+        -:   43:/// </summary>
+        -:   44:/// <param name="index">現在インデックス</param>
+        -:   45:/// <param name="max">最大インデックス</param>
+        -:   46:/// <param name="min">最小インデックス</param>
+        -:   47:/// <returns>次インデックス</returns>
+       34:   48:int32_t NextIndex(int32_t index, int32_t max, int32_t min)
+        -:   49:{
+       34:   50:	if (index + 1 < max)
+        -:   51:	{
+       24:   52:		index += 1;
+        -:   53:	}
+        -:   54:	else
+        -:   55:	{
+       10:   56:		index = min;
+        -:   57:	}
+       34:   58:	return index;
+        -:   59:}
+        -:   60:
+        -:   61:/// <summary>
+        -:   62:/// 前インデックス取得
+        -:   63:/// </summary>
+        -:   64:/// <param name="index">現在インデックス</param>
+        -:   65:/// <param name="max">最大インデックス</param>
+        -:   66:/// <param name="min">最小インデックス</param>
+        -:   67:/// <returns>前インデックス</returns>
+    #####:   68:int32_t PreviousIndex(int32_t index, int32_t max, int32_t min)
+        -:   69:{
+    #####:   70:	if (index > min)
+        -:   71:	{
+    #####:   72:		index -= 1;
+        -:   73:	}
+        -:   74:	else
+        -:   75:	{
+    #####:   76:		index = max - 1;
+        -:   77:	}
+    #####:   78:	return index;
+        -:   79:}
+        -:   80:
+        -:   81:/// <summary>
+        -:   82:/// 巡回インデックス取得
+        -:   83:/// </summary>
+        -:   84:/// <param name="index">現在インデックス</param>
+        -:   85:/// <param name="max">最大インデックス</param>
+        -:   86:/// <param name="min">最小インデックス</param>
+        -:   87:/// <returns>巡回インデックス</returns>
+       54:   88:int32_t RoundIndex(int32_t index, int32_t max, int32_t min)
+        -:   89:{
+       54:   90:	if (index < min)
+        -:   91:	{
+       22:   92:		index = max - (min - index);
+        -:   93:	}
+       32:   94:	else if (index >= max)
+        -:   95:	{
+    #####:   96:		index = min + (index - max);
+        -:   97:	}
+       54:   98:	return index;
+        -:   99:}
+        -:  100:
+        -:  101:/// <summary>
+        -:  102:/// 最大まで増加させる。
+        -:  103:/// </summary>
+        -:  104:/// <param name="d">現在値</param>
+        -:  105:/// <param name="max">最大値</param>
+        -:  106:/// <returns>更新された値</returns>
+       34:  107:int32_t Inc2Max(int32_t d, int32_t max)
+        -:  108:{
+       34:  109:	if (d < max)
+        -:  110:	{
+       20:  111:		d += 1;
+        -:  112:	}
+        -:  113:
+       34:  114:	return d;
+        -:  115:}
+        -:  116:
+        -:  117:/// <summary>
+        -:  118:/// 最小まで減算する。
+        -:  119:/// </summary>
+        -:  120:/// <param name="d">現在値</param>
+        -:  121:/// <param name="min">最小値</param>
+        -:  122:/// <returns>更新された値</returns>
+       10:  123:int32_t Dec2Min(int32_t d, int32_t min)
+        -:  124:{
+       10:  125:	if (d > min)
+        -:  126:	{
+       10:  127:		d -= 1;
+        -:  128:	}
+       10:  129:	return d;
+        -:  130:}
+        -:  131:
+        -:  132:/// <summary>
+        -:  133:/// <para>最小～最大の間で次の値を得る。</para>
+        -:  134:/// <para>最大は含まれる。</para>
+        -:  135:/// </summary>
+        -:  136:/// <param name="minimum">最小値</param>
+        -:  137:/// <param name="maximum">最大値</param>
+        -:  138:/// <param name="value">現在値</param>
+        -:  139:/// <returns>更新された値</returns>
+       14:  140:int32_t NextWithin(int32_t minimum, int32_t maximum, int32_t value)
+        -:  141:{
+       14:  142:	value += 1;
+       14:  143:	if ((minimum <= value) && (value <= maximum))
+        -:  144:	{
+        -:  145:		// 加算して範囲内ならそのまま
+        -:  146:	}
+        -:  147:	else
+        -:  148:	{
+        -:  149:		// 加算して範囲外なら最小に戻す
+        8:  150:		value = minimum;
+        -:  151:	}
+       14:  152:	return value;
+        -:  153:}
+        -:  154:
+        -:  155:/* -------------------------------------------------------------------
+        -:  156:*	Unit Test
+        -:  157:*/
+        -:  158:#ifdef _UNIT_TEST
+        -:  159:#include <assert.h>
+        2:  160:void Indices_UnitTest(void)
+        -:  161:{
+        -:  162:	// -----------------------------------------
+        -:  163:	// 1-1 NextWithin
+       2*:  164:	assert(NextWithin(3, 11, 0) == 3);
+        -:  165:	// -----------------------------------------
+        -:  166:	// 1-2 NextWithin
+       2*:  167:	assert(NextWithin(3, 11, 3) == 4);
+        -:  168:	// -----------------------------------------
+        -:  169:	// 1-3 NextWithin
+       2*:  170:	assert(NextWithin(3, 11, 10) == 11);
+        -:  171:	// -----------------------------------------
+        -:  172:	// 1-4 NextWithin
+       2*:  173:	assert(NextWithin(3, 11, 11) == 3);
+        -:  174:	// -----------------------------------------
+        -:  175:	// 1-5 NextWithin
+       2*:  176:	assert(NextWithin(3, 11, 12) == 3);
+        -:  177:	// -----------------------------------------
+        -:  178:	// 1-6 NextWithin
+       2*:  179:	assert(NextWithin(3, 0x7fffffff, 0x7ffffffe) == 0x7fffffff);
+        -:  180:	// -----------------------------------------
+        -:  181:	// 1-6 NextWithin
+       2*:  182:	assert(NextWithin(3, 0x7fffffff, 0x7fffffff) == 3);
+        2:  183:}
+        -:  184:#endif
