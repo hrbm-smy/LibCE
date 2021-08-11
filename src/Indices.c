@@ -110,7 +110,6 @@ int32_t Inc2Max(int32_t d, int32_t max)
 	{
 		d += 1;
 	}
-
 	return d;
 }
 
@@ -160,25 +159,72 @@ int32_t NextWithin(int32_t minimum, int32_t maximum, int32_t value)
 void Indices_UnitTest(void)
 {
 	// -----------------------------------------
-	// 1-1 NextWithin
+	// 1-1 NextIndex
+	assert(NextIndex(1, 3, 1) == 2);
+	// -----------------------------------------
+	// 1-2 NextIndex
+	assert(NextIndex(2, 3, 1) == 1);
+
+	// -----------------------------------------
+	// 2-1 PreviousIndex
+	assert(PreviousIndex(1, 3, -1) == 0);
+	// -----------------------------------------
+	// 2-2 PreviousIndex
+	assert(PreviousIndex(0, 3, -1) == -1);
+	// -----------------------------------------
+	// 2-3 PreviousIndex
+	assert(PreviousIndex(-1, 3, -1) == 2);
+
+	// -----------------------------------------
+	// 3-1 RoundIndex
+	assert(RoundIndex(1, 3, 0) == 1);
+	// -----------------------------------------
+	// 3-2 RoundIndex
+	assert(RoundIndex(-1, 3, 0) == 2);
+	// -----------------------------------------
+	// 3-3 RoundIndex
+	assert(RoundIndex(4, 3, 0) == 1);
+
+	// -----------------------------------------
+	// 4-1 Inc2Max
+	assert(Inc2Max(1, 3) == 2);
+	// -----------------------------------------
+	// 4-2 Inc2Max
+	assert(Inc2Max(2, 3) == 3);
+	// -----------------------------------------
+	// 4-3 Inc2Max
+	assert(Inc2Max(3, 3) == 3);
+
+	// -----------------------------------------
+	// 5-1 Dec2Min
+	assert(Dec2Min(1, -1) == 0);
+	// -----------------------------------------
+	// 5-2 Dec2Min
+	assert(Dec2Min(0, -1) == -1);
+	// -----------------------------------------
+	// 5-3 Dec2Min
+	assert(Dec2Min(-1, -1) == -1);
+
+	// -----------------------------------------
+	// 6-1 NextWithin
 	assert(NextWithin(3, 11, 0) == 3);
 	// -----------------------------------------
-	// 1-2 NextWithin
+	// 6-2 NextWithin
 	assert(NextWithin(3, 11, 3) == 4);
 	// -----------------------------------------
-	// 1-3 NextWithin
+	// 6-3 NextWithin
 	assert(NextWithin(3, 11, 10) == 11);
 	// -----------------------------------------
-	// 1-4 NextWithin
+	// 6-4 NextWithin
 	assert(NextWithin(3, 11, 11) == 3);
 	// -----------------------------------------
-	// 1-5 NextWithin
+	// 6-5 NextWithin
 	assert(NextWithin(3, 11, 12) == 3);
 	// -----------------------------------------
-	// 1-6 NextWithin
+	// 6-6 NextWithin
 	assert(NextWithin(3, 0x7fffffff, 0x7ffffffe) == 0x7fffffff);
 	// -----------------------------------------
-	// 1-6 NextWithin
+	// 6-7 NextWithin
 	assert(NextWithin(3, 0x7fffffff, 0x7fffffff) == 3);
 }
 #endif

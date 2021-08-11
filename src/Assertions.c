@@ -206,13 +206,22 @@ void Assertions_UnitTest(void)
 
 	// -----------------------------------------
 	// 2-4 Assert 2nd item
+	char tooLongFileName[261] =
+		"01234567890123456789012345678901234567890123456789"	//  50
+		"01234567890123456789012345678901234567890123456789"	// 100
+		"01234567890123456789012345678901234567890123456789"	// 150
+		"01234567890123456789012345678901234567890123456789"	// 200
+		"01234567890123456789012345678901234567890123456789"	// 250
+		"0123456789\0"	// 261
+		;
 	lines[1] = __LINE__;
-	Assertions_Assert(0, &assertions);
+	Assertions_AssertWith(0, tooLongFileName, __LINE__, &assertions);
 	assert(Assertions_Count(&assertions) == 2);
 	assItem = Assertions_Refer(1, &assertions);
 	assert(assItem != nullptr);
 	assert(assItem->Line == lines[1] + 1);
-	assert(strcmp(assItem->FileName, __FILE__) == 0);
+	tooLongFileName[259] = '\0';
+	assert(strcmp(assItem->FileName, tooLongFileName) == 0);
 
 	// -----------------------------------------
 	// 2-5 Assert 3rd item

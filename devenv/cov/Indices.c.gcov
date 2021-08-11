@@ -1,8 +1,8 @@
         -:    0:Source:../../src/Indices.c
         -:    0:Graph:obj/src/Indices.gcno
         -:    0:Data:obj/src/Indices.gcda
-        -:    0:Runs:2
-        -:    0:Programs:2
+        -:    0:Runs:1
+        -:    0:Programs:1
         -:    1:﻿/** ------------------------------------------------------------------
         -:    2:*
         -:    3:*	@file	Indices.c
@@ -50,17 +50,17 @@
         -:   45:/// <param name="max">最大インデックス</param>
         -:   46:/// <param name="min">最小インデックス</param>
         -:   47:/// <returns>次インデックス</returns>
-       34:   48:int32_t NextIndex(int32_t index, int32_t max, int32_t min)
+       19:   48:int32_t NextIndex(int32_t index, int32_t max, int32_t min)
         -:   49:{
-       34:   50:	if (index + 1 < max)
+       19:   50:	if (index + 1 < max)
         -:   51:	{
-       24:   52:		index += 1;
+       13:   52:		index += 1;
         -:   53:	}
         -:   54:	else
         -:   55:	{
-       10:   56:		index = min;
+        6:   56:		index = min;
         -:   57:	}
-       34:   58:	return index;
+       19:   58:	return index;
         -:   59:}
         -:   60:
         -:   61:/// <summary>
@@ -70,17 +70,17 @@
         -:   65:/// <param name="max">最大インデックス</param>
         -:   66:/// <param name="min">最小インデックス</param>
         -:   67:/// <returns>前インデックス</returns>
-    #####:   68:int32_t PreviousIndex(int32_t index, int32_t max, int32_t min)
+        3:   68:int32_t PreviousIndex(int32_t index, int32_t max, int32_t min)
         -:   69:{
-    #####:   70:	if (index > min)
+        3:   70:	if (index > min)
         -:   71:	{
-    #####:   72:		index -= 1;
+        2:   72:		index -= 1;
         -:   73:	}
         -:   74:	else
         -:   75:	{
-    #####:   76:		index = max - 1;
+        1:   76:		index = max - 1;
         -:   77:	}
-    #####:   78:	return index;
+        3:   78:	return index;
         -:   79:}
         -:   80:
         -:   81:/// <summary>
@@ -90,17 +90,17 @@
         -:   85:/// <param name="max">最大インデックス</param>
         -:   86:/// <param name="min">最小インデックス</param>
         -:   87:/// <returns>巡回インデックス</returns>
-       54:   88:int32_t RoundIndex(int32_t index, int32_t max, int32_t min)
+       30:   88:int32_t RoundIndex(int32_t index, int32_t max, int32_t min)
         -:   89:{
-       54:   90:	if (index < min)
+       30:   90:	if (index < min)
         -:   91:	{
-       22:   92:		index = max - (min - index);
+       12:   92:		index = max - (min - index);
         -:   93:	}
-       32:   94:	else if (index >= max)
+       18:   94:	else if (index >= max)
         -:   95:	{
-    #####:   96:		index = min + (index - max);
+        1:   96:		index = min + (index - max);
         -:   97:	}
-       54:   98:	return index;
+       30:   98:	return index;
         -:   99:}
         -:  100:
         -:  101:/// <summary>
@@ -109,81 +109,127 @@
         -:  104:/// <param name="d">現在値</param>
         -:  105:/// <param name="max">最大値</param>
         -:  106:/// <returns>更新された値</returns>
-       34:  107:int32_t Inc2Max(int32_t d, int32_t max)
+       20:  107:int32_t Inc2Max(int32_t d, int32_t max)
         -:  108:{
-       34:  109:	if (d < max)
+       20:  109:	if (d < max)
         -:  110:	{
-       20:  111:		d += 1;
+       12:  111:		d += 1;
         -:  112:	}
-        -:  113:
-       34:  114:	return d;
-        -:  115:}
-        -:  116:
-        -:  117:/// <summary>
-        -:  118:/// 最小まで減算する。
-        -:  119:/// </summary>
-        -:  120:/// <param name="d">現在値</param>
-        -:  121:/// <param name="min">最小値</param>
-        -:  122:/// <returns>更新された値</returns>
-       10:  123:int32_t Dec2Min(int32_t d, int32_t min)
-        -:  124:{
-       10:  125:	if (d > min)
-        -:  126:	{
-       10:  127:		d -= 1;
-        -:  128:	}
-       10:  129:	return d;
-        -:  130:}
-        -:  131:
-        -:  132:/// <summary>
-        -:  133:/// <para>最小～最大の間で次の値を得る。</para>
-        -:  134:/// <para>最大は含まれる。</para>
-        -:  135:/// </summary>
-        -:  136:/// <param name="minimum">最小値</param>
-        -:  137:/// <param name="maximum">最大値</param>
-        -:  138:/// <param name="value">現在値</param>
-        -:  139:/// <returns>更新された値</returns>
-       14:  140:int32_t NextWithin(int32_t minimum, int32_t maximum, int32_t value)
-        -:  141:{
-       14:  142:	value += 1;
-       14:  143:	if ((minimum <= value) && (value <= maximum))
-        -:  144:	{
-        -:  145:		// 加算して範囲内ならそのまま
-        -:  146:	}
-        -:  147:	else
-        -:  148:	{
-        -:  149:		// 加算して範囲外なら最小に戻す
-        8:  150:		value = minimum;
-        -:  151:	}
-       14:  152:	return value;
-        -:  153:}
-        -:  154:
-        -:  155:/* -------------------------------------------------------------------
-        -:  156:*	Unit Test
-        -:  157:*/
-        -:  158:#ifdef _UNIT_TEST
-        -:  159:#include <assert.h>
-        2:  160:void Indices_UnitTest(void)
-        -:  161:{
-        -:  162:	// -----------------------------------------
-        -:  163:	// 1-1 NextWithin
-       2*:  164:	assert(NextWithin(3, 11, 0) == 3);
-        -:  165:	// -----------------------------------------
-        -:  166:	// 1-2 NextWithin
-       2*:  167:	assert(NextWithin(3, 11, 3) == 4);
+       20:  113:	return d;
+        -:  114:}
+        -:  115:
+        -:  116:/// <summary>
+        -:  117:/// 最小まで減算する。
+        -:  118:/// </summary>
+        -:  119:/// <param name="d">現在値</param>
+        -:  120:/// <param name="min">最小値</param>
+        -:  121:/// <returns>更新された値</returns>
+        8:  122:int32_t Dec2Min(int32_t d, int32_t min)
+        -:  123:{
+        8:  124:	if (d > min)
+        -:  125:	{
+        7:  126:		d -= 1;
+        -:  127:	}
+        8:  128:	return d;
+        -:  129:}
+        -:  130:
+        -:  131:/// <summary>
+        -:  132:/// <para>最小～最大の間で次の値を得る。</para>
+        -:  133:/// <para>最大は含まれる。</para>
+        -:  134:/// </summary>
+        -:  135:/// <param name="minimum">最小値</param>
+        -:  136:/// <param name="maximum">最大値</param>
+        -:  137:/// <param name="value">現在値</param>
+        -:  138:/// <returns>更新された値</returns>
+        7:  139:int32_t NextWithin(int32_t minimum, int32_t maximum, int32_t value)
+        -:  140:{
+        7:  141:	value += 1;
+        7:  142:	if ((minimum <= value) && (value <= maximum))
+        -:  143:	{
+        -:  144:		// 加算して範囲内ならそのまま
+        -:  145:	}
+        -:  146:	else
+        -:  147:	{
+        -:  148:		// 加算して範囲外なら最小に戻す
+        4:  149:		value = minimum;
+        -:  150:	}
+        7:  151:	return value;
+        -:  152:}
+        -:  153:
+        -:  154:/* -------------------------------------------------------------------
+        -:  155:*	Unit Test
+        -:  156:*/
+        -:  157:#ifdef _UNIT_TEST
+        -:  158:#include <assert.h>
+        1:  159:void Indices_UnitTest(void)
+        -:  160:{
+        -:  161:	// -----------------------------------------
+        -:  162:	// 1-1 NextIndex
+       1*:  163:	assert(NextIndex(1, 3, 1) == 2);
+        -:  164:	// -----------------------------------------
+        -:  165:	// 1-2 NextIndex
+       1*:  166:	assert(NextIndex(2, 3, 1) == 1);
+        -:  167:
         -:  168:	// -----------------------------------------
-        -:  169:	// 1-3 NextWithin
-       2*:  170:	assert(NextWithin(3, 11, 10) == 11);
+        -:  169:	// 2-1 PreviousIndex
+       1*:  170:	assert(PreviousIndex(1, 3, -1) == 0);
         -:  171:	// -----------------------------------------
-        -:  172:	// 1-4 NextWithin
-       2*:  173:	assert(NextWithin(3, 11, 11) == 3);
+        -:  172:	// 2-2 PreviousIndex
+       1*:  173:	assert(PreviousIndex(0, 3, -1) == -1);
         -:  174:	// -----------------------------------------
-        -:  175:	// 1-5 NextWithin
-       2*:  176:	assert(NextWithin(3, 11, 12) == 3);
-        -:  177:	// -----------------------------------------
-        -:  178:	// 1-6 NextWithin
-       2*:  179:	assert(NextWithin(3, 0x7fffffff, 0x7ffffffe) == 0x7fffffff);
-        -:  180:	// -----------------------------------------
-        -:  181:	// 1-6 NextWithin
-       2*:  182:	assert(NextWithin(3, 0x7fffffff, 0x7fffffff) == 3);
-        2:  183:}
-        -:  184:#endif
+        -:  175:	// 2-3 PreviousIndex
+       1*:  176:	assert(PreviousIndex(-1, 3, -1) == 2);
+        -:  177:
+        -:  178:	// -----------------------------------------
+        -:  179:	// 3-1 RoundIndex
+       1*:  180:	assert(RoundIndex(1, 3, 0) == 1);
+        -:  181:	// -----------------------------------------
+        -:  182:	// 3-2 RoundIndex
+       1*:  183:	assert(RoundIndex(-1, 3, 0) == 2);
+        -:  184:	// -----------------------------------------
+        -:  185:	// 3-3 RoundIndex
+       1*:  186:	assert(RoundIndex(4, 3, 0) == 1);
+        -:  187:
+        -:  188:	// -----------------------------------------
+        -:  189:	// 4-1 Inc2Max
+       1*:  190:	assert(Inc2Max(1, 3) == 2);
+        -:  191:	// -----------------------------------------
+        -:  192:	// 4-2 Inc2Max
+       1*:  193:	assert(Inc2Max(2, 3) == 3);
+        -:  194:	// -----------------------------------------
+        -:  195:	// 4-3 Inc2Max
+       1*:  196:	assert(Inc2Max(3, 3) == 3);
+        -:  197:
+        -:  198:	// -----------------------------------------
+        -:  199:	// 5-1 Dec2Min
+       1*:  200:	assert(Dec2Min(1, -1) == 0);
+        -:  201:	// -----------------------------------------
+        -:  202:	// 5-2 Dec2Min
+       1*:  203:	assert(Dec2Min(0, -1) == -1);
+        -:  204:	// -----------------------------------------
+        -:  205:	// 5-3 Dec2Min
+       1*:  206:	assert(Dec2Min(-1, -1) == -1);
+        -:  207:
+        -:  208:	// -----------------------------------------
+        -:  209:	// 6-1 NextWithin
+       1*:  210:	assert(NextWithin(3, 11, 0) == 3);
+        -:  211:	// -----------------------------------------
+        -:  212:	// 6-2 NextWithin
+       1*:  213:	assert(NextWithin(3, 11, 3) == 4);
+        -:  214:	// -----------------------------------------
+        -:  215:	// 6-3 NextWithin
+       1*:  216:	assert(NextWithin(3, 11, 10) == 11);
+        -:  217:	// -----------------------------------------
+        -:  218:	// 6-4 NextWithin
+       1*:  219:	assert(NextWithin(3, 11, 11) == 3);
+        -:  220:	// -----------------------------------------
+        -:  221:	// 6-5 NextWithin
+       1*:  222:	assert(NextWithin(3, 11, 12) == 3);
+        -:  223:	// -----------------------------------------
+        -:  224:	// 6-6 NextWithin
+       1*:  225:	assert(NextWithin(3, 0x7fffffff, 0x7ffffffe) == 0x7fffffff);
+        -:  226:	// -----------------------------------------
+        -:  227:	// 6-7 NextWithin
+       1*:  228:	assert(NextWithin(3, 0x7fffffff, 0x7fffffff) == 3);
+        1:  229:}
+        -:  230:#endif
