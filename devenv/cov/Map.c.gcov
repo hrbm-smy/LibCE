@@ -1,8 +1,8 @@
         -:    0:Source:../../src/Map.c
         -:    0:Graph:obj/src/Map.gcno
         -:    0:Data:obj/src/Map.gcda
-        -:    0:Runs:5
-        -:    0:Programs:5
+        -:    0:Runs:6
+        -:    0:Programs:6
         -:    1:﻿/** ------------------------------------------------------------------
         -:    2:*
         -:    3:*	@file	Map.c
@@ -53,33 +53,33 @@
         -:   48:/// 最大要素数分確保して指定すること。</param>
         -:   49:/// <param name="ctxt">コンテキスト。</param>
         -:   50:/// <returns>なし。</returns>
-       10:   51:void Map_Init(
+       12:   51:void Map_Init(
         -:   52:	int32_t capacity,
         -:   53:	MapElm* elements,
         -:   54:	Map* ctxt)
         -:   55:{
-       10:   56:	if (ctxt != nullptr)
+       12:   56:	if (ctxt != nullptr)
         -:   57:	{
-        5:   58:		memset(ctxt, 0, sizeof(Map));
-        5:   59:		ctxt->Elements = elements;
-        5:   60:		ctxt->Capacity = capacity;
+        6:   58:		memset(ctxt, 0, sizeof(Map));
+        6:   59:		ctxt->Elements = elements;
+        6:   60:		ctxt->Capacity = capacity;
         -:   61:	}
-       10:   62:}
+       12:   62:}
         -:   63:
         -:   64:/// <summary>
         -:   65:/// <para>Mapの最大要素数を取得する。</para>
         -:   66:/// </summary>
         -:   67:/// <param name="ctxt">コンテキスト。</param>
         -:   68:/// <returns>最大要素数。</returns>
-       15:   69:int32_t Map_Capacity(
+       18:   69:int32_t Map_Capacity(
         -:   70:	const Map* ctxt)
         -:   71:{
-       15:   72:	int32_t result = 0;
-       15:   73:	if (ctxt != nullptr)
+       18:   72:	int32_t result = 0;
+       18:   73:	if (ctxt != nullptr)
         -:   74:	{
-       10:   75:		result = ctxt->Capacity;
+       12:   75:		result = ctxt->Capacity;
         -:   76:	}
-       15:   77:	return result;
+       18:   77:	return result;
         -:   78:}
         -:   79:
         -:   80:/// <summary>
@@ -87,15 +87,15 @@
         -:   82:/// </summary>
         -:   83:/// <param name="ctxt">コンテキスト。</param>
         -:   84:/// <returns>蓄積済み要素数。</returns>
-       45:   85:int32_t Map_Count(
+       54:   85:int32_t Map_Count(
         -:   86:	const Map* ctxt)
         -:   87:{
-       45:   88:	int32_t result = 0;
-       45:   89:	if (ctxt != nullptr)
+       54:   88:	int32_t result = 0;
+       54:   89:	if (ctxt != nullptr)
         -:   90:	{
-       40:   91:		result = ctxt->Count;
+       48:   91:		result = ctxt->Count;
         -:   92:	}
-       45:   93:	return result;
+       54:   93:	return result;
         -:   94:}
         -:   95:
         -:   96:/// <summary>
@@ -103,15 +103,15 @@
         -:   98:/// </summary>
         -:   99:/// <param name="ctxt">コンテキスト。</param>
         -:  100:/// <returns>なし。</returns>
-       15:  101:void Map_Clear(
+       18:  101:void Map_Clear(
         -:  102:	Map* ctxt)
         -:  103:{
-       15:  104:	if (ctxt != nullptr)
+       18:  104:	if (ctxt != nullptr)
         -:  105:	{
-       10:  106:		ctxt->Count = 0;
-       10:  107:		ctxt->Root = nullptr;
+       12:  106:		ctxt->Count = 0;
+       12:  107:		ctxt->Root = nullptr;
         -:  108:	}
-       15:  109:}
+       18:  109:}
         -:  110:
         -:  111:/// <summary>
         -:  112:/// <para>valueをkeyに関連付ける。</para>
@@ -125,31 +125,31 @@
         -:  120:/// <param name="key">キー。</param>
         -:  121:/// <param name="ctxt">コンテキスト。</param>
         -:  122:/// <returns>蓄積済み要素数。</returns>
-       45:  123:int32_t Map_Relate(
+       54:  123:int32_t Map_Relate(
         -:  124:	const void* value, MapKey_t key,
         -:  125:	Map* ctxt)
         -:  126:{
-       45:  127:	int32_t result = 0;
-       45:  128:	if (ctxt != nullptr)
+       54:  127:	int32_t result = 0;
+       54:  128:	if (ctxt != nullptr)
         -:  129:	{
-       40:  130:		AvlNode* existing = AvlTree_Search(key, ctxt->Root);
-       40:  131:		if (existing != nullptr)
+       48:  130:		AvlNode* existing = AvlTree_Search(key, ctxt->Root);
+       48:  131:		if (existing != nullptr)
         -:  132:		{
-        5:  133:			existing->Content.Value = value;
+        6:  133:			existing->Content.Value = value;
         -:  134:
-        5:  135:			result = ctxt->Count;
+        6:  135:			result = ctxt->Count;
         -:  136:		}
-       35:  137:		else if (ctxt->Count < ctxt->Capacity)
+       42:  137:		else if (ctxt->Count < ctxt->Capacity)
         -:  138:		{
-       30:  139:			MapElm* elm = &ctxt->Elements[ctxt->Count];
-       30:  140:			AvlNode_Init(key, value, &elm->Node);
-       30:  141:			ctxt->Root = AvlTree_Insert(&elm->Node, ctxt->Root);
-       30:  142:			ctxt->Count += 1;
+       36:  139:			MapElm* elm = &ctxt->Elements[ctxt->Count];
+       36:  140:			AvlNode_Init(key, value, &elm->Node);
+       36:  141:			ctxt->Root = AvlTree_Insert(&elm->Node, ctxt->Root);
+       36:  142:			ctxt->Count += 1;
         -:  143:
-       30:  144:			result = ctxt->Count;
+       36:  144:			result = ctxt->Count;
         -:  145:		}
         -:  146:	}
-       45:  147:	return result;
+       54:  147:	return result;
         -:  148:}
         -:  149:
         -:  150:/// <summary>
@@ -161,20 +161,20 @@
         -:  156:/// <param name="key">キー。</param>
         -:  157:/// <param name="ctxt">コンテキスト。</param>
         -:  158:/// <returns>keyに対応するvalue。</returns>
-       30:  159:void* Map_ValueFor(
+       36:  159:void* Map_ValueFor(
         -:  160:	MapKey_t key,
         -:  161:	const Map* ctxt)
         -:  162:{
-       30:  163:	void* result = nullptr;
-       30:  164:	if (ctxt != nullptr)
+       36:  163:	void* result = nullptr;
+       36:  164:	if (ctxt != nullptr)
         -:  165:	{
-       30:  166:		AvlNode* node = AvlTree_Search(key, ctxt->Root);
-       30:  167:		if (node != nullptr)
+       36:  166:		AvlNode* node = AvlTree_Search(key, ctxt->Root);
+       36:  167:		if (node != nullptr)
         -:  168:		{
-       20:  169:			result = (void*)node->Content.Value;
+       24:  169:			result = (void*)node->Content.Value;
         -:  170:		}
         -:  171:	}
-       30:  172:	return result;
+       36:  172:	return result;
         -:  173:}
         -:  174:
         -:  175:/// <summary>
@@ -186,18 +186,18 @@
         -:  181:/// <param name="index">インデックス位置(0～)。</param>
         -:  182:/// <param name="ctxt">コンテキスト。</param>
         -:  183:/// <returns>インデックス位置のvalue。</returns>
-       25:  184:void* Map_ValueAt(
+       30:  184:void* Map_ValueAt(
         -:  185:	int32_t index,
         -:  186:	const Map* ctxt)
         -:  187:{
-       25:  188:	void* result = nullptr;
-       25:  189:	if ((ctxt != nullptr) &&
-       15:  190:		(0 <= index) && (index < ctxt->Count))
+       30:  188:	void* result = nullptr;
+       30:  189:	if ((ctxt != nullptr) &&
+       18:  190:		(0 <= index) && (index < ctxt->Count))
         -:  191:	{
-       10:  192:		MapElm* elm = &ctxt->Elements[index];
-       10:  193:		result = (void*)elm->Node.Content.Value;
+       12:  192:		MapElm* elm = &ctxt->Elements[index];
+       12:  193:		result = (void*)elm->Node.Content.Value;
         -:  194:	}
-       25:  195:	return result;
+       30:  195:	return result;
         -:  196:}
         -:  197:
         -:  198:/* -------------------------------------------------------------------
@@ -212,167 +212,167 @@
         -:  207:	short Member3[4];
         -:  208:} Map_UnitTest_Value;
         -:  209:
-        5:  210:void Map_UnitTest(void)
+        6:  210:void Map_UnitTest(void)
         -:  211:{
-        5:  212:	Assertions* assertions = Assertions_Instance();
-        5:  213:	const Map_UnitTest_Value* value = nullptr;
+        6:  212:	Assertions* assertions = Assertions_Instance();
+        6:  213:	const Map_UnitTest_Value* value = nullptr;
         -:  214:	MapElm mapElms[3];
         -:  215:	Map_UnitTest_Value values[5];
-        5:  216:	memset(values, 0, sizeof values);
+        6:  216:	memset(values, 0, sizeof values);
         -:  217:	Map map;
         -:  218:
         -:  219:	// -----------------------------------------
         -:  220:	// 1-1 Init(ctxt==nullptr)
-        5:  221:	Map_Init(3, mapElms, nullptr);
+        6:  221:	Map_Init(3, mapElms, nullptr);
         -:  222:	// -----------------------------------------
         -:  223:	// 1-2 Init
-        5:  224:	Map_Init(3, mapElms, &map);
-        5:  225:	Assertions_Assert(Map_Capacity(&map) == 3, assertions);
-        5:  226:	Assertions_Assert(Map_Count(&map) == 0, assertions);
+        6:  224:	Map_Init(3, mapElms, &map);
+        6:  225:	Assertions_Assert(Map_Capacity(&map) == 3, assertions);
+        6:  226:	Assertions_Assert(Map_Count(&map) == 0, assertions);
         -:  227:
         -:  228:	// -----------------------------------------
         -:  229:	// 2-1 Capacity(ctxt==nullptr)
-        5:  230:	Assertions_Assert(Map_Capacity(nullptr) == 0, assertions);
+        6:  230:	Assertions_Assert(Map_Capacity(nullptr) == 0, assertions);
         -:  231:	// -----------------------------------------
         -:  232:	// 2-2 Capacity
-        5:  233:	Assertions_Assert(Map_Capacity(&map) == 3, assertions);
+        6:  233:	Assertions_Assert(Map_Capacity(&map) == 3, assertions);
         -:  234:
         -:  235:	// -----------------------------------------
         -:  236:	// 3-1 Count(ctxt==nullptr)
-        5:  237:	values[2].Member1 = 1000;
-        5:  238:	values[2].Member2 = 10;
-        5:  239:	values[2].Member3[0] = 100;
-        5:  240:	values[2].Member3[2] = 102;
-        5:  241:	Map_Relate(&values[2], 12345, &map);
-        5:  242:	Assertions_Assert(Map_Count(nullptr) == 0, assertions);
+        6:  237:	values[2].Member1 = 1000;
+        6:  238:	values[2].Member2 = 10;
+        6:  239:	values[2].Member3[0] = 100;
+        6:  240:	values[2].Member3[2] = 102;
+        6:  241:	Map_Relate(&values[2], 12345, &map);
+        6:  242:	Assertions_Assert(Map_Count(nullptr) == 0, assertions);
         -:  243:	// -----------------------------------------
         -:  244:	// 3-2 Count
-        5:  245:	Assertions_Assert(Map_Count(&map) == 1, assertions);
+        6:  245:	Assertions_Assert(Map_Count(&map) == 1, assertions);
         -:  246:
         -:  247:	// -----------------------------------------
         -:  248:	// 4-1 Clear(ctxt==nullptr)
-        5:  249:	Map_Clear(nullptr);
-        5:  250:	Assertions_Assert(Map_Count(&map) == 1, assertions);
+        6:  249:	Map_Clear(nullptr);
+        6:  250:	Assertions_Assert(Map_Count(&map) == 1, assertions);
         -:  251:	// -----------------------------------------
         -:  252:	// 4-2 Clear
-        5:  253:	Map_Clear(&map);
-        5:  254:	Assertions_Assert(Map_Count(&map) == 0, assertions);
+        6:  253:	Map_Clear(&map);
+        6:  254:	Assertions_Assert(Map_Count(&map) == 0, assertions);
         -:  255:
         -:  256:	// -----------------------------------------
         -:  257:	// 5-1 Relate(ctxt==nullptr)
-        5:  258:	values[2].Member1 = 1000;
-        5:  259:	values[2].Member2 = 10;
-        5:  260:	values[2].Member3[0] = 100;
-        5:  261:	values[2].Member3[2] = 102;
-        5:  262:	Assertions_Assert(Map_Relate(&values[2], 12345, nullptr) == 0, assertions);
-        5:  263:	value = Map_ValueFor(12345, &map);
-        5:  264:	Assertions_Assert(value == nullptr, assertions);
+        6:  258:	values[2].Member1 = 1000;
+        6:  259:	values[2].Member2 = 10;
+        6:  260:	values[2].Member3[0] = 100;
+        6:  261:	values[2].Member3[2] = 102;
+        6:  262:	Assertions_Assert(Map_Relate(&values[2], 12345, nullptr) == 0, assertions);
+        6:  263:	value = Map_ValueFor(12345, &map);
+        6:  264:	Assertions_Assert(value == nullptr, assertions);
         -:  265:	// -----------------------------------------
         -:  266:	// 5-2 Relate
-        5:  267:	values[2].Member1 = 1000;
-        5:  268:	values[2].Member2 = 10;
-        5:  269:	values[2].Member3[0] = 100;
-        5:  270:	values[2].Member3[2] = 102;
-        5:  271:	Assertions_Assert(Map_Relate(&values[2], 12345, &map) == 1, assertions);
-        5:  272:	value = Map_ValueFor(12345, &map);
-        5:  273:	Assertions_Assert(value != nullptr, assertions);
-        5:  274:	Assertions_Assert(value->Member1 == 1000, assertions);
-        5:  275:	Assertions_Assert(value->Member2 == 10, assertions);
-        5:  276:	Assertions_Assert(value->Member3[0] == 100, assertions);
-        5:  277:	Assertions_Assert(value->Member3[2] == 102, assertions);
-        5:  278:	Assertions_Assert(Map_Count(&map) == 1, assertions);
+        6:  267:	values[2].Member1 = 1000;
+        6:  268:	values[2].Member2 = 10;
+        6:  269:	values[2].Member3[0] = 100;
+        6:  270:	values[2].Member3[2] = 102;
+        6:  271:	Assertions_Assert(Map_Relate(&values[2], 12345, &map) == 1, assertions);
+        6:  272:	value = Map_ValueFor(12345, &map);
+        6:  273:	Assertions_Assert(value != nullptr, assertions);
+        6:  274:	Assertions_Assert(value->Member1 == 1000, assertions);
+        6:  275:	Assertions_Assert(value->Member2 == 10, assertions);
+        6:  276:	Assertions_Assert(value->Member3[0] == 100, assertions);
+        6:  277:	Assertions_Assert(value->Member3[2] == 102, assertions);
+        6:  278:	Assertions_Assert(Map_Count(&map) == 1, assertions);
         -:  279:	// -----------------------------------------
         -:  280:	// 5-3 Relate
-        5:  281:	values[0].Member1 = 2000;
-        5:  282:	values[0].Member2 = 20;
-        5:  283:	values[0].Member3[0] = 200;
-        5:  284:	values[0].Member3[2] = 202;
-        5:  285:	Assertions_Assert(Map_Relate(&values[0], 12345678, &map) == 2, assertions);
-        5:  286:	value = Map_ValueFor(12345678, &map);
-        5:  287:	Assertions_Assert(value != nullptr, assertions);
-        5:  288:	Assertions_Assert(value->Member1 == 2000, assertions);
-        5:  289:	Assertions_Assert(value->Member2 == 20, assertions);
-        5:  290:	Assertions_Assert(value->Member3[0] == 200, assertions);
-        5:  291:	Assertions_Assert(value->Member3[2] == 202, assertions);
-        5:  292:	Assertions_Assert(Map_Count(&map) == 2, assertions);
+        6:  281:	values[0].Member1 = 2000;
+        6:  282:	values[0].Member2 = 20;
+        6:  283:	values[0].Member3[0] = 200;
+        6:  284:	values[0].Member3[2] = 202;
+        6:  285:	Assertions_Assert(Map_Relate(&values[0], 12345678, &map) == 2, assertions);
+        6:  286:	value = Map_ValueFor(12345678, &map);
+        6:  287:	Assertions_Assert(value != nullptr, assertions);
+        6:  288:	Assertions_Assert(value->Member1 == 2000, assertions);
+        6:  289:	Assertions_Assert(value->Member2 == 20, assertions);
+        6:  290:	Assertions_Assert(value->Member3[0] == 200, assertions);
+        6:  291:	Assertions_Assert(value->Member3[2] == 202, assertions);
+        6:  292:	Assertions_Assert(Map_Count(&map) == 2, assertions);
         -:  293:	// -----------------------------------------
         -:  294:	// 5-4 Relate
-        5:  295:	values[1].Member1 = 3000;
-        5:  296:	values[1].Member2 = 30;
-        5:  297:	values[1].Member3[0] = 300;
-        5:  298:	values[1].Member3[2] = 302;
-        5:  299:	Assertions_Assert(Map_Relate(&values[1], 0x80000000, &map) == 3, assertions);
-        5:  300:	value = Map_ValueFor(0x80000000, &map);
-        5:  301:	Assertions_Assert(value != nullptr, assertions);
-        5:  302:	Assertions_Assert(value->Member1 == 3000, assertions);
-        5:  303:	Assertions_Assert(value->Member2 == 30, assertions);
-        5:  304:	Assertions_Assert(value->Member3[0] == 300, assertions);
-        5:  305:	Assertions_Assert(value->Member3[2] == 302, assertions);
-        5:  306:	Assertions_Assert(Map_Count(&map) == 3, assertions);
+        6:  295:	values[1].Member1 = 3000;
+        6:  296:	values[1].Member2 = 30;
+        6:  297:	values[1].Member3[0] = 300;
+        6:  298:	values[1].Member3[2] = 302;
+        6:  299:	Assertions_Assert(Map_Relate(&values[1], 0x80000000, &map) == 3, assertions);
+        6:  300:	value = Map_ValueFor(0x80000000, &map);
+        6:  301:	Assertions_Assert(value != nullptr, assertions);
+        6:  302:	Assertions_Assert(value->Member1 == 3000, assertions);
+        6:  303:	Assertions_Assert(value->Member2 == 30, assertions);
+        6:  304:	Assertions_Assert(value->Member3[0] == 300, assertions);
+        6:  305:	Assertions_Assert(value->Member3[2] == 302, assertions);
+        6:  306:	Assertions_Assert(Map_Count(&map) == 3, assertions);
         -:  307:	// -----------------------------------------
         -:  308:	// 5-5 Relate いっぱいの場合には新たなキーは挿入できない
-        5:  309:	values[3].Member1 = 3000;
-        5:  310:	values[3].Member2 = 30;
-        5:  311:	values[3].Member3[0] = 300;
-        5:  312:	values[3].Member3[2] = 302;
-        5:  313:	Assertions_Assert(Map_Relate(&values[1], 98765, &map) == 0, assertions);
-        5:  314:	value = Map_ValueFor(98765, &map);
-        5:  315:	Assertions_Assert(value == nullptr, assertions);
+        6:  309:	values[3].Member1 = 3000;
+        6:  310:	values[3].Member2 = 30;
+        6:  311:	values[3].Member3[0] = 300;
+        6:  312:	values[3].Member3[2] = 302;
+        6:  313:	Assertions_Assert(Map_Relate(&values[1], 98765, &map) == 0, assertions);
+        6:  314:	value = Map_ValueFor(98765, &map);
+        6:  315:	Assertions_Assert(value == nullptr, assertions);
         -:  316:	// -----------------------------------------
         -:  317:	// 5-6 Relate 同じキーは上書き
-        5:  318:	values[4].Member1 = 4000;
-        5:  319:	values[4].Member2 = 40;
-        5:  320:	values[4].Member3[0] = 400;
-        5:  321:	values[4].Member3[2] = 402;
-        5:  322:	Assertions_Assert(Map_Relate(&values[4], 12345678, &map) == 3, assertions);
-        5:  323:	value = Map_ValueFor(12345678, &map);
-        5:  324:	Assertions_Assert(value != nullptr, assertions);
-        5:  325:	Assertions_Assert(value->Member1 == 4000, assertions);
-        5:  326:	Assertions_Assert(value->Member2 == 40, assertions);
-        5:  327:	Assertions_Assert(value->Member3[0] == 400, assertions);
-        5:  328:	Assertions_Assert(value->Member3[2] == 402, assertions);
-        5:  329:	Assertions_Assert(Map_Count(&map) == 3, assertions);
+        6:  318:	values[4].Member1 = 4000;
+        6:  319:	values[4].Member2 = 40;
+        6:  320:	values[4].Member3[0] = 400;
+        6:  321:	values[4].Member3[2] = 402;
+        6:  322:	Assertions_Assert(Map_Relate(&values[4], 12345678, &map) == 3, assertions);
+        6:  323:	value = Map_ValueFor(12345678, &map);
+        6:  324:	Assertions_Assert(value != nullptr, assertions);
+        6:  325:	Assertions_Assert(value->Member1 == 4000, assertions);
+        6:  326:	Assertions_Assert(value->Member2 == 40, assertions);
+        6:  327:	Assertions_Assert(value->Member3[0] == 400, assertions);
+        6:  328:	Assertions_Assert(value->Member3[2] == 402, assertions);
+        6:  329:	Assertions_Assert(Map_Count(&map) == 3, assertions);
         -:  330:
         -:  331:	// -----------------------------------------
         -:  332:	// 6-x ValueAt
-        5:  333:	Map_Clear(&map);
-        5:  334:	values[2].Member1 = 1000;
-        5:  335:	values[2].Member2 = 10;
-        5:  336:	values[2].Member3[0] = 100;
-        5:  337:	values[2].Member3[2] = 102;
-        5:  338:	Map_Relate(&values[2], 12345, &map);
-        5:  339:	values[4].Member1 = 4000;
-        5:  340:	values[4].Member2 = 40;
-        5:  341:	values[4].Member3[0] = 400;
-        5:  342:	values[4].Member3[2] = 402;
-        5:  343:	Map_Relate(&values[4], 12345678, &map);
+        6:  333:	Map_Clear(&map);
+        6:  334:	values[2].Member1 = 1000;
+        6:  335:	values[2].Member2 = 10;
+        6:  336:	values[2].Member3[0] = 100;
+        6:  337:	values[2].Member3[2] = 102;
+        6:  338:	Map_Relate(&values[2], 12345, &map);
+        6:  339:	values[4].Member1 = 4000;
+        6:  340:	values[4].Member2 = 40;
+        6:  341:	values[4].Member3[0] = 400;
+        6:  342:	values[4].Member3[2] = 402;
+        6:  343:	Map_Relate(&values[4], 12345678, &map);
         -:  344:	// -----------------------------------------
         -:  345:	// 6-1 ValueAt(ctxt==nullptr)
-        5:  346:	value = Map_ValueAt(0, nullptr);
-        5:  347:	Assertions_Assert(value == nullptr, assertions);
+        6:  346:	value = Map_ValueAt(0, nullptr);
+        6:  347:	Assertions_Assert(value == nullptr, assertions);
         -:  348:	// -----------------------------------------
         -:  349:	// 6-2 ValueAt(index < 0)
-        5:  350:	value = Map_ValueAt(-1, &map);
-        5:  351:	Assertions_Assert(value == nullptr, assertions);
+        6:  350:	value = Map_ValueAt(-1, &map);
+        6:  351:	Assertions_Assert(value == nullptr, assertions);
         -:  352:	// -----------------------------------------
         -:  353:	// 6-3 ValueAt(index >= Count)
-        5:  354:	value = Map_ValueAt(2, &map);
-        5:  355:	Assertions_Assert(value == nullptr, assertions);
+        6:  354:	value = Map_ValueAt(2, &map);
+        6:  355:	Assertions_Assert(value == nullptr, assertions);
         -:  356:	// -----------------------------------------
         -:  357:	// 6-4 ValueAt
-        5:  358:	value = Map_ValueAt(0, &map);
-        5:  359:	Assertions_Assert(value != nullptr, assertions);
-        5:  360:	Assertions_Assert(value->Member1 == 1000, assertions);
-        5:  361:	Assertions_Assert(value->Member2 == 10, assertions);
-        5:  362:	Assertions_Assert(value->Member3[0] == 100, assertions);
-        5:  363:	Assertions_Assert(value->Member3[2] == 102, assertions);
+        6:  358:	value = Map_ValueAt(0, &map);
+        6:  359:	Assertions_Assert(value != nullptr, assertions);
+        6:  360:	Assertions_Assert(value->Member1 == 1000, assertions);
+        6:  361:	Assertions_Assert(value->Member2 == 10, assertions);
+        6:  362:	Assertions_Assert(value->Member3[0] == 100, assertions);
+        6:  363:	Assertions_Assert(value->Member3[2] == 102, assertions);
         -:  364:	// -----------------------------------------
         -:  365:	// 6-5 ValueAt
-        5:  366:	value = Map_ValueAt(1, &map);
-        5:  367:	Assertions_Assert(value != nullptr, assertions);
-        5:  368:	Assertions_Assert(value->Member1 == 4000, assertions);
-        5:  369:	Assertions_Assert(value->Member2 == 40, assertions);
-        5:  370:	Assertions_Assert(value->Member3[0] == 400, assertions);
-        5:  371:	Assertions_Assert(value->Member3[2] == 402, assertions);
-        5:  372:}
+        6:  366:	value = Map_ValueAt(1, &map);
+        6:  367:	Assertions_Assert(value != nullptr, assertions);
+        6:  368:	Assertions_Assert(value->Member1 == 4000, assertions);
+        6:  369:	Assertions_Assert(value->Member2 == 40, assertions);
+        6:  370:	Assertions_Assert(value->Member3[0] == 400, assertions);
+        6:  371:	Assertions_Assert(value->Member3[2] == 402, assertions);
+        6:  372:}
         -:  373:#endif

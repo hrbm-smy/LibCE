@@ -1,8 +1,8 @@
         -:    0:Source:../../src/AvlTree.c
         -:    0:Graph:obj/src/AvlTree.gcno
         -:    0:Data:obj/src/AvlTree.gcda
-        -:    0:Runs:5
-        -:    0:Programs:5
+        -:    0:Runs:6
+        -:    0:Programs:6
         -:    1:﻿/** ------------------------------------------------------------------
         -:    2:*
         -:    3:*	@file	AvlTree.c
@@ -43,404 +43,404 @@
         -:   38:/// <summary>
         -:   39:/// <para>親を取得する。</para>
         -:   40:/// </summary>
-     2405:   41:static AvlNode* ParentOf(const AvlNode* node)
+     2886:   41:static AvlNode* ParentOf(const AvlNode* node)
         -:   42:{
-     2405:   43:	AvlNode* result = nullptr;
-     2405:   44:	if (node != nullptr)
+     2886:   43:	AvlNode* result = nullptr;
+     2886:   44:	if (node != nullptr)
         -:   45:	{
-     2395:   46:		result = node->Parent;
+     2874:   46:		result = node->Parent;
         -:   47:	}
-     2405:   48:	return result;
+     2886:   48:	return result;
         -:   49:}
         -:   50:/// <summary>
         -:   51:/// <para>左の子を取得する。</para>
         -:   52:/// </summary>
-     1180:   53:static AvlNode* LeftOf(const AvlNode* node)
+     1416:   53:static AvlNode* LeftOf(const AvlNode* node)
         -:   54:{
-     1180:   55:	AvlNode* result = nullptr;
-     1180:   56:	if (node != nullptr)
+     1416:   55:	AvlNode* result = nullptr;
+     1416:   56:	if (node != nullptr)
         -:   57:	{
-     1180:   58:		result = node->Left;
+     1416:   58:		result = node->Left;
         -:   59:	}
-     1180:   60:	return result;
+     1416:   60:	return result;
         -:   61:}
         -:   62:/// <summary>
         -:   63:/// <para>右の子を取得する。</para>
         -:   64:/// </summary>
-      285:   65:static AvlNode* RightOf(const AvlNode* node)
+      342:   65:static AvlNode* RightOf(const AvlNode* node)
         -:   66:{
-      285:   67:	AvlNode* result = nullptr;
-      285:   68:	if (node != nullptr)
+      342:   67:	AvlNode* result = nullptr;
+      342:   68:	if (node != nullptr)
         -:   69:	{
-      285:   70:		result = node->Right;
+      342:   70:		result = node->Right;
         -:   71:	}
-      285:   72:	return result;
+      342:   72:	return result;
         -:   73:}
         -:   74:/// <summary>
         -:   75:/// <para>高さを取得する。</para>
         -:   76:/// </summary>
-     7905:   77:static int32_t HeightOf(const AvlNode* node)
+     9486:   77:static int32_t HeightOf(const AvlNode* node)
         -:   78:{
-     7905:   79:	int32_t result = 0;
-     7905:   80:	if (node != nullptr)
+     9486:   79:	int32_t result = 0;
+     9486:   80:	if (node != nullptr)
         -:   81:	{
-     5925:   82:		result = node->Height;
+     7110:   82:		result = node->Height;
         -:   83:	}
-     7905:   84:	return result;
+     9486:   84:	return result;
         -:   85:}
         -:   86:/// <summary>
         -:   87:/// <para>子の最大の高さを取得する。</para>
         -:   88:/// </summary>
-     1405:   89:static int32_t ChildrenMaxHeightOf(const AvlNode* node)
+     1686:   89:static int32_t ChildrenMaxHeightOf(const AvlNode* node)
         -:   90:{
-     1405:   91:	int32_t result = 0;
-     1405:   92:	if (node != nullptr)
+     1686:   91:	int32_t result = 0;
+     1686:   92:	if (node != nullptr)
         -:   93:	{
-     1405:   94:		int32_t lh = HeightOf(node->Left);
-     1405:   95:		int32_t rh = HeightOf(node->Right);
-     1405:   96:		if (lh > rh)
+     1686:   94:		int32_t lh = HeightOf(node->Left);
+     1686:   95:		int32_t rh = HeightOf(node->Right);
+     1686:   96:		if (lh > rh)
         -:   97:		{
-      320:   98:			result = lh;
+      384:   98:			result = lh;
         -:   99:		}
         -:  100:		else
         -:  101:		{
-     1085:  102:			result = rh;
+     1302:  102:			result = rh;
         -:  103:		}
         -:  104:	}
-     1405:  105:	return result;
+     1686:  105:	return result;
         -:  106:}
         -:  107:/// <summary>
         -:  108:/// <para>平衡値(左の高さ - 右の高さ)を取得する。</para>
         -:  109:/// </summary>
-     1135:  110:static int32_t ChildrenBalanceOf(const AvlNode* node)
+     1362:  110:static int32_t ChildrenBalanceOf(const AvlNode* node)
         -:  111:{
-     1135:  112:	int32_t result = 0;
-     1135:  113:	if (node != nullptr)
+     1362:  112:	int32_t result = 0;
+     1362:  113:	if (node != nullptr)
         -:  114:	{
-     1135:  115:		int32_t lh = HeightOf(node->Left);
-     1135:  116:		int32_t rh = HeightOf(node->Right);
-     1135:  117:		result = lh - rh;
+     1362:  115:		int32_t lh = HeightOf(node->Left);
+     1362:  116:		int32_t rh = HeightOf(node->Right);
+     1362:  117:		result = lh - rh;
         -:  118:	}
-     1135:  119:	return result;
+     1362:  119:	return result;
         -:  120:}
         -:  121:/// <summary>
         -:  122:/// <para>高さを更新する。</para>
         -:  123:/// </summary>
-     1455:  124:static void UpdateHeight(AvlNode* node)
+     1746:  124:static void UpdateHeight(AvlNode* node)
         -:  125:{
-     1455:  126:	if (node != nullptr)
+     1746:  126:	if (node != nullptr)
         -:  127:	{
-     1405:  128:		node->Height = ChildrenMaxHeightOf(node) + 1;
+     1686:  128:		node->Height = ChildrenMaxHeightOf(node) + 1;
         -:  129:	}
-     1455:  130:}
+     1746:  130:}
         -:  131:
         -:  132:/// <summary>
         -:  133:/// <para>左の子として縁組を行う。</para>
         -:  134:/// </summary>
-      515:  135:static void AdoptAsLeft(AvlNode* child, AvlNode* parent)
+      618:  135:static void AdoptAsLeft(AvlNode* child, AvlNode* parent)
         -:  136:{
         -:  137:	// Link with parent -> child
-      515:  138:	if (parent != nullptr)
+      618:  138:	if (parent != nullptr)
         -:  139:	{
-      515:  140:		parent->Left = child;
+      618:  140:		parent->Left = child;
         -:  141:	}
         -:  142:	// Link with child -> parent
-      515:  143:	if (child != nullptr)
+      618:  143:	if (child != nullptr)
         -:  144:	{
-      445:  145:		child->Parent = parent;
+      534:  145:		child->Parent = parent;
         -:  146:	}
-      515:  147:}
+      618:  147:}
         -:  148:/// <summary>
         -:  149:/// <para>右の子として縁組を行う。</para>
         -:  150:/// </summary>
-      625:  151:static void AdoptAsRight(AvlNode* child, AvlNode* parent)
+      750:  151:static void AdoptAsRight(AvlNode* child, AvlNode* parent)
         -:  152:{
         -:  153:	// Link with parent -> child
-      625:  154:	if (parent != nullptr)
+      750:  154:	if (parent != nullptr)
         -:  155:	{
-      625:  156:		parent->Right = child;
+      750:  156:		parent->Right = child;
         -:  157:	}
         -:  158:	// Link with child -> parent
-      625:  159:	if (child != nullptr)
+      750:  159:	if (child != nullptr)
         -:  160:	{
-      515:  161:		child->Parent = parent;
+      618:  161:		child->Parent = parent;
         -:  162:	}
-      625:  163:}
+      750:  163:}
         -:  164:/// <summary>
         -:  165:/// <para>子ノードを置き換える。</para>
         -:  166:/// </summary>
-      275:  167:static void ReplaceChild(const AvlNode* from, AvlNode* to)
+      330:  167:static void ReplaceChild(const AvlNode* from, AvlNode* to)
         -:  168:{
         -:  169:	// 親を取得
-      275:  170:	AvlNode* parent = ParentOf(from);
-      275:  171:	if (parent == nullptr)
+      330:  170:	AvlNode* parent = ParentOf(from);
+      330:  171:	if (parent == nullptr)
         -:  172:	{
         -:  173:		// 親->子はつなぐことが出来ないが、子->親はつなげられるならつなげる(親なし)
-       50:  174:		if (to != nullptr)
+       60:  174:		if (to != nullptr)
         -:  175:		{
-       50:  176:			to->Parent = parent;
+       60:  176:			to->Parent = parent;
         -:  177:		}
         -:  178:	}
-      225:  179:	else if (parent->Left == from)
+      270:  179:	else if (parent->Left == from)
         -:  180:	{
         -:  181:		// 左につながれていた場合は左につなぐ
-      100:  182:		AdoptAsLeft(to, parent);
+      120:  182:		AdoptAsLeft(to, parent);
         -:  183:	}
-      125:  184:	else if (parent->Right == from)
+      150:  184:	else if (parent->Right == from)
         -:  185:	{
         -:  186:		// 右につながれていた場合は右につなぐ
-      125:  187:		AdoptAsRight(to, parent);
+      150:  187:		AdoptAsRight(to, parent);
         -:  188:	}
-      275:  189:}
+      330:  189:}
         -:  190:/// <summary>
         -:  191:/// <para>ノードを置き換える。</para>
         -:  192:/// </summary>
-        5:  193:static void Replace(const AvlNode* from, AvlNode* to)
+        6:  193:static void Replace(const AvlNode* from, AvlNode* to)
         -:  194:{
         -:  195:	// 親との縁組
-        5:  196:	ReplaceChild(from, to);
+        6:  196:	ReplaceChild(from, to);
         -:  197:
         -:  198:	// 左との縁組
-        5:  199:	AvlNode* left = LeftOf(from);
-        5:  200:	AdoptAsLeft(left, to);
+        6:  199:	AvlNode* left = LeftOf(from);
+        6:  200:	AdoptAsLeft(left, to);
         -:  201:
         -:  202:	// 右との縁組
-        5:  203:	AvlNode* right = RightOf(from);
-        5:  204:	AdoptAsRight(right, to);
+        6:  203:	AvlNode* right = RightOf(from);
+        6:  204:	AdoptAsRight(right, to);
         -:  205:
         -:  206:	// Heightを引き継ぐ
-        5:  207:	if (to != nullptr)
+        6:  207:	if (to != nullptr)
         -:  208:	{
-        5:  209:		to->Height = HeightOf(from);
+        6:  209:		to->Height = HeightOf(from);
         -:  210:	}
-        5:  211:}
+        6:  211:}
         -:  212:
         -:  213:/// <summary>
         -:  214:/// <para>右回転を行う。</para>
         -:  215:/// <para>更新されたrootを返す。</para>
         -:  216:/// </summary>
-      105:  217:static AvlNode* RotateRight(AvlNode* node)
+      126:  217:static AvlNode* RotateRight(AvlNode* node)
         -:  218:{
         -:  219:	// 回転中心(pivot)は左の子ノード
-      105:  220:	AvlNode* pivot = LeftOf(node);
+      126:  220:	AvlNode* pivot = LeftOf(node);
         -:  221:
         -:  222:	// 回転中心と親を縁組
-      105:  223:	ReplaceChild(node, pivot);
+      126:  223:	ReplaceChild(node, pivot);
         -:  224:
         -:  225:	// 移動する子ノードを取得
-      105:  226:	AvlNode* moveChild = RightOf(pivot);
+      126:  226:	AvlNode* moveChild = RightOf(pivot);
         -:  227:	// 移動する子ノードを、左の子として縁組
-      105:  228:	AdoptAsLeft(moveChild, node);
+      126:  228:	AdoptAsLeft(moveChild, node);
         -:  229:	// 移動なので移動元はクリア
-      105:  230:	if (pivot != nullptr)
+      126:  230:	if (pivot != nullptr)
         -:  231:	{
-      105:  232:		pivot->Right = nullptr;
+      126:  232:		pivot->Right = nullptr;
         -:  233:	}
         -:  234:
         -:  235:	// 回転中心の右の子ノードとして再縁組
-      105:  236:	AdoptAsRight(node, pivot);
+      126:  236:	AdoptAsRight(node, pivot);
         -:  237:
         -:  238:	// 縁組したので高さを更新(子から親へ)
-      105:  239:	UpdateHeight(node);
-      105:  240:	UpdateHeight(pivot);
-      105:  241:	UpdateHeight(ParentOf(pivot));
+      126:  239:	UpdateHeight(node);
+      126:  240:	UpdateHeight(pivot);
+      126:  241:	UpdateHeight(ParentOf(pivot));
         -:  242:
         -:  243:	// 新たなrootを返す
-      105:  244:	return pivot;
+      126:  244:	return pivot;
         -:  245:}
         -:  246:/// <summary>
         -:  247:/// <para>左回転を行う。</para>
         -:  248:/// <para>更新されたrootを返す。</para>
         -:  249:/// </summary>
-      165:  250:static AvlNode* RotateLeft(AvlNode* node)
+      198:  250:static AvlNode* RotateLeft(AvlNode* node)
         -:  251:{
         -:  252:	// 回転中心(pivot)は右の子ノード
-      165:  253:	AvlNode* pivot = RightOf(node);
+      198:  253:	AvlNode* pivot = RightOf(node);
         -:  254:
         -:  255:	// 回転中心と親を縁組
-      165:  256:	ReplaceChild(node, pivot);
+      198:  256:	ReplaceChild(node, pivot);
         -:  257:
         -:  258:	// 移動する子ノードを取得
-      165:  259:	AvlNode* moveChild = LeftOf(pivot);
+      198:  259:	AvlNode* moveChild = LeftOf(pivot);
         -:  260:	// 移動する子ノードを、右の子として縁組
-      165:  261:	AdoptAsRight(moveChild, node);
+      198:  261:	AdoptAsRight(moveChild, node);
         -:  262:	// 移動なので移動元はクリア
-      165:  263:	if (pivot != nullptr)
+      198:  263:	if (pivot != nullptr)
         -:  264:	{
-      165:  265:		pivot->Left = nullptr;
+      198:  265:		pivot->Left = nullptr;
         -:  266:	}
         -:  267:
         -:  268:	// 回転中心の左の子ノードとして再縁組
-      165:  269:	AdoptAsLeft(node, pivot);
+      198:  269:	AdoptAsLeft(node, pivot);
         -:  270:
         -:  271:	// 縁組したので高さを更新(子から親へ)
-      165:  272:	UpdateHeight(node);
-      165:  273:	UpdateHeight(pivot);
-      165:  274:	UpdateHeight(ParentOf(pivot));
+      198:  272:	UpdateHeight(node);
+      198:  273:	UpdateHeight(pivot);
+      198:  274:	UpdateHeight(ParentOf(pivot));
         -:  275:
         -:  276:	// 新たなrootを返す
-      165:  277:	return pivot;
+      198:  277:	return pivot;
         -:  278:}
         -:  279:/// <summary>
         -:  280:/// <para>右-左 2重回転を行う。</para>
         -:  281:/// <para>更新されたrootを返す。</para>
         -:  282:/// </summary>
-       10:  283:static AvlNode* RotateRightLeft(AvlNode* node)
+       12:  283:static AvlNode* RotateRightLeft(AvlNode* node)
         -:  284:{
-       10:  285:	RotateRight(RightOf(node));
-       10:  286:	return RotateLeft(node);
+       12:  285:	RotateRight(RightOf(node));
+       12:  286:	return RotateLeft(node);
         -:  287:}
         -:  288:/// <summary>
         -:  289:/// <para>左-右 2重回転を行う。</para>
         -:  290:/// <para>更新されたrootを返す。</para>
         -:  291:/// </summary>
-       15:  292:static AvlNode* RotateLeftRight(AvlNode* node)
+       18:  292:static AvlNode* RotateLeftRight(AvlNode* node)
         -:  293:{
-       15:  294:	RotateLeft(LeftOf(node));
-       15:  295:	return RotateRight(node);
+       18:  294:	RotateLeft(LeftOf(node));
+       18:  295:	return RotateRight(node);
         -:  296:}
         -:  297:
         -:  298:/// <summary>
         -:  299:/// <para>treeにノードを挿入する。</para>
         -:  300:/// <para>ここでは挿入するのみで、バランスはとらない。</para>
         -:  301:/// </summary>
-      410:  302:static void Insert(
+      492:  302:static void Insert(
         -:  303:	AvlNode* node,
         -:  304:	AvlNode* root)
         -:  305:{
-      410:  306:	if (node != nullptr)
+      492:  306:	if (node != nullptr)
         -:  307:	{
-      405:  308:		AvlNode* parent = root;
-     1300:  309:		while (parent != nullptr)
+      486:  308:		AvlNode* parent = root;
+     1560:  309:		while (parent != nullptr)
         -:  310:		{
-     1265:  311:			if (node->Content.Key < parent->Content.Key)
+     1518:  311:			if (node->Content.Key < parent->Content.Key)
         -:  312:			{
         -:  313:				// 親のKeyより小さい -> 左に入れようとする
-      515:  314:				if (parent->Left != nullptr)
+      618:  314:				if (parent->Left != nullptr)
         -:  315:				{
         -:  316:					// 左がある -> さらに左を見る
-      375:  317:					parent = parent->Left;
+      450:  317:					parent = parent->Left;
         -:  318:				}
         -:  319:				else
         -:  320:				{
         -:  321:					// 左がない -> 見つかった。ここに挿入
-      140:  322:					AdoptAsLeft(node, parent);
-      140:  323:					node->Height = 1;
-      140:  324:					node->Left = nullptr;
-      140:  325:					node->Right = nullptr;
+      168:  322:					AdoptAsLeft(node, parent);
+      168:  323:					node->Height = 1;
+      168:  324:					node->Left = nullptr;
+      168:  325:					node->Right = nullptr;
         -:  326:
-      140:  327:					break;
+      168:  327:					break;
         -:  328:				}
         -:  329:			}
-      750:  330:			else if (node->Content.Key > parent->Content.Key)
+      900:  330:			else if (node->Content.Key > parent->Content.Key)
         -:  331:			{
         -:  332:				// 親のKeyより大きい -> 右に入れようとする
-      745:  333:				if (parent->Right != nullptr)
+      894:  333:				if (parent->Right != nullptr)
         -:  334:				{
         -:  335:					// 右がある -> さらに右を見る
-      520:  336:					parent = parent->Right;
+      624:  336:					parent = parent->Right;
         -:  337:				}
         -:  338:				else
         -:  339:				{
         -:  340:					// 右がない -> 見つかった。ここに挿入
-      225:  341:					AdoptAsRight(node, parent);
-      225:  342:					node->Height = 1;
-      225:  343:					node->Left = nullptr;
-      225:  344:					node->Right = nullptr;
+      270:  341:					AdoptAsRight(node, parent);
+      270:  342:					node->Height = 1;
+      270:  343:					node->Left = nullptr;
+      270:  344:					node->Right = nullptr;
         -:  345:
-      225:  346:					break;
+      270:  346:					break;
         -:  347:				}
         -:  348:			}
         -:  349:			else
         -:  350:			{
         -:  351:				// 同じKey -> 上書き(入れ替え、これまでの親は勘当)
-        5:  352:				Replace(parent, node);
+        6:  352:				Replace(parent, node);
         -:  353:				// 親子関係だけ成り代わる、内容は新しく追加するノードのものを使う
         -:  354:
-        5:  355:				break;
+        6:  355:				break;
         -:  356:			}
         -:  357:		}
         -:  358:	}
-      410:  359:}
+      492:  359:}
         -:  360:
         -:  361:/// <summary>
         -:  362:/// <para>treeのバランスをとる。</para>
         -:  363:/// <para>更新されたrootを返す。</para>
         -:  364:/// </summary>
-      410:  365:static AvlNode* Balance(AvlNode* node)
+      492:  365:static AvlNode* Balance(AvlNode* node)
         -:  366:{
-      410:  367:	AvlNode* target = node;
-      410:  368:	AvlNode* parent = ParentOf(target);
-     1020:  369:	while (parent != nullptr)
+      492:  367:	AvlNode* target = node;
+      492:  368:	AvlNode* parent = ParentOf(target);
+     1224:  369:	while (parent != nullptr)
         -:  370:	{
         -:  371:		// 平衡処理を行う前の高さをとっておく
-      890:  372:		int32_t parentHeight = HeightOf(parent);
+     1068:  372:		int32_t parentHeight = HeightOf(parent);
         -:  373:
         -:  374:		// 平衡処理
-      890:  375:		if (target == LeftOf(parent))
+     1068:  375:		if (target == LeftOf(parent))
         -:  376:		{
         -:  377:			// 左の子である場合
-      360:  378:			int32_t parentBalance = ChildrenBalanceOf(parent);
-      360:  379:			if (parentBalance >= 2)
+      432:  378:			int32_t parentBalance = ChildrenBalanceOf(parent);
+      432:  379:			if (parentBalance >= 2)
         -:  380:			{
-       95:  381:				int32_t targetBalance = ChildrenBalanceOf(target);
-       95:  382:				if (targetBalance >= 0)
+      114:  381:				int32_t targetBalance = ChildrenBalanceOf(target);
+      114:  382:				if (targetBalance >= 0)
         -:  383:				{
-       80:  384:					parent = RotateRight(parent);
+       96:  384:					parent = RotateRight(parent);
         -:  385:				}
         -:  386:				else
         -:  387:				{
-       15:  388:					parent = RotateLeftRight(parent);
+       18:  388:					parent = RotateLeftRight(parent);
         -:  389:				}
         -:  390:			}
         -:  391:			else
         -:  392:			{
-      265:  393:				UpdateHeight(parent);
+      318:  393:				UpdateHeight(parent);
         -:  394:			}
         -:  395:		}
         -:  396:		else
         -:  397:		{
         -:  398:			// 右の子である場合
-      530:  399:			int32_t parentBalance = ChildrenBalanceOf(parent);
-      530:  400:			if (parentBalance <= -2)
+      636:  399:			int32_t parentBalance = ChildrenBalanceOf(parent);
+      636:  400:			if (parentBalance <= -2)
         -:  401:			{
-      150:  402:				int32_t targetBalance = ChildrenBalanceOf(target);
-      150:  403:				if (targetBalance <= 0)
+      180:  402:				int32_t targetBalance = ChildrenBalanceOf(target);
+      180:  403:				if (targetBalance <= 0)
         -:  404:				{
-      140:  405:					parent = RotateLeft(parent);
+      168:  405:					parent = RotateLeft(parent);
         -:  406:				}
         -:  407:				else
         -:  408:				{
-       10:  409:					parent = RotateRightLeft(parent);
+       12:  409:					parent = RotateRightLeft(parent);
         -:  410:				}
         -:  411:			}
         -:  412:			else
         -:  413:			{
-      380:  414:				UpdateHeight(parent);
+      456:  414:				UpdateHeight(parent);
         -:  415:			}
         -:  416:		}
         -:  417:
         -:  418:		// 平衡処理の前後で高さが変わらない場合、終わり
-      890:  419:		if (HeightOf(parent) == parentHeight)
+     1068:  419:		if (HeightOf(parent) == parentHeight)
         -:  420:		{
-      280:  421:			break;
+      336:  421:			break;
         -:  422:		}
         -:  423:
         -:  424:		// 次へ
-      610:  425:		target = parent;
-      610:  426:		parent = ParentOf(target);
+      732:  425:		target = parent;
+      732:  426:		parent = ParentOf(target);
         -:  427:	}
         -:  428:
         -:  429:	// 新しいrootを探す
-      410:  430:	AvlNode* root = target;
-      410:  431:	AvlNode* rootParent = ParentOf(root);
-      840:  432:	while (rootParent != nullptr)
+      492:  430:	AvlNode* root = target;
+      492:  431:	AvlNode* rootParent = ParentOf(root);
+     1008:  432:	while (rootParent != nullptr)
         -:  433:	{
-      430:  434:		root = rootParent;
-      430:  435:		rootParent = ParentOf(root);
+      516:  434:		root = rootParent;
+      516:  435:		rootParent = ParentOf(root);
         -:  436:	}
         -:  437:
-      410:  438:	return root;
+      492:  438:	return root;
         -:  439:}
         -:  440:
         -:  441:/* -------------------------------------------------------------------
@@ -454,19 +454,19 @@
         -:  449:/// <param name="value">内容のValue。</param>
         -:  450:/// <param name="node">ノード。</param>
         -:  451:/// <returns>なし。</returns>
-      415:  452:void AvlNode_Init(
+      498:  452:void AvlNode_Init(
         -:  453:	AvlKey_t key, const void* value,
         -:  454:	AvlNode* node)
         -:  455:{
-      415:  456:	if (node != nullptr)
+      498:  456:	if (node != nullptr)
         -:  457:	{
-      410:  458:		memset(node, 0, sizeof(AvlNode));
+      492:  458:		memset(node, 0, sizeof(AvlNode));
         -:  459:
-      410:  460:		node->Height = 1;
-      410:  461:		node->Content.Key = key;
-      410:  462:		node->Content.Value = value;
+      492:  460:		node->Height = 1;
+      492:  461:		node->Content.Key = key;
+      492:  462:		node->Content.Value = value;
         -:  463:	}
-      415:  464:}
+      498:  464:}
         -:  465:
         -:  466:/// <summary>
         -:  467:/// <para>Keyに該当するノードを検索する。</para>
@@ -474,30 +474,30 @@
         -:  469:/// <param name="key">検索する内容のKey。</param>
         -:  470:/// <param name="root">検索開始rootノード。</param>
         -:  471:/// <returns>該当するノード。</returns>
-      540:  472:AvlNode* AvlTree_Search(
+      648:  472:AvlNode* AvlTree_Search(
         -:  473:	AvlKey_t key,
         -:  474:	AvlNode* root)
         -:  475:{
-      540:  476:	AvlNode* result = nullptr;
-      540:  477:	AvlNode* node = root;
-     2115:  478:	while (node != nullptr)
+      648:  476:	AvlNode* result = nullptr;
+      648:  477:	AvlNode* node = root;
+     2538:  478:	while (node != nullptr)
         -:  479:	{
-     1840:  480:		if (key < node->Content.Key)
+     2208:  480:		if (key < node->Content.Key)
         -:  481:		{
-      915:  482:			node = node->Left;
+     1098:  482:			node = node->Left;
         -:  483:		}
-      925:  484:		else if (key > node->Content.Key)
+     1110:  484:		else if (key > node->Content.Key)
         -:  485:		{
-      660:  486:			node = node->Right;
+      792:  486:			node = node->Right;
         -:  487:		}
         -:  488:		else
         -:  489:		{
         -:  490:			// HIT!
-      265:  491:			result = node;
-      265:  492:			break;
+      318:  491:			result = node;
+      318:  492:			break;
         -:  493:		}
         -:  494:	}
-      540:  495:	return result;
+      648:  495:	return result;
         -:  496:}
         -:  497:
         -:  498:/// <summary>
@@ -506,17 +506,17 @@
         -:  501:/// <param name="node">挿入するノード。</param>
         -:  502:/// <param name="root">挿入先treeのrootノード。</param>
         -:  503:/// <returns>更新されたtreeのrootノード。</returns>
-      410:  504:AvlNode* AvlTree_Insert(
+      492:  504:AvlNode* AvlTree_Insert(
         -:  505:	AvlNode* node,
         -:  506:	AvlNode* root)
         -:  507:{
         -:  508:	// まずは挿入
-      410:  509:	Insert(node, root);
+      492:  509:	Insert(node, root);
         -:  510:
         -:  511:	// バランスをとる
-      410:  512:	AvlNode* newRoot = Balance(node);
+      492:  512:	AvlNode* newRoot = Balance(node);
         -:  513:
-      410:  514:	return newRoot;
+      492:  514:	return newRoot;
         -:  515:}
         -:  516:
         -:  517:/* -------------------------------------------------------------------
@@ -532,46 +532,46 @@
         -:  527:	int8_t Member2[4];
         -:  528:} AvlTree_UnitTest_Value;
         -:  529:
-     3540:  530:static int32_t AvlTree_TracedHeightOf(const AvlNode* node)
+     4248:  530:static int32_t AvlTree_TracedHeightOf(const AvlNode* node)
         -:  531:{
-     3540:  532:	int32_t height = 0;
-     3540:  533:	if (node != nullptr)
+     4248:  532:	int32_t height = 0;
+     4248:  533:	if (node != nullptr)
         -:  534:	{
-     1250:  535:		height += 1;
-     1250:  536:		int32_t lh = AvlTree_TracedHeightOf(node->Left);
-     1250:  537:		int32_t rh = AvlTree_TracedHeightOf(node->Right);
-     1250:  538:		int32_t mh = (lh < rh) ? rh : lh;
-     1250:  539:		height += mh;
+     1500:  535:		height += 1;
+     1500:  536:		int32_t lh = AvlTree_TracedHeightOf(node->Left);
+     1500:  537:		int32_t rh = AvlTree_TracedHeightOf(node->Right);
+     1500:  538:		int32_t mh = (lh < rh) ? rh : lh;
+     1500:  539:		height += mh;
         -:  540:	}
-     3540:  541:	return height;
+     4248:  541:	return height;
         -:  542:}
         -:  543:
-     1080:  544:static void AvlTree_Check(const AvlNode* root, Assertions* assertions)
+     1296:  544:static void AvlTree_Check(const AvlNode* root, Assertions* assertions)
         -:  545:{
-     1080:  546:	if (root != nullptr)
+     1296:  546:	if (root != nullptr)
         -:  547:	{
         -:  548:		// 実際に構造を辿った高さと、記憶されている高さを取得
-      520:  549:		int32_t tlh = AvlTree_TracedHeightOf(root->Left);
-      520:  550:		int32_t trh = AvlTree_TracedHeightOf(root->Right);
-      520:  551:		int32_t slh = HeightOf(root->Left);
-      520:  552:		int32_t srh = HeightOf(root->Right);
+      624:  549:		int32_t tlh = AvlTree_TracedHeightOf(root->Left);
+      624:  550:		int32_t trh = AvlTree_TracedHeightOf(root->Right);
+      624:  551:		int32_t slh = HeightOf(root->Left);
+      624:  552:		int32_t srh = HeightOf(root->Right);
         -:  553:
         -:  554:		// 左右の部分木の高さの差が1以下であること
-     520*:  555:		Assertions_Assert(abs(tlh - trh) <= 1, assertions);
+     624*:  555:		Assertions_Assert(abs(tlh - trh) <= 1, assertions);
         -:  556:
         -:  557:		// 記憶された高さと、実際に辿った高さが同じであること
-      520:  558:		Assertions_Assert(tlh == slh, assertions);
-      520:  559:		Assertions_Assert(trh == srh, assertions);
+      624:  558:		Assertions_Assert(tlh == slh, assertions);
+      624:  559:		Assertions_Assert(trh == srh, assertions);
         -:  560:
         -:  561:		// 部分木を再帰チェック
-      520:  562:		AvlTree_Check(root->Left, assertions);
-      520:  563:		AvlTree_Check(root->Right, assertions);
+      624:  562:		AvlTree_Check(root->Left, assertions);
+      624:  563:		AvlTree_Check(root->Right, assertions);
         -:  564:	}
-     1080:  565:}
+     1296:  565:}
         -:  566:
-        5:  567:void AvlTree_UnitTest(void)
+        6:  567:void AvlTree_UnitTest(void)
         -:  568:{
-        5:  569:	Assertions* assertions = Assertions_Instance();
+        6:  569:	Assertions* assertions = Assertions_Instance();
         -:  570:	AvlNode* root;
         -:  571:	AvlNode* searched;
         -:  572:	AvlNode nodes[30];
@@ -581,210 +581,210 @@
         -:  576:
         -:  577:	// -----------------------------------------
         -:  578:	// 1-1 Init(self==nullptr)
-        5:  579:	AvlNode_Init(0, nullptr, nullptr);
+        6:  579:	AvlNode_Init(0, nullptr, nullptr);
         -:  580:
         -:  581:	// -----------------------------------------
         -:  582:	// 1-2 Init
-        5:  583:	AvlNode_Init(0, &values[0], &nodes[0]);
-        5:  584:	Assertions_Assert(nodes[0].Content.Key == 0, assertions);
-        5:  585:	Assertions_Assert(nodes[0].Content.Value == &values[0], assertions);
+        6:  583:	AvlNode_Init(0, &values[0], &nodes[0]);
+        6:  584:	Assertions_Assert(nodes[0].Content.Key == 0, assertions);
+        6:  585:	Assertions_Assert(nodes[0].Content.Value == &values[0], assertions);
         -:  586:
         -:  587:	// -----------------------------------------
         -:  588:	// 2-1 Insert(node==nullptr)
-        5:  589:	root = nullptr;
-        5:  590:	root = AvlTree_Insert(nullptr, root);
-        5:  591:	Assertions_Assert(root == nullptr, assertions);
+        6:  589:	root = nullptr;
+        6:  590:	root = AvlTree_Insert(nullptr, root);
+        6:  591:	Assertions_Assert(root == nullptr, assertions);
         -:  592:
         -:  593:	// -----------------------------------------
         -:  594:	// 2-2 Insert 1st node, become a root
-        5:  595:	root = nullptr;
-        5:  596:	AvlNode_Init(0, &values[0], &nodes[0]);
-        5:  597:	root = AvlTree_Insert(&nodes[0], root);
+        6:  595:	root = nullptr;
+        6:  596:	AvlNode_Init(0, &values[0], &nodes[0]);
+        6:  597:	root = AvlTree_Insert(&nodes[0], root);
         -:  598:	// Check structure
-        5:  599:	AvlTree_Check(root, assertions);
+        6:  599:	AvlTree_Check(root, assertions);
         -:  600:	// Check searches
-        5:  601:	Assertions_Assert(root == &nodes[0], assertions);
-        5:  602:	searched = AvlTree_Search(0, root);
-        5:  603:	Assertions_Assert(searched == &nodes[0], assertions);
-        5:  604:	searched = AvlTree_Search(1, root);
-        5:  605:	Assertions_Assert(searched == nullptr, assertions);
+        6:  601:	Assertions_Assert(root == &nodes[0], assertions);
+        6:  602:	searched = AvlTree_Search(0, root);
+        6:  603:	Assertions_Assert(searched == &nodes[0], assertions);
+        6:  604:	searched = AvlTree_Search(1, root);
+        6:  605:	Assertions_Assert(searched == nullptr, assertions);
         -:  606:
         -:  607:	// -----------------------------------------
         -:  608:	// 3-1 Insert sequential nodes
-       50:  609:	for (int32_t i = 1; i < 10; i++)
+       60:  609:	for (int32_t i = 1; i < 10; i++)
         -:  610:	{
-       45:  611:		AvlKey_t key = (i * 2) + 1;
-       45:  612:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  613:		root = AvlTree_Insert(&nodes[i], root);
+       54:  611:		AvlKey_t key = (i * 2) + 1;
+       54:  612:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  613:		root = AvlTree_Insert(&nodes[i], root);
         -:  614:	}
         -:  615:	// Check structure
-        5:  616:	AvlTree_Check(root, assertions);
+        6:  616:	AvlTree_Check(root, assertions);
         -:  617:	// Check searches
-       50:  618:	for (int32_t i = 1; i < 10; i++)
+       60:  618:	for (int32_t i = 1; i < 10; i++)
         -:  619:	{
-       45:  620:		AvlKey_t key = (i * 2) + 1;
-       45:  621:		searched = AvlTree_Search(key, root);
-       45:  622:		Assertions_Assert(searched == &nodes[i], assertions);
-       45:  623:		searched = AvlTree_Search(key - 1, root);
-       45:  624:		Assertions_Assert(searched == nullptr, assertions);
+       54:  620:		AvlKey_t key = (i * 2) + 1;
+       54:  621:		searched = AvlTree_Search(key, root);
+       54:  622:		Assertions_Assert(searched == &nodes[i], assertions);
+       54:  623:		searched = AvlTree_Search(key - 1, root);
+       54:  624:		Assertions_Assert(searched == nullptr, assertions);
         -:  625:	}
         -:  626:
         -:  627:	// -----------------------------------------
         -:  628:	// 3-2 Insert sequential nodes (descent order)
-       50:  629:	for (int32_t i = 11; i < 20; i++)
+       60:  629:	for (int32_t i = 11; i < 20; i++)
         -:  630:	{
-       45:  631:		AvlKey_t key = -((i * 2) + 1);
-       45:  632:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  633:		root = AvlTree_Insert(&nodes[i], root);
+       54:  631:		AvlKey_t key = -((i * 2) + 1);
+       54:  632:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  633:		root = AvlTree_Insert(&nodes[i], root);
         -:  634:	}
         -:  635:	// Check structure
-        5:  636:	AvlTree_Check(root, assertions);
+        6:  636:	AvlTree_Check(root, assertions);
         -:  637:	// Check searches
-       50:  638:	for (int32_t i = 11; i < 20; i++)
+       60:  638:	for (int32_t i = 11; i < 20; i++)
         -:  639:	{
-       45:  640:		AvlKey_t key = -((i * 2) + 1);
-       45:  641:		searched = AvlTree_Search(key, root);
-       45:  642:		Assertions_Assert(searched == &nodes[i], assertions);
-       45:  643:		searched = AvlTree_Search(key - 1, root);
-       45:  644:		Assertions_Assert(searched == nullptr, assertions);
+       54:  640:		AvlKey_t key = -((i * 2) + 1);
+       54:  641:		searched = AvlTree_Search(key, root);
+       54:  642:		Assertions_Assert(searched == &nodes[i], assertions);
+       54:  643:		searched = AvlTree_Search(key - 1, root);
+       54:  644:		Assertions_Assert(searched == nullptr, assertions);
         -:  645:	}
         -:  646:
         -:  647:	// -----------------------------------------
         -:  648:	// 3-3 Re-Insert sequential nodes (descent order)
-        5:  649:	root = nullptr;
-       50:  650:	for (int32_t i = 11; i < 20; i++)
+        6:  649:	root = nullptr;
+       60:  650:	for (int32_t i = 11; i < 20; i++)
         -:  651:	{
-       45:  652:		AvlKey_t key = -((i * 2) + 1);
-       45:  653:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  654:		root = AvlTree_Insert(&nodes[i], root);
+       54:  652:		AvlKey_t key = -((i * 2) + 1);
+       54:  653:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  654:		root = AvlTree_Insert(&nodes[i], root);
         -:  655:	}
         -:  656:	// Check structure
-        5:  657:	AvlTree_Check(root, assertions);
+        6:  657:	AvlTree_Check(root, assertions);
         -:  658:	// Check searches
-       50:  659:	for (int32_t i = 11; i < 20; i++)
+       60:  659:	for (int32_t i = 11; i < 20; i++)
         -:  660:	{
-       45:  661:		AvlKey_t key = -((i * 2) + 1);
-       45:  662:		searched = AvlTree_Search(key, root);
-       45:  663:		Assertions_Assert(searched == &nodes[i], assertions);
-       45:  664:		searched = AvlTree_Search(key - 1, root);
-       45:  665:		Assertions_Assert(searched == nullptr, assertions);
+       54:  661:		AvlKey_t key = -((i * 2) + 1);
+       54:  662:		searched = AvlTree_Search(key, root);
+       54:  663:		Assertions_Assert(searched == &nodes[i], assertions);
+       54:  664:		searched = AvlTree_Search(key - 1, root);
+       54:  665:		Assertions_Assert(searched == nullptr, assertions);
         -:  666:	}
         -:  667:
         -:  668:	// -----------------------------------------
         -:  669:	// 4-1 Insert oscillated nodes
-       50:  670:	for (int32_t i = 1; i < 10; i++)
+       60:  670:	for (int32_t i = 1; i < 10; i++)
         -:  671:	{
-       45:  672:		AvlKey_t key = (i * 2) + 1;
-       45:  673:		if ((i % 2) != 0)
+       54:  672:		AvlKey_t key = (i * 2) + 1;
+       54:  673:		if ((i % 2) != 0)
         -:  674:		{
-       25:  675:			key = -key;
+       30:  675:			key = -key;
         -:  676:		}
-       45:  677:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  678:		root = AvlTree_Insert(&nodes[i], root);
+       54:  677:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  678:		root = AvlTree_Insert(&nodes[i], root);
         -:  679:	}
         -:  680:	// Check structure
-        5:  681:	AvlTree_Check(root, assertions);
+        6:  681:	AvlTree_Check(root, assertions);
         -:  682:	// Check searches
-       50:  683:	for (int32_t i = 1; i < 10; i++)
+       60:  683:	for (int32_t i = 1; i < 10; i++)
         -:  684:	{
-       45:  685:		AvlKey_t key = (i * 2) + 1;
-       45:  686:		if ((i % 2) != 0)
+       54:  685:		AvlKey_t key = (i * 2) + 1;
+       54:  686:		if ((i % 2) != 0)
         -:  687:		{
-       25:  688:			key = -key;
+       30:  688:			key = -key;
         -:  689:		}
-       45:  690:		searched = AvlTree_Search(key, root);
-       45:  691:		Assertions_Assert(searched == &nodes[i], assertions);
-       45:  692:		searched = AvlTree_Search(key - 1, root);
-       45:  693:		Assertions_Assert(searched == nullptr, assertions);
+       54:  690:		searched = AvlTree_Search(key, root);
+       54:  691:		Assertions_Assert(searched == &nodes[i], assertions);
+       54:  692:		searched = AvlTree_Search(key - 1, root);
+       54:  693:		Assertions_Assert(searched == nullptr, assertions);
         -:  694:	}
         -:  695:
         -:  696:	// -----------------------------------------
         -:  697:	// 4-2 Insert oscillated nodes
-        5:  698:	root = nullptr;
-       50:  699:	for (int32_t i = 11; i < 20; i++)
+        6:  698:	root = nullptr;
+       60:  699:	for (int32_t i = 11; i < 20; i++)
         -:  700:	{
-       45:  701:		AvlKey_t key = ((i * 2) + 1);
-       45:  702:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  703:		root = AvlTree_Insert(&nodes[i], root);
+       54:  701:		AvlKey_t key = ((i * 2) + 1);
+       54:  702:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  703:		root = AvlTree_Insert(&nodes[i], root);
         -:  704:	}
-       50:  705:	for (int32_t i = 1; i < 10; i++)
+       60:  705:	for (int32_t i = 1; i < 10; i++)
         -:  706:	{
-       45:  707:		AvlKey_t key = (i * 2) + 1;
-       45:  708:		if ((i % 2) != 0)
+       54:  707:		AvlKey_t key = (i * 2) + 1;
+       54:  708:		if ((i % 2) != 0)
         -:  709:		{
-       25:  710:			key = -key;
+       30:  710:			key = -key;
         -:  711:		}
-       45:  712:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  713:		root = AvlTree_Insert(&nodes[i], root);
+       54:  712:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  713:		root = AvlTree_Insert(&nodes[i], root);
         -:  714:	}
         -:  715:	// Check structure
-        5:  716:	AvlTree_Check(root, assertions);
+        6:  716:	AvlTree_Check(root, assertions);
         -:  717:	// Check searches
-       50:  718:	for (int32_t i = 1; i < 10; i++)
+       60:  718:	for (int32_t i = 1; i < 10; i++)
         -:  719:	{
-       45:  720:		AvlKey_t key = (i * 2) + 1;
-       45:  721:		if ((i % 2) != 0)
+       54:  720:		AvlKey_t key = (i * 2) + 1;
+       54:  721:		if ((i % 2) != 0)
         -:  722:		{
-       25:  723:			key = -key;
+       30:  723:			key = -key;
         -:  724:		}
-       45:  725:		searched = AvlTree_Search(key, root);
-       45:  726:		Assertions_Assert(searched == &nodes[i], assertions);
-       45:  727:		searched = AvlTree_Search(key - 1, root);
-       45:  728:		Assertions_Assert(searched == nullptr, assertions);
+       54:  725:		searched = AvlTree_Search(key, root);
+       54:  726:		Assertions_Assert(searched == &nodes[i], assertions);
+       54:  727:		searched = AvlTree_Search(key - 1, root);
+       54:  728:		Assertions_Assert(searched == nullptr, assertions);
         -:  729:	}
         -:  730:
         -:  731:	// -----------------------------------------
         -:  732:	// 5-1 Insert duplicated node
-        5:  733:	root = nullptr;
-        5:  734:	memset(values, 0, sizeof values);
+        6:  733:	root = nullptr;
+        6:  734:	memset(values, 0, sizeof values);
         -:  735:	// まず、いくつかノードを挿入する
-       30:  736:	for (int32_t i = 0; i < 5; i++)
+       36:  736:	for (int32_t i = 0; i < 5; i++)
         -:  737:	{
-       25:  738:		AvlKey_t key = (i * 2) + 1;
-       25:  739:		AvlNode_Init(key, &values[i], &nodes[i]);
-       25:  740:		root = AvlTree_Insert(&nodes[i], root);
+       30:  738:		AvlKey_t key = (i * 2) + 1;
+       30:  739:		AvlNode_Init(key, &values[i], &nodes[i]);
+       30:  740:		root = AvlTree_Insert(&nodes[i], root);
         -:  741:	}
         -:  742:	// 上書きされるノードを挿入する
-        5:  743:	dupKey = (5 * 2) + 1;
-        5:  744:	values[5].Member1 = (5 * 2) + 1 + 1;
-        5:  745:	AvlNode_Init(dupKey, &values[5], &nodes[5]);
-        5:  746:	root = AvlTree_Insert(&nodes[5], root);
+        6:  743:	dupKey = (5 * 2) + 1;
+        6:  744:	values[5].Member1 = (5 * 2) + 1 + 1;
+        6:  745:	AvlNode_Init(dupKey, &values[5], &nodes[5]);
+        6:  746:	root = AvlTree_Insert(&nodes[5], root);
         -:  747:	// さらにノードを挿入して、木を変形させる
-       25:  748:	for (int32_t i = 6; i < 10; i++)
+       30:  748:	for (int32_t i = 6; i < 10; i++)
         -:  749:	{
-       20:  750:		AvlKey_t key = (i * 2) + 1;
-       20:  751:		AvlNode_Init(key, &values[i], &nodes[i]);
-       20:  752:		root = AvlTree_Insert(&nodes[i], root);
+       24:  750:		AvlKey_t key = (i * 2) + 1;
+       24:  751:		AvlNode_Init(key, &values[i], &nodes[i]);
+       24:  752:		root = AvlTree_Insert(&nodes[i], root);
         -:  753:	}
         -:  754:	// いったん構造をチェック
-        5:  755:	AvlTree_Check(root, assertions);
+        6:  755:	AvlTree_Check(root, assertions);
         -:  756:	// この時点では上書きされる前のノードが検索できるはず
-        5:  757:	searched = AvlTree_Search(dupKey, root);
-        5:  758:	Assertions_Assert(searched != nullptr, assertions);
-        5:  759:	foundValue = searched->Content.Value;
-        5:  760:	Assertions_Assert(foundValue != nullptr, assertions);
-        5:  761:	Assertions_Assert(foundValue->Member1 == (5 * 2) + 1 + 1, assertions);
+        6:  757:	searched = AvlTree_Search(dupKey, root);
+        6:  758:	Assertions_Assert(searched != nullptr, assertions);
+        6:  759:	foundValue = searched->Content.Value;
+        6:  760:	Assertions_Assert(foundValue != nullptr, assertions);
+        6:  761:	Assertions_Assert(foundValue->Member1 == (5 * 2) + 1 + 1, assertions);
         -:  762:
         -:  763:	// 上書きするノードを挿入する
-        5:  764:	values[10].Member1 = (10 * 2) + 1 + 1;
-        5:  765:	AvlNode_Init(dupKey, &values[10], &nodes[10]);
-        5:  766:	root = AvlTree_Insert(&nodes[10], root);
+        6:  764:	values[10].Member1 = (10 * 2) + 1 + 1;
+        6:  765:	AvlNode_Init(dupKey, &values[10], &nodes[10]);
+        6:  766:	root = AvlTree_Insert(&nodes[10], root);
         -:  767:	// さらにノードを挿入して、木を変形させる
-       50:  768:	for (int32_t i = 11; i < 20; i++)
+       60:  768:	for (int32_t i = 11; i < 20; i++)
         -:  769:	{
-       45:  770:		AvlKey_t key = (i * 2) + 1;
-       45:  771:		AvlNode_Init(key, &values[i], &nodes[i]);
-       45:  772:		root = AvlTree_Insert(&nodes[i], root);
+       54:  770:		AvlKey_t key = (i * 2) + 1;
+       54:  771:		AvlNode_Init(key, &values[i], &nodes[i]);
+       54:  772:		root = AvlTree_Insert(&nodes[i], root);
         -:  773:	}
         -:  774:
         -:  775:	// 構造をチェック
-        5:  776:	AvlTree_Check(root, assertions);
+        6:  776:	AvlTree_Check(root, assertions);
         -:  777:	// 上書きされた後のノードが検索できるはず
-        5:  778:	searched = AvlTree_Search(dupKey, root);
-        5:  779:	Assertions_Assert(searched != nullptr, assertions);
-        5:  780:	foundValue = searched->Content.Value;
-        5:  781:	Assertions_Assert(foundValue != nullptr, assertions);
-        5:  782:	Assertions_Assert(foundValue->Member1 == (10 * 2) + 1 + 1, assertions);
+        6:  778:	searched = AvlTree_Search(dupKey, root);
+        6:  779:	Assertions_Assert(searched != nullptr, assertions);
+        6:  780:	foundValue = searched->Content.Value;
+        6:  781:	Assertions_Assert(foundValue != nullptr, assertions);
+        6:  782:	Assertions_Assert(foundValue->Member1 == (10 * 2) + 1 + 1, assertions);
         -:  783:
-        5:  784:}
+        6:  784:}
         -:  785:#endif
