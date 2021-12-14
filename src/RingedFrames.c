@@ -31,7 +31,6 @@ SOFTWARE.
 #include "RingedFrames.h"
 #include <string.h>
 #include "nullptr.h"
-#include "bitop.h"
 #include "Indices.h"
 
 /* -------------------------------------------------------------------
