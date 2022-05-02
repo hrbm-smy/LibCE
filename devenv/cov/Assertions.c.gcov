@@ -1,8 +1,8 @@
         -:    0:Source:../../src/Assertions.c
         -:    0:Graph:obj/src/Assertions.gcno
         -:    0:Data:obj/src/Assertions.gcda
-        -:    0:Runs:1
-        -:    0:Programs:1
+        -:    0:Runs:2
+        -:    0:Programs:2
         -:    1:﻿/** ------------------------------------------------------------------
         -:    2:*
         -:    3:*	@file	Assertions.c
@@ -54,13 +54,13 @@
         -:   49:/// <para>共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。</para>
         -:   50:/// </summary>
         -:   51:/// <returns>共有インスタンス。</returns>
-        4:   52:Assertions* Assertions_Instance(void)
+        8:   52:Assertions* Assertions_Instance(void)
         -:   53:{
-        4:   54:	if (m_instance.Items.Buffer == nullptr)
+        8:   54:	if (m_instance.Items.Buffer == nullptr)
         -:   55:	{
-        1:   56:		Assertions_Init(SA_CAP_INSTANCE, m_instanceBuffer, &m_instance);
+        2:   56:		Assertions_Init(SA_CAP_INSTANCE, m_instanceBuffer, &m_instance);
         -:   57:	}
-        4:   58:	return &m_instance;
+        8:   58:	return &m_instance;
         -:   59:}
         -:   60:
         -:   61:/// <summary>
@@ -71,20 +71,20 @@
         -:   66:/// SA_NEEDED_BUFFER_WORDS分の要素数を持つ領域を確保して指定すること。</param>
         -:   67:/// <param name="ctxt">コンテキスト。</param>
         -:   68:/// <returns>なし。</returns>
-        3:   69:void Assertions_Init(
+        6:   69:void Assertions_Init(
         -:   70:	int32_t capacity,
         -:   71:	int32_t* buffer,
         -:   72:	Assertions* ctxt)
         -:   73:{
-        3:   74:	if (ctxt != nullptr)
+        6:   74:	if (ctxt != nullptr)
         -:   75:	{
-        2:   76:		memset(ctxt, 0, sizeof(Assertions));
+        4:   76:		memset(ctxt, 0, sizeof(Assertions));
         -:   77:
-        2:   78:		RingedFrames_Init(
+        4:   78:		RingedFrames_Init(
         -:   79:			capacity, sizeof(Assertions_Item), buffer,
         -:   80:			&ctxt->Items);
         -:   81:	}
-        3:   82:}
+        6:   82:}
         -:   83:
         -:   84:/// <summary>
         -:   85:/// <para>条件の偽(0)を表示する。</para>
@@ -94,51 +94,51 @@
         -:   89:/// <param name="line">行番号。</param>
         -:   90:/// <param name="ctxt">コンテキスト。</param>
         -:   91:/// <returns>なし。</returns>
-      489:   92:void Assertions_AssertWith(
+      983:   92:void Assertions_AssertWith(
         -:   93:	int condition,
         -:   94:	const char* fileName, int32_t line,
         -:   95:	Assertions* ctxt)
         -:   96:{
-      489:   97:	if ((ctxt != nullptr) &&
+      983:   97:	if ((ctxt != nullptr) &&
         -:   98:		(condition == 0))
         -:   99:	{
         -:  100:		// Assertionは、最古を上書きしない、最初のn個を記録するものとする
-        8:  101:		if (RingedFrames_Count(&ctxt->Items) <
-        4:  102:			RingedFrames_Capacity(&ctxt->Items))
+       16:  101:		if (RingedFrames_Count(&ctxt->Items) <
+        8:  102:			RingedFrames_Capacity(&ctxt->Items))
         -:  103:		{
         -:  104:			// アイテムを作成
         -:  105:			Assertions_Item item;
-        3:  106:			item.Line = line;
+        6:  106:			item.Line = line;
         -:  107:			// ターミネータを含めたサイズをコピー
-        3:  108:			int32_t fnl = strlen(fileName) + 1;
-        3:  109:			if (fnl > sizeof item.FileName)
+        6:  108:			int32_t fnl = strlen(fileName) + 1;
+        6:  109:			if (fnl > sizeof item.FileName)
         -:  110:			{
-        1:  111:				fnl = sizeof item.FileName;
+        2:  111:				fnl = sizeof item.FileName;
         -:  112:			}
-        3:  113:			memcpy(item.FileName, fileName, fnl);
+        6:  113:			memcpy(item.FileName, fileName, fnl);
         -:  114:			// バッファ末尾のターミネータは常時つけてしまう
-        3:  115:			item.FileName[CAPACITY_OF(item.FileName) - 1] = '\0';
+        6:  115:			item.FileName[CAPACITY_OF(item.FileName) - 1] = '\0';
         -:  116:
         -:  117:			// リングバッファに追加
-        3:  118:			RingedFrames_Push(&item, sizeof item, 0, &ctxt->Items);
+        6:  118:			RingedFrames_Push(&item, sizeof item, 0, &ctxt->Items);
         -:  119:		}
         -:  120:	}
-      489:  121:}
+      983:  121:}
         -:  122:
         -:  123:/// <summary>
         -:  124:/// <para>記憶されている項目の数を取得する。</para>
         -:  125:/// </summary>
         -:  126:/// <param name="ctxt">コンテキスト。</param>
         -:  127:/// <returns>項目数。</returns>
-        9:  128:int32_t Assertions_Count(
+       18:  128:int32_t Assertions_Count(
         -:  129:	const Assertions* ctxt)
         -:  130:{
-        9:  131:	int32_t result = 0;
-        9:  132:	if (ctxt != nullptr)
+       18:  131:	int32_t result = 0;
+       18:  132:	if (ctxt != nullptr)
         -:  133:	{
-        8:  134:		result = RingedFrames_Count(&ctxt->Items);
+       16:  134:		result = RingedFrames_Count(&ctxt->Items);
         -:  135:	}
-        9:  136:	return result;
+       18:  136:	return result;
         -:  137:}
         -:  138:
         -:  139:/// <summary>
@@ -147,17 +147,17 @@
         -:  142:/// <param name="index">インデックス(0～、最古基準)。</param>
         -:  143:/// <param name="ctxt">コンテキスト。</param>
         -:  144:/// <returns>項目。</returns>
-        8:  145:const Assertions_Item* Assertions_Refer(
+       16:  145:const Assertions_Item* Assertions_Refer(
         -:  146:	int32_t index,
         -:  147:	const Assertions* ctxt)
         -:  148:{
-        8:  149:	const Assertions_Item* result = nullptr;
-        8:  150:	if (ctxt != nullptr)
+       16:  149:	const Assertions_Item* result = nullptr;
+       16:  150:	if (ctxt != nullptr)
         -:  151:	{
-        7:  152:		result = RingedFrames_ReferWithOld(
+       14:  152:		result = RingedFrames_ReferWithOld(
         -:  153:			index, nullptr, nullptr, &ctxt->Items);
         -:  154:	}
-        8:  155:	return result;
+       16:  155:	return result;
         -:  156:}
         -:  157:
         -:  158:/* -------------------------------------------------------------------
@@ -165,7 +165,7 @@
         -:  160:*/
         -:  161:#ifdef _UNIT_TEST
         -:  162:#include <assert.h>
-        1:  163:void Assertions_UnitTest(void)
+        2:  163:void Assertions_UnitTest(void)
         -:  164:{
         -:  165:	Assertions assertions;
         -:  166:	int32_t assBuffer[SA_NEEDED_BUFFER_WORDS(3)];
@@ -175,43 +175,43 @@
         -:  170:
         -:  171:	// -----------------------------------------
         -:  172:	// 1-1 Init(self==nullptr)
-        1:  173:	Assertions_Init(0, nullptr, nullptr);
+        2:  173:	Assertions_Init(0, nullptr, nullptr);
         -:  174:
         -:  175:	// -----------------------------------------
         -:  176:	// 1-2 Init
-        1:  177:	memset(&assertions, -1, sizeof assertions);
-        1:  178:	Assertions_Init(3, assBuffer, &assertions);
-       1*:  179:	assert(Assertions_Count(&assertions) == 0);
-        1:  180:	assItem = Assertions_Refer(0, &assertions);
-       1*:  181:	assert(assItem == nullptr);
+        2:  177:	memset(&assertions, -1, sizeof assertions);
+        2:  178:	Assertions_Init(3, assBuffer, &assertions);
+       2*:  179:	assert(Assertions_Count(&assertions) == 0);
+        2:  180:	assItem = Assertions_Refer(0, &assertions);
+       2*:  181:	assert(assItem == nullptr);
         -:  182:
         -:  183:	// -----------------------------------------
         -:  184:	// 2-1 Assert(self==nullptr)
-        1:  185:	Assertions_Assert(1, nullptr);
-       1*:  186:	assert(Assertions_Count(&assertions) == 0);
-        1:  187:	assItem = Assertions_Refer(0, &assertions);
-       1*:  188:	assert(assItem == nullptr);
+        2:  185:	Assertions_Assert(1, nullptr);
+       2*:  186:	assert(Assertions_Count(&assertions) == 0);
+        2:  187:	assItem = Assertions_Refer(0, &assertions);
+       2*:  188:	assert(assItem == nullptr);
         -:  189:
         -:  190:	// -----------------------------------------
         -:  191:	// 2-2 Assert(condition!=0)
-        1:  192:	Assertions_Assert(1, &assertions);
-       1*:  193:	assert(Assertions_Count(&assertions) == 0);
-        1:  194:	assItem = Assertions_Refer(0, &assertions);
-       1*:  195:	assert(assItem == nullptr);
+        2:  192:	Assertions_Assert(1, &assertions);
+       2*:  193:	assert(Assertions_Count(&assertions) == 0);
+        2:  194:	assItem = Assertions_Refer(0, &assertions);
+       2*:  195:	assert(assItem == nullptr);
         -:  196:
         -:  197:	// -----------------------------------------
         -:  198:	// 2-3 Assert 1st item
-        1:  199:	lines[0] = __LINE__;
-        1:  200:	Assertions_Assert(0, &assertions);
-       1*:  201:	assert(Assertions_Count(&assertions) == 1);
-        1:  202:	assItem = Assertions_Refer(0, &assertions);
-       1*:  203:	assert(assItem != nullptr);
-       1*:  204:	assert(assItem->Line == lines[0] + 1);
-       1*:  205:	assert(strcmp(assItem->FileName, __FILE__) == 0);
+        2:  199:	lines[0] = __LINE__;
+        2:  200:	Assertions_Assert(0, &assertions);
+       2*:  201:	assert(Assertions_Count(&assertions) == 1);
+        2:  202:	assItem = Assertions_Refer(0, &assertions);
+       2*:  203:	assert(assItem != nullptr);
+       2*:  204:	assert(assItem->Line == lines[0] + 1);
+       2*:  205:	assert(strcmp(assItem->FileName, __FILE__) == 0);
         -:  206:
         -:  207:	// -----------------------------------------
         -:  208:	// 2-4 Assert 2nd item
-        1:  209:	char tooLongFileName[261] =
+        2:  209:	char tooLongFileName[261] =
         -:  210:		"01234567890123456789012345678901234567890123456789"	//  50
         -:  211:		"01234567890123456789012345678901234567890123456789"	// 100
         -:  212:		"01234567890123456789012345678901234567890123456789"	// 150
@@ -219,39 +219,39 @@
         -:  214:		"01234567890123456789012345678901234567890123456789"	// 250
         -:  215:		"0123456789\0"	// 261
         -:  216:		;
-        1:  217:	lines[1] = __LINE__;
-        1:  218:	Assertions_AssertWith(0, tooLongFileName, __LINE__, &assertions);
-       1*:  219:	assert(Assertions_Count(&assertions) == 2);
-        1:  220:	assItem = Assertions_Refer(1, &assertions);
-       1*:  221:	assert(assItem != nullptr);
-       1*:  222:	assert(assItem->Line == lines[1] + 1);
-        1:  223:	tooLongFileName[259] = '\0';
-       1*:  224:	assert(strcmp(assItem->FileName, tooLongFileName) == 0);
+        2:  217:	lines[1] = __LINE__;
+        2:  218:	Assertions_AssertWith(0, tooLongFileName, __LINE__, &assertions);
+       2*:  219:	assert(Assertions_Count(&assertions) == 2);
+        2:  220:	assItem = Assertions_Refer(1, &assertions);
+       2*:  221:	assert(assItem != nullptr);
+       2*:  222:	assert(assItem->Line == lines[1] + 1);
+        2:  223:	tooLongFileName[259] = '\0';
+       2*:  224:	assert(strcmp(assItem->FileName, tooLongFileName) == 0);
         -:  225:
         -:  226:	// -----------------------------------------
         -:  227:	// 2-5 Assert 3rd item
-        1:  228:	lines[2] = __LINE__;
-        1:  229:	Assertions_Assert(0, &assertions);
-       1*:  230:	assert(Assertions_Count(&assertions) == 3);
-        1:  231:	assItem = Assertions_Refer(2, &assertions);
-       1*:  232:	assert(assItem != nullptr);
-       1*:  233:	assert(assItem->Line == lines[2] + 1);
-       1*:  234:	assert(strcmp(assItem->FileName, __FILE__) == 0);
+        2:  228:	lines[2] = __LINE__;
+        2:  229:	Assertions_Assert(0, &assertions);
+       2*:  230:	assert(Assertions_Count(&assertions) == 3);
+        2:  231:	assItem = Assertions_Refer(2, &assertions);
+       2*:  232:	assert(assItem != nullptr);
+       2*:  233:	assert(assItem->Line == lines[2] + 1);
+       2*:  234:	assert(strcmp(assItem->FileName, __FILE__) == 0);
         -:  235:
         -:  236:	// -----------------------------------------
         -:  237:	// 2-6 Assert 4th item, but ignored
-        1:  238:	lines[3] = __LINE__;
-        1:  239:	Assertions_Assert(0, &assertions);
-       1*:  240:	assert(Assertions_Count(&assertions) == 3);
-        1:  241:	assItem = Assertions_Refer(3, &assertions);
-       1*:  242:	assert(assItem == nullptr);
+        2:  238:	lines[3] = __LINE__;
+        2:  239:	Assertions_Assert(0, &assertions);
+       2*:  240:	assert(Assertions_Count(&assertions) == 3);
+        2:  241:	assItem = Assertions_Refer(3, &assertions);
+       2*:  242:	assert(assItem == nullptr);
         -:  243:
         -:  244:	// -----------------------------------------
         -:  245:	// 3-1 Count(self==nullptr)
-       1*:  246:	assert(Assertions_Count(nullptr) == 0);
+       2*:  246:	assert(Assertions_Count(nullptr) == 0);
         -:  247:
         -:  248:	// -----------------------------------------
         -:  249:	// 4-1 Refer(self==nullptr)
-       1*:  250:	assert(Assertions_Refer(0, nullptr) == nullptr);
-        1:  251:}
+       2*:  250:	assert(Assertions_Refer(0, nullptr) == nullptr);
+        2:  251:}
         -:  252:#endif

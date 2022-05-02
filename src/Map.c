@@ -195,9 +195,34 @@ void* Map_ValueAt(
 	return result;
 }
 
+/// <summary>
+/// <para>指定したインデックス位置のkeyを取得する。</para>
+/// <para>※　Relateで関連付けたkeyを返すものである。
+/// 従って、keyのスコープは、
+/// Relateと合わせ、ユーザーが考慮しなければならない。　※</para>
+/// </summary>
+/// <param name="index">インデックス位置(0～)。</param>
+/// <param name="orDefault">取得できない場合のデフォルト値。</param>
+/// <param name="ctxt">コンテキスト。</param>
+/// <returns>インデックス位置のkey。</returns>
+MapKey_t Map_KeyAt(
+	int32_t index,
+	MapKey_t orDefault,
+	const Map* ctxt)
+{
+	MapKey_t result = orDefault;
+	if ((ctxt != nullptr) &&
+		(0 <= index) && (index < ctxt->Count))
+	{
+		MapElm* elm = &ctxt->Elements[index];
+		result = elm->Node.Content.Key;
+	}
+	return result;
+}
+
 /* -------------------------------------------------------------------
-*	Unit Test
-*/
+ *	Unit Test
+ */
 #ifdef _UNIT_TEST
 #include "Assertions.h"
 
@@ -215,6 +240,7 @@ void Map_UnitTest(void)
 	Map_UnitTest_Value values[5];
 	memset(values, 0, sizeof values);
 	Map map;
+	MapKey_t key;
 
 	// -----------------------------------------
 	// 1-1 Init(ctxt==nullptr)
@@ -369,5 +395,39 @@ void Map_UnitTest(void)
 	Assertions_Assert(value->Member2 == 40, assertions);
 	Assertions_Assert(value->Member3[0] == 400, assertions);
 	Assertions_Assert(value->Member3[2] == 402, assertions);
+
+	// -----------------------------------------
+	// 7-x KeyAt
+	Map_Clear(&map);
+	values[2].Member1 = 1070;
+	values[2].Member2 = 17;
+	values[2].Member3[0] = 170;
+	values[2].Member3[2] = 172;
+	Map_Relate(&values[2], 54321, &map);
+	values[4].Member1 = 4070;
+	values[4].Member2 = 47;
+	values[4].Member3[0] = 470;
+	values[4].Member3[2] = 472;
+	Map_Relate(&values[4], 87654321, &map);
+	// -----------------------------------------
+	// 7-1 KeyAt(ctxt==nullptr)
+	key = Map_KeyAt(0, -1, nullptr);
+	Assertions_Assert(key == -1, assertions);
+	// -----------------------------------------
+	// 7-2 KeyAt(index < 0)
+	key = Map_KeyAt(-1, 0, &map);
+	Assertions_Assert(key == 0, assertions);
+	// -----------------------------------------
+	// 7-3 KeyAt(index >= Count)
+	key = Map_KeyAt(2, 0, &map);
+	Assertions_Assert(key == 0, assertions);
+	// -----------------------------------------
+	// 7-4 KeyAt
+	key = Map_KeyAt(0, 0, &map);
+	Assertions_Assert(key == 54321, assertions);
+	// -----------------------------------------
+	// 7-5 KeyAt
+	key = Map_KeyAt(1, 0, &map);
+	Assertions_Assert(key == 87654321, assertions);
 }
 #endif

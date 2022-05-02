@@ -1,8 +1,8 @@
         -:    0:Source:../../src/RingedFrames.c
         -:    0:Graph:obj/src/RingedFrames.gcno
         -:    0:Data:obj/src/RingedFrames.gcda
-        -:    0:Runs:1
-        -:    0:Programs:1
+        -:    0:Runs:2
+        -:    0:Programs:2
         -:    1:﻿/** ------------------------------------------------------------------
         -:    2:*
         -:    3:*	@file	RingedFrames.c
@@ -55,50 +55,50 @@
         -:   50:/// RF_NEEDED_BUFFER_WORDS分の要素数を持つ領域を確保して指定すること。</param>
         -:   51:/// <param name="ctxt">コンテキスト。</param>
         -:   52:/// <returns>なし。</returns>
-        5:   53:void RingedFrames_Init(
+       10:   53:void RingedFrames_Init(
         -:   54:	int32_t capacity, int32_t frameSize,
         -:   55:	int32_t* buffer,
         -:   56:	RingedFrames* ctxt)
         -:   57:{
-        5:   58:	if (ctxt != nullptr)
+       10:   58:	if (ctxt != nullptr)
         -:   59:	{
-        4:   60:		memset(ctxt, 0, sizeof(RingedFrames));
-        4:   61:		ctxt->Capacity = capacity;
-        4:   62:		ctxt->FrameSize = frameSize;
-        4:   63:		ctxt->Buffer = buffer;
+        8:   60:		memset(ctxt, 0, sizeof(RingedFrames));
+        8:   61:		ctxt->Capacity = capacity;
+        8:   62:		ctxt->FrameSize = frameSize;
+        8:   63:		ctxt->Buffer = buffer;
         -:   64:	}
-        5:   65:}
+       10:   65:}
         -:   66:
         -:   67:/// <summary>
         -:   68:/// <para>クリアする。</para>
         -:   69:/// </summary>
         -:   70:/// <param name="ctxt">コンテキスト。</param>
         -:   71:/// <returns>なし。</returns>
-        3:   72:void RingedFrames_Clear(
+        6:   72:void RingedFrames_Clear(
         -:   73:	RingedFrames* ctxt)
         -:   74:{
-        3:   75:	if (ctxt != nullptr)
+        6:   75:	if (ctxt != nullptr)
         -:   76:	{
-        2:   77:		ctxt->Index = 0;
-        2:   78:		ctxt->Count = 0;
-        2:   79:		ctxt->UpdateCount = 0;
+        4:   77:		ctxt->Index = 0;
+        4:   78:		ctxt->Count = 0;
+        4:   79:		ctxt->UpdateCount = 0;
         -:   80:	}
-        3:   81:}
+        6:   81:}
         -:   82:
         -:   83:/// <summary>
         -:   84:/// <para>現在のフレーム蓄積数を取得する。</para>
         -:   85:/// </summary>
         -:   86:/// <param name="ctxt">コンテキスト。</param>
         -:   87:/// <returns>現在のフレーム蓄積数。</returns>
-       52:   88:int32_t RingedFrames_Count(
+      104:   88:int32_t RingedFrames_Count(
         -:   89:	const RingedFrames* ctxt)
         -:   90:{
-       52:   91:	int32_t result = 0;
-       52:   92:	if (ctxt != nullptr)
+      104:   91:	int32_t result = 0;
+      104:   92:	if (ctxt != nullptr)
         -:   93:	{
-       50:   94:		result = ctxt->Count;
+      100:   94:		result = ctxt->Count;
         -:   95:	}
-       52:   96:	return result;
+      104:   96:	return result;
         -:   97:}
         -:   98:
         -:   99:/// <summary>
@@ -108,15 +108,15 @@
         -:  103:/// </summary>
         -:  104:/// <param name="ctxt">コンテキスト。</param>
         -:  105:/// <returns>現在のフレーム更新数。</returns>
-       26:  106:int64_t RingedFrames_UpdateCount(
+       52:  106:int64_t RingedFrames_UpdateCount(
         -:  107:	const RingedFrames* ctxt)
         -:  108:{
-       26:  109:	int64_t result = 0;
-       26:  110:	if (ctxt != nullptr)
+       52:  109:	int64_t result = 0;
+       52:  110:	if (ctxt != nullptr)
         -:  111:	{
-       25:  112:		result = ctxt->UpdateCount;
+       50:  112:		result = ctxt->UpdateCount;
         -:  113:	}
-       26:  114:	return result;
+       52:  114:	return result;
         -:  115:}
         -:  116:
         -:  117:/// <summary>
@@ -124,15 +124,15 @@
         -:  119:/// </summary>
         -:  120:/// <param name="ctxt">コンテキスト。</param>
         -:  121:/// <returns>最大蓄積可能フレーム数。</returns>
-        7:  122:int32_t RingedFrames_Capacity(
+       14:  122:int32_t RingedFrames_Capacity(
         -:  123:	const RingedFrames* ctxt)
         -:  124:{
-        7:  125:	int32_t result = 0;
-        7:  126:	if (ctxt != nullptr)
+       14:  125:	int32_t result = 0;
+       14:  126:	if (ctxt != nullptr)
         -:  127:	{
-        6:  128:		result = ctxt->Capacity;
+       12:  128:		result = ctxt->Capacity;
         -:  129:	}
-        7:  130:	return result;
+       14:  130:	return result;
         -:  131:}
         -:  132:
         -:  133:/// <summary>
@@ -140,15 +140,15 @@
         -:  135:/// </summary>
         -:  136:/// <param name="ctxt">コンテキスト。</param>
         -:  137:/// <returns>最大フレームサイズ。</returns>
-        2:  138:int32_t RingedFrames_FrameSize(
+        4:  138:int32_t RingedFrames_FrameSize(
         -:  139:	const RingedFrames* ctxt)
         -:  140:{
-        2:  141:	int32_t result = 0;
-        2:  142:	if (ctxt != nullptr)
+        4:  141:	int32_t result = 0;
+        4:  142:	if (ctxt != nullptr)
         -:  143:	{
-        1:  144:		result = ctxt->FrameSize;
+        2:  144:		result = ctxt->FrameSize;
         -:  145:	}
-        2:  146:	return result;
+        4:  146:	return result;
         -:  147:}
         -:  148:
         -:  149:/// <summary>
@@ -160,46 +160,46 @@
         -:  155:/// <param name="timestamp">タイムスタンプ。</param>
         -:  156:/// <param name="ctxt">コンテキスト。</param>
         -:  157:/// <returns>なし。</returns>
-       18:  158:void RingedFrames_Push(
+       36:  158:void RingedFrames_Push(
         -:  159:	const void* frame, int32_t length,
         -:  160:	int64_t timestamp,
         -:  161:	RingedFrames* ctxt)
         -:  162:{
-       18:  163:	if (ctxt != nullptr)
+       36:  163:	if (ctxt != nullptr)
         -:  164:	{
         -:  165:		// 保存先バッファ位置を計算
-       17:  166:		int32_t fi = ctxt->Index;
-       17:  167:		int32_t bi = RF_STRIDE_WORDS(ctxt->FrameSize) * fi;
-       17:  168:		int32_t* bp = &ctxt->Buffer[bi];
+       34:  166:		int32_t fi = ctxt->Index;
+       34:  167:		int32_t bi = RF_STRIDE_WORDS(ctxt->FrameSize) * fi;
+       34:  168:		int32_t* bp = &ctxt->Buffer[bi];
         -:  169:
         -:  170:		// ヘッダを記録
-       17:  171:		uint8_t* header = (uint8_t*)bp;
+       34:  171:		uint8_t* header = (uint8_t*)bp;
         -:  172:		// 0～7バイト目にタイムスタンプを記録
-       17:  173:		int64_t* tsp = (int64_t*)&header[0];
-       17:  174:		*tsp = timestamp;
+       34:  173:		int64_t* tsp = (int64_t*)&header[0];
+       34:  174:		*tsp = timestamp;
         -:  175:		// 8～9バイト目に長さを記録
-       17:  176:		int16_t* lenp = (int16_t*)&header[sizeof(int64_t)];
-       17:  177:		*lenp = length;
+       34:  176:		int16_t* lenp = (int16_t*)&header[sizeof(int64_t)];
+       34:  177:		*lenp = length;
         -:  178:
         -:  179:		// フレームを記録
-       17:  180:		uint8_t* fp = &header[RF_FRAME_HEADER_SIZE];
-       17:  181:		if ((frame != nullptr) &&
-       14:  182:			(0 < length) && (length <= ctxt->FrameSize))
+       34:  180:		uint8_t* fp = &header[RF_FRAME_HEADER_SIZE];
+       34:  181:		if ((frame != nullptr) &&
+       28:  182:			(0 < length) && (length <= ctxt->FrameSize))
         -:  183:		{
-       13:  184:			memcpy(fp, frame, length);
+       26:  184:			memcpy(fp, frame, length);
         -:  185:		}
         -:  186:		else
         -:  187:		{
         -:  188:			// フレームが記録されない場合は長さを0にする
-        4:  189:			*lenp = 0;
+        8:  189:			*lenp = 0;
         -:  190:		}
         -:  191:
         -:  192:		// インデックス、カウンタを更新
-       17:  193:		ctxt->Index = NextIndex(ctxt->Index, ctxt->Capacity, 0);
-       17:  194:		ctxt->Count = Inc2Max(ctxt->Count, ctxt->Capacity);
-       17:  195:		ctxt->UpdateCount += 1;
+       34:  193:		ctxt->Index = NextIndex(ctxt->Index, ctxt->Capacity, 0);
+       34:  194:		ctxt->Count = Inc2Max(ctxt->Count, ctxt->Capacity);
+       34:  195:		ctxt->UpdateCount += 1;
         -:  196:	}
-       18:  197:}
+       36:  197:}
         -:  198:
         -:  199:/// <summary>
         -:  200:/// <para>最古を0としたインデックスで、フレームを参照する。</para>
@@ -210,54 +210,54 @@
         -:  205:/// <param name="timestamp">タイムスタンプの格納先。</param>
         -:  206:/// <param name="ctxt">コンテキスト。</param>
         -:  207:/// <returns>フレーム。nullでなし。</returns>
-       45:  208:const void* RingedFrames_ReferWithOld(
+       90:  208:const void* RingedFrames_ReferWithOld(
         -:  209:	int32_t index,
         -:  210:	int32_t* length,
         -:  211:	int64_t* timestamp,
         -:  212:	const RingedFrames* ctxt)
         -:  213:{
         -:  214:	// 結果を初期化
-       45:  215:	const void* frame = nullptr;
-       45:  216:	if (length != nullptr)
+       90:  215:	const void* frame = nullptr;
+       90:  216:	if (length != nullptr)
         -:  217:	{
-       37:  218:		*length = 0;
+       74:  218:		*length = 0;
         -:  219:	}
-       45:  220:	if (timestamp != nullptr)
+       90:  220:	if (timestamp != nullptr)
         -:  221:	{
-       37:  222:		*timestamp = 0LL;
+       74:  222:		*timestamp = 0LL;
         -:  223:	}
         -:  224:
-       45:  225:	if ((ctxt != nullptr) &&
-       44:  226:		(ctxt->Count > 0) &&
-       32:  227:		((0 <= index) && (index < ctxt->Count)))
+       90:  225:	if ((ctxt != nullptr) &&
+       88:  226:		(ctxt->Count > 0) &&
+       64:  227:		((0 <= index) && (index < ctxt->Count)))
         -:  228:	{
         -:  229:		// 保存先バッファ位置を計算
-       54:  230:		int32_t fi = RoundIndex(
-       27:  231:			ctxt->Index - ctxt->Count + index, ctxt->Capacity, 0);
-       27:  232:		int32_t bi = RF_STRIDE_WORDS(ctxt->FrameSize) * fi;
-       27:  233:		int32_t* bp = &ctxt->Buffer[bi];
+      108:  230:		int32_t fi = RoundIndex(
+       54:  231:			ctxt->Index - ctxt->Count + index, ctxt->Capacity, 0);
+       54:  232:		int32_t bi = RF_STRIDE_WORDS(ctxt->FrameSize) * fi;
+       54:  233:		int32_t* bp = &ctxt->Buffer[bi];
         -:  234:
         -:  235:		// ヘッダを取得
-       27:  236:		uint8_t* header = (uint8_t*)bp;
+       54:  236:		uint8_t* header = (uint8_t*)bp;
         -:  237:		// 0～7バイト目にタイムスタンプが記録されている
-       27:  238:		if (timestamp != nullptr)
+       54:  238:		if (timestamp != nullptr)
         -:  239:		{
-       23:  240:			int64_t* tsp = (int64_t*)&header[0];
-       23:  241:			*timestamp = *tsp;
+       46:  240:			int64_t* tsp = (int64_t*)&header[0];
+       46:  241:			*timestamp = *tsp;
         -:  242:		}
         -:  243:		// 8～9バイト目に長さが記録されている
-       27:  244:		if (length != nullptr)
+       54:  244:		if (length != nullptr)
         -:  245:		{
-       23:  246:			int16_t* lenp = (int16_t*)&header[sizeof(int64_t)];
-       23:  247:			*length = *lenp;
+       46:  246:			int16_t* lenp = (int16_t*)&header[sizeof(int64_t)];
+       46:  247:			*length = *lenp;
         -:  248:		}
         -:  249:
         -:  250:		// フレームを取得
-       27:  251:		uint8_t* fp = &header[RF_FRAME_HEADER_SIZE];
-       27:  252:		frame = fp;
+       54:  251:		uint8_t* fp = &header[RF_FRAME_HEADER_SIZE];
+       54:  252:		frame = fp;
         -:  253:	}
         -:  254:
-       45:  255:	return frame;
+       90:  255:	return frame;
         -:  256:}
         -:  257:
         -:  258:/// <summary>
@@ -269,14 +269,14 @@
         -:  264:/// <param name="timestamp">タイムスタンプの格納先。</param>
         -:  265:/// <param name="ctxt">コンテキスト。</param>
         -:  266:/// <returns>フレーム。nullでなし。</returns>
-       19:  267:const void* RingedFrames_ReferWithNew(
+       38:  267:const void* RingedFrames_ReferWithNew(
         -:  268:	int32_t index,
         -:  269:	int32_t* length,
         -:  270:	int64_t* timestamp,
         -:  271:	const RingedFrames* ctxt)
         -:  272:{
-       38:  273:	return RingedFrames_ReferWithOld(
-       19:  274:		RingedFrames_Count(ctxt) - 1 - index,
+       76:  273:	return RingedFrames_ReferWithOld(
+       38:  274:		RingedFrames_Count(ctxt) - 1 - index,
         -:  275:		length, timestamp,
         -:  276:		ctxt);
         -:  277:}
@@ -291,49 +291,49 @@
         -:  286:/// <param name="timestamp">タイムスタンプの格納先。</param>
         -:  287:/// <param name="ctxt">コンテキスト。</param>
         -:  288:/// <returns>フレーム長。</returns>
-        6:  289:int32_t RingedFrames_Pop(
+       12:  289:int32_t RingedFrames_Pop(
         -:  290:	void* buffer, int32_t bufferSize,
         -:  291:	int64_t* timestamp,
         -:  292:	RingedFrames* ctxt)
         -:  293:{
         -:  294:	// 結果を初期化
-        6:  295:	int32_t length = -1;
-        6:  296:	if (timestamp != nullptr)
+       12:  295:	int32_t length = -1;
+       12:  296:	if (timestamp != nullptr)
         -:  297:	{
-        5:  298:		*timestamp = 0LL;
+       10:  298:		*timestamp = 0LL;
         -:  299:	}
         -:  300:
         -:  301:	// 最古のフレームを取得
         -:  302:	int32_t len;
         -:  303:	int64_t ts;
-        6:  304:	const void* frame = RingedFrames_ReferWithOld(0, &len, &ts, ctxt);
-        6:  305:	if (frame != nullptr)
+       12:  304:	const void* frame = RingedFrames_ReferWithOld(0, &len, &ts, ctxt);
+       12:  305:	if (frame != nullptr)
         -:  306:	{
         -:  307:		// データ長を補正して報告
-        5:  308:		length = len;
-        5:  309:		if (length > bufferSize)
+       10:  308:		length = len;
+       10:  309:		if (length > bufferSize)
         -:  310:		{
-        2:  311:			length = bufferSize;
+        4:  311:			length = bufferSize;
         -:  312:		}
         -:  313:
         -:  314:		// フレームを報告
-        5:  315:		if ((buffer != nullptr) &&
+       10:  315:		if ((buffer != nullptr) &&
         -:  316:			(length > 0))
         -:  317:		{
-        3:  318:			memcpy(buffer, frame, length);
+        6:  318:			memcpy(buffer, frame, length);
         -:  319:		}
         -:  320:
         -:  321:		// タイムスタンプを報告
-        5:  322:		if (timestamp != nullptr)
+       10:  322:		if (timestamp != nullptr)
         -:  323:		{
-        4:  324:			*timestamp = ts;
+        8:  324:			*timestamp = ts;
         -:  325:		}
         -:  326:
         -:  327:		// 最古を削除
-        5:  328:		ctxt->Count = Dec2Min(ctxt->Count, 0);
+       10:  328:		ctxt->Count = Dec2Min(ctxt->Count, 0);
         -:  329:	}
         -:  330:
-        6:  331:	return length;
+       12:  331:	return length;
         -:  332:}
         -:  333:
         -:  334:/* -------------------------------------------------------------------
@@ -341,7 +341,7 @@
         -:  336:*/
         -:  337:#ifdef _UNIT_TEST
         -:  338:#include <assert.h>
-        1:  339:void RingedFrames_UnitTest(void)
+        2:  339:void RingedFrames_UnitTest(void)
         -:  340:{
         -:  341:	// -----------------------------------------
         -:  342:	// 1-1
@@ -356,420 +356,420 @@
         -:  351:
         -:  352:	// -----------------------------------------
         -:  353:	// 1-1 Init
-        1:  354:	memset(buffer, -1, sizeof buffer);
-        1:  355:	RingedFrames_Init(3, 8, &buffer[1], &ring);
-       1*:  356:	assert(RingedFrames_Count(&ring) == 0);
-       1*:  357:	assert(RingedFrames_UpdateCount(&ring) == 0);
+        2:  354:	memset(buffer, -1, sizeof buffer);
+        2:  355:	RingedFrames_Init(3, 8, &buffer[1], &ring);
+       2*:  356:	assert(RingedFrames_Count(&ring) == 0);
+       2*:  357:	assert(RingedFrames_UpdateCount(&ring) == 0);
         -:  358:	// -----------------------------------------
         -:  359:	// 1-2 Init(self==nullptr)
-        1:  360:	RingedFrames_Init(5, 8, &buffer[1], nullptr);
-       1*:  361:	assert(RingedFrames_Capacity(&ring) == 3);
+        2:  360:	RingedFrames_Init(5, 8, &buffer[1], nullptr);
+       2*:  361:	assert(RingedFrames_Capacity(&ring) == 3);
         -:  362:
         -:  363:	// -----------------------------------------
         -:  364:	// 2-1 Capacity(self==nullptr)
-       1*:  365:	assert(RingedFrames_Capacity(nullptr) == 0);
+       2*:  365:	assert(RingedFrames_Capacity(nullptr) == 0);
         -:  366:	// -----------------------------------------
         -:  367:	// 2-2 Capacity
-       1*:  368:	assert(RingedFrames_Capacity(&ring) == 3);
+       2*:  368:	assert(RingedFrames_Capacity(&ring) == 3);
         -:  369:
         -:  370:	// -----------------------------------------
         -:  371:	// 3-1 FrameSize(self==nullptr)
-       1*:  372:	assert(RingedFrames_FrameSize(nullptr) == 0);
+       2*:  372:	assert(RingedFrames_FrameSize(nullptr) == 0);
         -:  373:	// -----------------------------------------
         -:  374:	// 3-2 FrameSize
-       1*:  375:	assert(RingedFrames_FrameSize(&ring) == 8);
+       2*:  375:	assert(RingedFrames_FrameSize(&ring) == 8);
         -:  376:
         -:  377:	// -----------------------------------------
         -:  378:	// 4-1 Count(self==nullptr)
-       1*:  379:	assert(RingedFrames_Count(nullptr) == 0);
+       2*:  379:	assert(RingedFrames_Count(nullptr) == 0);
         -:  380:	// -----------------------------------------
         -:  381:	// 4-2 Count
-        1:  382:	memset(frame, 0, sizeof frame);
-        1:  383:	frame[0] = 4;
-        1:  384:	frame[7] = 2;
-       1*:  385:	assert(RingedFrames_Count(&ring) == 0);
-        1:  386:	RingedFrames_Push(frame, 8, 42LL, &ring);
-       1*:  387:	assert(RingedFrames_Count(&ring) == 1);
+        2:  382:	memset(frame, 0, sizeof frame);
+        2:  383:	frame[0] = 4;
+        2:  384:	frame[7] = 2;
+       2*:  385:	assert(RingedFrames_Count(&ring) == 0);
+        2:  386:	RingedFrames_Push(frame, 8, 42LL, &ring);
+       2*:  387:	assert(RingedFrames_Count(&ring) == 1);
         -:  388:
         -:  389:	// -----------------------------------------
         -:  390:	// 5-1 UpdateCount(self==nullptr)
-       1*:  391:	assert(RingedFrames_UpdateCount(nullptr) == 0);
+       2*:  391:	assert(RingedFrames_UpdateCount(nullptr) == 0);
         -:  392:	// -----------------------------------------
         -:  393:	// 5-2 UpdateCount
-        1:  394:	memset(frame, 0, sizeof frame);
-        1:  395:	frame[0] = 5;
-        1:  396:	frame[7] = 2;
-        1:  397:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  398:	RingedFrames_Push(frame, 8, 52LL, &ring);
-       1*:  399:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+        2:  394:	memset(frame, 0, sizeof frame);
+        2:  395:	frame[0] = 5;
+        2:  396:	frame[7] = 2;
+        2:  397:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  398:	RingedFrames_Push(frame, 8, 52LL, &ring);
+       2*:  399:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  400:
         -:  401:	// -----------------------------------------
         -:  402:	// 6-1 Clear(self==nullptr)
-        1:  403:	RingedFrames_Clear(nullptr);
-       1*:  404:	assert(RingedFrames_Count(&ring) == 2);
-       1*:  405:	assert(RingedFrames_UpdateCount(&ring) != 0);
+        2:  403:	RingedFrames_Clear(nullptr);
+       2*:  404:	assert(RingedFrames_Count(&ring) == 2);
+       2*:  405:	assert(RingedFrames_UpdateCount(&ring) != 0);
         -:  406:	// -----------------------------------------
         -:  407:	// 6-2 Clear
-        1:  408:	RingedFrames_Clear(&ring);
-       1*:  409:	assert(RingedFrames_Count(&ring) == 0);
-       1*:  410:	assert(RingedFrames_UpdateCount(&ring) == 0);
+        2:  408:	RingedFrames_Clear(&ring);
+       2*:  409:	assert(RingedFrames_Count(&ring) == 0);
+       2*:  410:	assert(RingedFrames_UpdateCount(&ring) == 0);
         -:  411:
         -:  412:	// -----------------------------------------
         -:  413:	// 7-xx Push, Refer, Pop
-        1:  414:	memset(buffer, -1, sizeof buffer);
-        1:  415:	RingedFrames_Init(3, 8, &buffer[1], &ring);
+        2:  414:	memset(buffer, -1, sizeof buffer);
+        2:  415:	RingedFrames_Init(3, 8, &buffer[1], &ring);
         -:  416:
         -:  417:	// -----------------------------------------
         -:  418:	// 7-01 Empty
-        1:  419:	RingedFrames_Clear(&ring);
+        2:  419:	RingedFrames_Clear(&ring);
         -:  420:
         -:  421:	// Check
-       1*:  422:	assert(RingedFrames_Count(&ring) == 0);
-        1:  423:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
-       1*:  424:	assert(referer == nullptr);
-       1*:  425:	assert(length == 0);
-       1*:  426:	assert(timestamp == 0LL);
-        1:  427:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  428:	assert(referer == nullptr);
-       1*:  429:	assert(length == 0);
-       1*:  430:	assert(timestamp == 0LL);
-        1:  431:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, &timestamp, &ring);
-       1*:  432:	assert(length < 0);
-       1*:  433:	assert(timestamp == 0LL);
+       2*:  422:	assert(RingedFrames_Count(&ring) == 0);
+        2:  423:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
+       2*:  424:	assert(referer == nullptr);
+       2*:  425:	assert(length == 0);
+       2*:  426:	assert(timestamp == 0LL);
+        2:  427:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  428:	assert(referer == nullptr);
+       2*:  429:	assert(length == 0);
+       2*:  430:	assert(timestamp == 0LL);
+        2:  431:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, &timestamp, &ring);
+       2*:  432:	assert(length < 0);
+       2*:  433:	assert(timestamp == 0LL);
         -:  434:
         -:  435:	// -----------------------------------------
         -:  436:	// 7-02 Push(self==nullptr)
-        1:  437:	memset(frame, 0, sizeof frame);
-        1:  438:	frame[0] = 7;
-        1:  439:	frame[7] = 2;
-        1:  440:	RingedFrames_Push(frame, 8, 72LL, nullptr);
+        2:  437:	memset(frame, 0, sizeof frame);
+        2:  438:	frame[0] = 7;
+        2:  439:	frame[7] = 2;
+        2:  440:	RingedFrames_Push(frame, 8, 72LL, nullptr);
         -:  441:
         -:  442:	// Check
-       1*:  443:	assert(RingedFrames_Count(&ring) == 0);
-        1:  444:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
-       1*:  445:	assert(referer == nullptr);
-       1*:  446:	assert(length == 0);
-       1*:  447:	assert(timestamp == 0LL);
-        1:  448:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  449:	assert(referer == nullptr);
-       1*:  450:	assert(length == 0);
-       1*:  451:	assert(timestamp == 0LL);
+       2*:  443:	assert(RingedFrames_Count(&ring) == 0);
+        2:  444:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
+       2*:  445:	assert(referer == nullptr);
+       2*:  446:	assert(length == 0);
+       2*:  447:	assert(timestamp == 0LL);
+        2:  448:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  449:	assert(referer == nullptr);
+       2*:  450:	assert(length == 0);
+       2*:  451:	assert(timestamp == 0LL);
         -:  452:
         -:  453:	// -----------------------------------------
         -:  454:	// 7-03 Push 1st frame
-        1:  455:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  456:	memset(frame, 0, sizeof frame);
-        1:  457:	frame[0] = 7;
-        1:  458:	frame[7] = 3;
-        1:  459:	RingedFrames_Push(frame, 8, 73LL, &ring);
+        2:  455:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  456:	memset(frame, 0, sizeof frame);
+        2:  457:	frame[0] = 7;
+        2:  458:	frame[7] = 3;
+        2:  459:	RingedFrames_Push(frame, 8, 73LL, &ring);
         -:  460:
         -:  461:	// Check
-       1*:  462:	assert(RingedFrames_Count(&ring) == 1);
-       1*:  463:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  462:	assert(RingedFrames_Count(&ring) == 1);
+       2*:  463:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  464:	// Index -1 is not valid
-        1:  465:	referer = RingedFrames_ReferWithOld(-1, &length, &timestamp, &ring);
-       1*:  466:	assert(referer == nullptr);
-       1*:  467:	assert(length == 0);
-       1*:  468:	assert(timestamp == 0LL);
+        2:  465:	referer = RingedFrames_ReferWithOld(-1, &length, &timestamp, &ring);
+       2*:  466:	assert(referer == nullptr);
+       2*:  467:	assert(length == 0);
+       2*:  468:	assert(timestamp == 0LL);
         -:  469:	// Index 0 is valid
-        1:  470:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
-       1*:  471:	assert(referer[0] == 7);
-       1*:  472:	assert(referer[7] == 3);
-       1*:  473:	assert(length == 8);
-       1*:  474:	assert(timestamp == 73LL);
+        2:  470:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
+       2*:  471:	assert(referer[0] == 7);
+       2*:  472:	assert(referer[7] == 3);
+       2*:  473:	assert(length == 8);
+       2*:  474:	assert(timestamp == 73LL);
         -:  475:	// Index 1 is not valid
-        1:  476:	referer = RingedFrames_ReferWithOld(1, &length, &timestamp, &ring);
-       1*:  477:	assert(referer == nullptr);
-       1*:  478:	assert(length == 0);
-       1*:  479:	assert(timestamp == 0LL);
+        2:  476:	referer = RingedFrames_ReferWithOld(1, &length, &timestamp, &ring);
+       2*:  477:	assert(referer == nullptr);
+       2*:  478:	assert(length == 0);
+       2*:  479:	assert(timestamp == 0LL);
         -:  480:	// Index -1 is not valid
-        1:  481:	referer = RingedFrames_ReferWithNew(-1, &length, &timestamp, &ring);
-       1*:  482:	assert(referer == nullptr);
-       1*:  483:	assert(length == 0);
-       1*:  484:	assert(timestamp == 0LL);
+        2:  481:	referer = RingedFrames_ReferWithNew(-1, &length, &timestamp, &ring);
+       2*:  482:	assert(referer == nullptr);
+       2*:  483:	assert(length == 0);
+       2*:  484:	assert(timestamp == 0LL);
         -:  485:	// Index 0 is valid
-        1:  486:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  487:	assert(referer[0] == 7);
-       1*:  488:	assert(referer[7] == 3);
-       1*:  489:	assert(length == 8);
-       1*:  490:	assert(timestamp == 73LL);
+        2:  486:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  487:	assert(referer[0] == 7);
+       2*:  488:	assert(referer[7] == 3);
+       2*:  489:	assert(length == 8);
+       2*:  490:	assert(timestamp == 73LL);
         -:  491:	// Index 1 is not valid
-        1:  492:	referer = RingedFrames_ReferWithNew(1, &length, &timestamp, &ring);
-       1*:  493:	assert(referer == nullptr);
-       1*:  494:	assert(length == 0);
-       1*:  495:	assert(timestamp == 0LL);
+        2:  492:	referer = RingedFrames_ReferWithNew(1, &length, &timestamp, &ring);
+       2*:  493:	assert(referer == nullptr);
+       2*:  494:	assert(length == 0);
+       2*:  495:	assert(timestamp == 0LL);
         -:  496:
         -:  497:	// -----------------------------------------
         -:  498:	// 7-04 Push 2nd frame
-        1:  499:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  500:	memset(frame, 0, sizeof frame);
-        1:  501:	frame[0] = 7;
-        1:  502:	frame[6] = 4;
-        1:  503:	RingedFrames_Push(frame, 7, 74LL, &ring);
+        2:  499:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  500:	memset(frame, 0, sizeof frame);
+        2:  501:	frame[0] = 7;
+        2:  502:	frame[6] = 4;
+        2:  503:	RingedFrames_Push(frame, 7, 74LL, &ring);
         -:  504:
         -:  505:	// Check
-       1*:  506:	assert(RingedFrames_Count(&ring) == 2);
-       1*:  507:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  506:	assert(RingedFrames_Count(&ring) == 2);
+       2*:  507:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  508:	// Index 0 is valid
-        1:  509:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
-       1*:  510:	assert(referer[0] == 7);
-       1*:  511:	assert(referer[7] == 3);
-       1*:  512:	assert(length == 8);
-       1*:  513:	assert(timestamp == 73LL);
+        2:  509:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
+       2*:  510:	assert(referer[0] == 7);
+       2*:  511:	assert(referer[7] == 3);
+       2*:  512:	assert(length == 8);
+       2*:  513:	assert(timestamp == 73LL);
         -:  514:	// Index 1 is valid
-        1:  515:	referer = RingedFrames_ReferWithOld(1, &length, &timestamp, &ring);
-       1*:  516:	assert(referer[0] == 7);
-       1*:  517:	assert(referer[6] == 4);
-       1*:  518:	assert(length == 7);
-       1*:  519:	assert(timestamp == 74LL);
+        2:  515:	referer = RingedFrames_ReferWithOld(1, &length, &timestamp, &ring);
+       2*:  516:	assert(referer[0] == 7);
+       2*:  517:	assert(referer[6] == 4);
+       2*:  518:	assert(length == 7);
+       2*:  519:	assert(timestamp == 74LL);
         -:  520:	// Index 2 is not valid
-        1:  521:	referer = RingedFrames_ReferWithOld(2, &length, &timestamp, &ring);
-       1*:  522:	assert(referer == nullptr);
-       1*:  523:	assert(length == 0);
-       1*:  524:	assert(timestamp == 0LL);
+        2:  521:	referer = RingedFrames_ReferWithOld(2, &length, &timestamp, &ring);
+       2*:  522:	assert(referer == nullptr);
+       2*:  523:	assert(length == 0);
+       2*:  524:	assert(timestamp == 0LL);
         -:  525:	// Index 0 is valid
-        1:  526:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  527:	assert(referer[0] == 7);
-       1*:  528:	assert(referer[6] == 4);
-       1*:  529:	assert(length == 7);
-       1*:  530:	assert(timestamp == 74LL);
+        2:  526:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  527:	assert(referer[0] == 7);
+       2*:  528:	assert(referer[6] == 4);
+       2*:  529:	assert(length == 7);
+       2*:  530:	assert(timestamp == 74LL);
         -:  531:	// Index 1 is valid
-        1:  532:	referer = RingedFrames_ReferWithNew(1, &length, &timestamp, &ring);
-       1*:  533:	assert(referer[0] == 7);
-       1*:  534:	assert(referer[7] == 3);
-       1*:  535:	assert(length == 8);
-       1*:  536:	assert(timestamp == 73LL);
+        2:  532:	referer = RingedFrames_ReferWithNew(1, &length, &timestamp, &ring);
+       2*:  533:	assert(referer[0] == 7);
+       2*:  534:	assert(referer[7] == 3);
+       2*:  535:	assert(length == 8);
+       2*:  536:	assert(timestamp == 73LL);
         -:  537:	// Index 2 is not valid
-        1:  538:	referer = RingedFrames_ReferWithNew(2, &length, &timestamp, &ring);
-       1*:  539:	assert(referer == nullptr);
-       1*:  540:	assert(length == 0);
-       1*:  541:	assert(timestamp == 0LL);
+        2:  538:	referer = RingedFrames_ReferWithNew(2, &length, &timestamp, &ring);
+       2*:  539:	assert(referer == nullptr);
+       2*:  540:	assert(length == 0);
+       2*:  541:	assert(timestamp == 0LL);
         -:  542:
         -:  543:	// -----------------------------------------
         -:  544:	// 7-05 Push 3rd frame
-        1:  545:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  546:	memset(frame, 0, sizeof frame);
-        1:  547:	frame[0] = 7;
-        1:  548:	frame[7] = 5;
-        1:  549:	RingedFrames_Push(frame, 8, 75LL, &ring);
+        2:  545:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  546:	memset(frame, 0, sizeof frame);
+        2:  547:	frame[0] = 7;
+        2:  548:	frame[7] = 5;
+        2:  549:	RingedFrames_Push(frame, 8, 75LL, &ring);
         -:  550:
         -:  551:	// Check
-       1*:  552:	assert(RingedFrames_Count(&ring) == 3);
-       1*:  553:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  552:	assert(RingedFrames_Count(&ring) == 3);
+       2*:  553:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  554:	// Index 0 is valid
-        1:  555:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
-       1*:  556:	assert(referer[0] == 7);
-       1*:  557:	assert(referer[7] == 3);
-       1*:  558:	assert(length == 8);
-       1*:  559:	assert(timestamp == 73LL);
+        2:  555:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
+       2*:  556:	assert(referer[0] == 7);
+       2*:  557:	assert(referer[7] == 3);
+       2*:  558:	assert(length == 8);
+       2*:  559:	assert(timestamp == 73LL);
         -:  560:	// Index 2 is valid
-        1:  561:	referer = RingedFrames_ReferWithOld(2, &length, &timestamp, &ring);
-       1*:  562:	assert(referer[0] == 7);
-       1*:  563:	assert(referer[7] == 5);
-       1*:  564:	assert(length == 8);
-       1*:  565:	assert(timestamp == 75LL);
+        2:  561:	referer = RingedFrames_ReferWithOld(2, &length, &timestamp, &ring);
+       2*:  562:	assert(referer[0] == 7);
+       2*:  563:	assert(referer[7] == 5);
+       2*:  564:	assert(length == 8);
+       2*:  565:	assert(timestamp == 75LL);
         -:  566:	// Index 3 is not valid
-        1:  567:	referer = RingedFrames_ReferWithOld(3, &length, &timestamp, &ring);
-       1*:  568:	assert(referer == nullptr);
-       1*:  569:	assert(length == 0);
-       1*:  570:	assert(timestamp == 0LL);
+        2:  567:	referer = RingedFrames_ReferWithOld(3, &length, &timestamp, &ring);
+       2*:  568:	assert(referer == nullptr);
+       2*:  569:	assert(length == 0);
+       2*:  570:	assert(timestamp == 0LL);
         -:  571:	// Index 0 is valid
-        1:  572:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  573:	assert(referer[0] == 7);
-       1*:  574:	assert(referer[7] == 5);
-       1*:  575:	assert(length == 8);
-       1*:  576:	assert(timestamp == 75LL);
+        2:  572:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  573:	assert(referer[0] == 7);
+       2*:  574:	assert(referer[7] == 5);
+       2*:  575:	assert(length == 8);
+       2*:  576:	assert(timestamp == 75LL);
         -:  577:	// Index 2 is valid
-        1:  578:	referer = RingedFrames_ReferWithNew(2, &length, &timestamp, &ring);
-       1*:  579:	assert(referer[0] == 7);
-       1*:  580:	assert(referer[7] == 3);
-       1*:  581:	assert(length == 8);
-       1*:  582:	assert(timestamp == 73LL);
+        2:  578:	referer = RingedFrames_ReferWithNew(2, &length, &timestamp, &ring);
+       2*:  579:	assert(referer[0] == 7);
+       2*:  580:	assert(referer[7] == 3);
+       2*:  581:	assert(length == 8);
+       2*:  582:	assert(timestamp == 73LL);
         -:  583:	// Index 3 is not valid
-        1:  584:	referer = RingedFrames_ReferWithNew(3, &length, &timestamp, &ring);
-       1*:  585:	assert(referer == nullptr);
-       1*:  586:	assert(length == 0);
-       1*:  587:	assert(timestamp == 0LL);
+        2:  584:	referer = RingedFrames_ReferWithNew(3, &length, &timestamp, &ring);
+       2*:  585:	assert(referer == nullptr);
+       2*:  586:	assert(length == 0);
+       2*:  587:	assert(timestamp == 0LL);
         -:  588:
         -:  589:	// -----------------------------------------
         -:  590:	// 7-06 Push 4th frame, lost 1st frame
-        1:  591:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  592:	memset(frame, 0, sizeof frame);
-        1:  593:	frame[0] = 7;
-        1:  594:	frame[6] = 6;
-        1:  595:	RingedFrames_Push(frame, 7, 76LL, &ring);
+        2:  591:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  592:	memset(frame, 0, sizeof frame);
+        2:  593:	frame[0] = 7;
+        2:  594:	frame[6] = 6;
+        2:  595:	RingedFrames_Push(frame, 7, 76LL, &ring);
         -:  596:
         -:  597:	// Check
-       1*:  598:	assert(RingedFrames_Count(&ring) == 3);
-       1*:  599:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  598:	assert(RingedFrames_Count(&ring) == 3);
+       2*:  599:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  600:	// Index 0 is valid, but moved
-        1:  601:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
-       1*:  602:	assert(referer[0] == 7);
-       1*:  603:	assert(referer[6] == 4);
-       1*:  604:	assert(length == 7);
-       1*:  605:	assert(timestamp == 74LL);
+        2:  601:	referer = RingedFrames_ReferWithOld(0, &length, &timestamp, &ring);
+       2*:  602:	assert(referer[0] == 7);
+       2*:  603:	assert(referer[6] == 4);
+       2*:  604:	assert(length == 7);
+       2*:  605:	assert(timestamp == 74LL);
         -:  606:	// Index 2 is valid, but moved
-        1:  607:	referer = RingedFrames_ReferWithOld(2, &length, &timestamp, &ring);
-       1*:  608:	assert(referer[0] == 7);
-       1*:  609:	assert(referer[6] == 6);
-       1*:  610:	assert(length == 7);
-       1*:  611:	assert(timestamp == 76LL);
+        2:  607:	referer = RingedFrames_ReferWithOld(2, &length, &timestamp, &ring);
+       2*:  608:	assert(referer[0] == 7);
+       2*:  609:	assert(referer[6] == 6);
+       2*:  610:	assert(length == 7);
+       2*:  611:	assert(timestamp == 76LL);
         -:  612:	// Index 0 is valid
-        1:  613:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  614:	assert(referer[0] == 7);
-       1*:  615:	assert(referer[6] == 6);
-       1*:  616:	assert(length == 7);
-       1*:  617:	assert(timestamp == 76LL);
+        2:  613:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  614:	assert(referer[0] == 7);
+       2*:  615:	assert(referer[6] == 6);
+       2*:  616:	assert(length == 7);
+       2*:  617:	assert(timestamp == 76LL);
         -:  618:	// Index 2 is valid
-        1:  619:	referer = RingedFrames_ReferWithNew(2, &length, &timestamp, &ring);
-       1*:  620:	assert(referer[0] == 7);
-       1*:  621:	assert(referer[6] == 4);
-       1*:  622:	assert(length == 7);
-       1*:  623:	assert(timestamp == 74LL);
+        2:  619:	referer = RingedFrames_ReferWithNew(2, &length, &timestamp, &ring);
+       2*:  620:	assert(referer[0] == 7);
+       2*:  621:	assert(referer[6] == 4);
+       2*:  622:	assert(length == 7);
+       2*:  623:	assert(timestamp == 74LL);
         -:  624:
         -:  625:	// Do not destroy memories
-       1*:  626:	assert(buffer[0] == -1);
-       1*:  627:	assert(buffer[((sizeof buffer) / sizeof buffer[0]) - 1] == -1);
+       2*:  626:	assert(buffer[0] == -1);
+       2*:  627:	assert(buffer[((sizeof buffer) / sizeof buffer[0]) - 1] == -1);
         -:  628:
         -:  629:	// -----------------------------------------
         -:  630:	// 7-07 Pop
-        1:  631:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, &timestamp, &ring);
-       1*:  632:	assert(dataBuffer[0] == 7);
-       1*:  633:	assert(dataBuffer[6] == 4);
-       1*:  634:	assert(length == 7);
-       1*:  635:	assert(timestamp == 74LL);
+        2:  631:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, &timestamp, &ring);
+       2*:  632:	assert(dataBuffer[0] == 7);
+       2*:  633:	assert(dataBuffer[6] == 4);
+       2*:  634:	assert(length == 7);
+       2*:  635:	assert(timestamp == 74LL);
         -:  636:
-       1*:  637:	assert(RingedFrames_Count(&ring) == 2);
+       2*:  637:	assert(RingedFrames_Count(&ring) == 2);
         -:  638:
         -:  639:	// -----------------------------------------
         -:  640:	// 7-08 Refer length only
-        1:  641:	referer = RingedFrames_ReferWithNew(0, &length, nullptr, &ring);
-       1*:  642:	assert(referer[0] == 7);
-       1*:  643:	assert(referer[6] == 6);
-       1*:  644:	assert(length == 7);
+        2:  641:	referer = RingedFrames_ReferWithNew(0, &length, nullptr, &ring);
+       2*:  642:	assert(referer[0] == 7);
+       2*:  643:	assert(referer[6] == 6);
+       2*:  644:	assert(length == 7);
         -:  645:
         -:  646:	// -----------------------------------------
         -:  647:	// 7-09 Refer timestamp only
-        1:  648:	referer = RingedFrames_ReferWithNew(0, nullptr, &timestamp, &ring);
-       1*:  649:	assert(referer[0] == 7);
-       1*:  650:	assert(referer[6] == 6);
-       1*:  651:	assert(timestamp == 76LL);
+        2:  648:	referer = RingedFrames_ReferWithNew(0, nullptr, &timestamp, &ring);
+       2*:  649:	assert(referer[0] == 7);
+       2*:  650:	assert(referer[6] == 6);
+       2*:  651:	assert(timestamp == 76LL);
         -:  652:
         -:  653:	// -----------------------------------------
         -:  654:	// 7-10 Push zero length frame
-        1:  655:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  656:	RingedFrames_Push(nullptr, 0, 710LL, &ring);
+        2:  655:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  656:	RingedFrames_Push(nullptr, 0, 710LL, &ring);
         -:  657:
         -:  658:	// Check
-       1*:  659:	assert(RingedFrames_Count(&ring) == 3);
-       1*:  660:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  659:	assert(RingedFrames_Count(&ring) == 3);
+       2*:  660:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  661:	// Index 0 is valid, but length is zero
-        1:  662:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  663:	assert(referer != nullptr);
-       1*:  664:	assert(length == 0);
-       1*:  665:	assert(timestamp == 710LL);
+        2:  662:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  663:	assert(referer != nullptr);
+       2*:  664:	assert(length == 0);
+       2*:  665:	assert(timestamp == 710LL);
         -:  666:
         -:  667:	// -----------------------------------------
         -:  668:	// 7-11 Push oversized frame
-        1:  669:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  670:	RingedFrames_Push(frame, 9, 711LL, &ring);
+        2:  669:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  670:	RingedFrames_Push(frame, 9, 711LL, &ring);
         -:  671:
         -:  672:	// Check
-       1*:  673:	assert(RingedFrames_Count(&ring) == 3);
-       1*:  674:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  673:	assert(RingedFrames_Count(&ring) == 3);
+       2*:  674:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  675:	// Index 0 is valid, but length is zero
-        1:  676:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  677:	assert(referer != nullptr);
-       1*:  678:	assert(length == 0);
-       1*:  679:	assert(timestamp == 711LL);
+        2:  676:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  677:	assert(referer != nullptr);
+       2*:  678:	assert(length == 0);
+       2*:  679:	assert(timestamp == 711LL);
         -:  680:
         -:  681:	// -----------------------------------------
         -:  682:	// 7-12 Push null frame
-        1:  683:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  684:	RingedFrames_Push(nullptr, 0, 712LL, &ring);
+        2:  683:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  684:	RingedFrames_Push(nullptr, 0, 712LL, &ring);
         -:  685:
         -:  686:	// Check
-       1*:  687:	assert(RingedFrames_Count(&ring) == 3);
-       1*:  688:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  687:	assert(RingedFrames_Count(&ring) == 3);
+       2*:  688:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
         -:  689:	// Index 0 is valid, but length is zero
-        1:  690:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
-       1*:  691:	assert(referer != nullptr);
-       1*:  692:	assert(length == 0);
-       1*:  693:	assert(timestamp == 712LL);
+        2:  690:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, &ring);
+       2*:  691:	assert(referer != nullptr);
+       2*:  692:	assert(length == 0);
+       2*:  693:	assert(timestamp == 712LL);
         -:  694:
         -:  695:	// -----------------------------------------
         -:  696:	// 7-13 Refer(self==nullptr)
-        1:  697:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  698:	memset(frame, 0, sizeof frame);
-        1:  699:	frame[0] = 7;
-        1:  700:	frame[6] = 13;
-        1:  701:	RingedFrames_Push(frame, 7, 713LL, &ring);
+        2:  697:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  698:	memset(frame, 0, sizeof frame);
+        2:  699:	frame[0] = 7;
+        2:  700:	frame[6] = 13;
+        2:  701:	RingedFrames_Push(frame, 7, 713LL, &ring);
         -:  702:
         -:  703:	// Check
-       1*:  704:	assert(RingedFrames_Count(&ring) == 3);
-       1*:  705:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
-        1:  706:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, nullptr);
-       1*:  707:	assert(referer == nullptr);
-       1*:  708:	assert(length == 0);
-       1*:  709:	assert(timestamp == 0LL);
+       2*:  704:	assert(RingedFrames_Count(&ring) == 3);
+       2*:  705:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+        2:  706:	referer = RingedFrames_ReferWithNew(0, &length, &timestamp, nullptr);
+       2*:  707:	assert(referer == nullptr);
+       2*:  708:	assert(length == 0);
+       2*:  709:	assert(timestamp == 0LL);
         -:  710:
         -:  711:	// -----------------------------------------
         -:  712:	// 7-14 Pop but not enough buffer
-        1:  713:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  714:	memset(frame, 0, sizeof frame);
-        1:  715:	frame[0] = 7;
-        1:  716:	frame[5] = 1;
-        1:  717:	frame[6] = 141;
-        1:  718:	RingedFrames_Push(frame, 7, 7141LL, &ring);
-        1:  719:	memset(frame, 0, sizeof frame);
-        1:  720:	frame[0] = 7;
-        1:  721:	frame[7] = 142;
-        1:  722:	RingedFrames_Push(frame, 8, 7142LL, &ring);
-        1:  723:	memset(frame, 0, sizeof frame);
-        1:  724:	frame[0] = 7;
-        1:  725:	frame[5] = 143;
-        1:  726:	RingedFrames_Push(frame, 6, 7143LL, &ring);
+        2:  713:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  714:	memset(frame, 0, sizeof frame);
+        2:  715:	frame[0] = 7;
+        2:  716:	frame[5] = 1;
+        2:  717:	frame[6] = 141;
+        2:  718:	RingedFrames_Push(frame, 7, 7141LL, &ring);
+        2:  719:	memset(frame, 0, sizeof frame);
+        2:  720:	frame[0] = 7;
+        2:  721:	frame[7] = 142;
+        2:  722:	RingedFrames_Push(frame, 8, 7142LL, &ring);
+        2:  723:	memset(frame, 0, sizeof frame);
+        2:  724:	frame[0] = 7;
+        2:  725:	frame[5] = 143;
+        2:  726:	RingedFrames_Push(frame, 6, 7143LL, &ring);
         -:  727:
-        1:  728:	length = RingedFrames_Pop(dataBuffer, 6, &timestamp, &ring);
+        2:  728:	length = RingedFrames_Pop(dataBuffer, 6, &timestamp, &ring);
         -:  729:
         -:  730:	// Check
-       1*:  731:	assert(RingedFrames_Count(&ring) == 2);
-       1*:  732:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
-       1*:  733:	assert(length == 6);
-       1*:  734:	assert(timestamp == 7141LL);
-       1*:  735:	assert(dataBuffer[0] == 7);
-       1*:  736:	assert(dataBuffer[5] == 1);
+       2*:  731:	assert(RingedFrames_Count(&ring) == 2);
+       2*:  732:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  733:	assert(length == 6);
+       2*:  734:	assert(timestamp == 7141LL);
+       2*:  735:	assert(dataBuffer[0] == 7);
+       2*:  736:	assert(dataBuffer[5] == 1);
         -:  737:
         -:  738:	// -----------------------------------------
         -:  739:	// 7-14 Pop only timestamp
-        1:  740:	length = RingedFrames_Pop(nullptr, 0, &timestamp, &ring);
+        2:  740:	length = RingedFrames_Pop(nullptr, 0, &timestamp, &ring);
         -:  741:
         -:  742:	// Check
-       1*:  743:	assert(RingedFrames_Count(&ring) == 1);
-       1*:  744:	assert(length == 0);
-       1*:  745:	assert(timestamp == 7142LL);
+       2*:  743:	assert(RingedFrames_Count(&ring) == 1);
+       2*:  744:	assert(length == 0);
+       2*:  745:	assert(timestamp == 7142LL);
         -:  746:
         -:  747:	// -----------------------------------------
         -:  748:	// 7-15 Pop without timestamp
-        1:  749:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, nullptr, &ring);
+        2:  749:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, nullptr, &ring);
         -:  750:
         -:  751:	// Check
-       1*:  752:	assert(RingedFrames_Count(&ring) == 0);
-       1*:  753:	assert(length == 6);
-       1*:  754:	assert(dataBuffer[0] == 7);
-       1*:  755:	assert(dataBuffer[5] == 143);
+       2*:  752:	assert(RingedFrames_Count(&ring) == 0);
+       2*:  753:	assert(length == 6);
+       2*:  754:	assert(dataBuffer[0] == 7);
+       2*:  755:	assert(dataBuffer[5] == 143);
         -:  756:
         -:  757:	// -----------------------------------------
         -:  758:	// 7-16 Pop zero length frame
-        1:  759:	updateCount = RingedFrames_UpdateCount(&ring);
-        1:  760:	RingedFrames_Push(nullptr, 0, 716LL, &ring);
+        2:  759:	updateCount = RingedFrames_UpdateCount(&ring);
+        2:  760:	RingedFrames_Push(nullptr, 0, 716LL, &ring);
         -:  761:
-        1:  762:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, &timestamp, &ring);
+        2:  762:	length = RingedFrames_Pop(dataBuffer, sizeof dataBuffer, &timestamp, &ring);
         -:  763:
         -:  764:	// Check
-       1*:  765:	assert(RingedFrames_Count(&ring) == 0);
-       1*:  766:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
-       1*:  767:	assert(length == 0);
-       1*:  768:	assert(timestamp == 716LL);
-        1:  769:}
+       2*:  765:	assert(RingedFrames_Count(&ring) == 0);
+       2*:  766:	assert(RingedFrames_UpdateCount(&ring) != updateCount);
+       2*:  767:	assert(length == 0);
+       2*:  768:	assert(timestamp == 716LL);
+        2:  769:}
         -:  770:#endif
