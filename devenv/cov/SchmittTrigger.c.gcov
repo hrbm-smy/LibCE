@@ -1,8 +1,8 @@
         -:    0:Source:../../src/SchmittTrigger.c
         -:    0:Graph:obj/src/SchmittTrigger.gcno
         -:    0:Data:obj/src/SchmittTrigger.gcda
-        -:    0:Runs:2
-        -:    0:Programs:2
+        -:    0:Runs:1
+        -:    0:Programs:1
         -:    1:﻿/** ------------------------------------------------------------------
         -:    2:*
         -:    3:*	@file	SchmittTrigger.c
@@ -56,7 +56,7 @@
         -:   51:/// <param name="offPeriod">OFF確定期間。</param>
         -:   52:/// <param name="ctxt">コンテキスト。</param>
         -:   53:/// <returns>なし。</returns>
-        4:   54:void SchmittTrigger_Init(
+        2:   54:void SchmittTrigger_Init(
         -:   55:	int initialState,
         -:   56:	int32_t onThreshold,
         -:   57:	int32_t onPeriod,
@@ -64,16 +64,16 @@
         -:   59:	int32_t offPeriod,
         -:   60:	SchmittTrigger* ctxt)
         -:   61:{
-        4:   62:	if (nullptr != ctxt)
+        2:   62:	if (nullptr != ctxt)
         -:   63:	{
-        4:   64:		memset(ctxt, 0, sizeof(SchmittTrigger));
-        4:   65:		ctxt->State = initialState;
-        4:   66:		ctxt->OnThreshold = onThreshold;
-        4:   67:		ctxt->OnPeriod = onPeriod;
-        4:   68:		ctxt->OffThreshold = offThreshold;
-        4:   69:		ctxt->OffPeriod = offPeriod;
+        2:   64:		memset(ctxt, 0, sizeof(SchmittTrigger));
+        2:   65:		ctxt->State = initialState;
+        2:   66:		ctxt->OnThreshold = onThreshold;
+        2:   67:		ctxt->OnPeriod = onPeriod;
+        2:   68:		ctxt->OffThreshold = offThreshold;
+        2:   69:		ctxt->OffPeriod = offPeriod;
         -:   70:	}
-        4:   71:}
+        2:   71:}
         -:   72:
         -:   73:/// <summary>
         -:   74:/// <para>シュミットトリガをリセットする。</para>
@@ -81,17 +81,17 @@
         -:   76:/// <param name="state">リセット状態。非0:ON / 0:OFF</param>
         -:   77:/// <param name="ctxt">コンテキスト。</param>
         -:   78:/// <returns>なし。</returns>
-        2:   79:void SchmittTrigger_Reset(
+        1:   79:void SchmittTrigger_Reset(
         -:   80:	int state,
         -:   81:	SchmittTrigger* ctxt)
         -:   82:{
-        2:   83:	if (nullptr != ctxt)
+        1:   83:	if (nullptr != ctxt)
         -:   84:	{
-        2:   85:		ctxt->State = state;
-        2:   86:		ctxt->OnCounter = 0;
-        2:   87:		ctxt->OffCounter = 0;
+        1:   85:		ctxt->State = state;
+        1:   86:		ctxt->OnCounter = 0;
+        1:   87:		ctxt->OffCounter = 0;
         -:   88:	}
-        2:   89:}
+        1:   89:}
         -:   90:
         -:   91:/// <summary>
         -:   92:/// <para>シュミットトリガを駆動する。</para>
@@ -101,50 +101,50 @@
         -:   96:/// <param name="input">入力値。</param>
         -:   97:/// <param name="ctxt">コンテキスト。</param>
         -:   98:/// <returns>非0:ON / 0:OFF。</returns>
-       28:   99:int SchmittTrigger_Drive(
+       14:   99:int SchmittTrigger_Drive(
         -:  100:	int32_t input,
         -:  101:	SchmittTrigger* ctxt)
         -:  102:{
-       28:  103:	int state = 0;
-       28:  104:	if (nullptr != ctxt)
+       14:  103:	int state = 0;
+       14:  104:	if (nullptr != ctxt)
         -:  105:	{
         -:  106:		// ON側のカウンタを更新
-       28:  107:		if (input >= ctxt->OnThreshold)
+       14:  107:		if (input >= ctxt->OnThreshold)
         -:  108:		{
-       12:  109:			ctxt->OnCounter = Inc2Max(ctxt->OnCounter, ctxt->OnPeriod);
+        6:  109:			ctxt->OnCounter = Inc2Max(ctxt->OnCounter, ctxt->OnPeriod);
         -:  110:		}
         -:  111:		else
         -:  112:		{
-       16:  113:			ctxt->OnCounter = 0;
+        8:  113:			ctxt->OnCounter = 0;
         -:  114:		}
         -:  115:		// OFF側のカウンタを更新
-       28:  116:		if (input < ctxt->OffThreshold)
+       14:  116:		if (input < ctxt->OffThreshold)
         -:  117:		{
-       10:  118:			ctxt->OffCounter = Inc2Max(ctxt->OffCounter, ctxt->OffPeriod);
+        5:  118:			ctxt->OffCounter = Inc2Max(ctxt->OffCounter, ctxt->OffPeriod);
         -:  119:		}
         -:  120:		else
         -:  121:		{
-       18:  122:			ctxt->OffCounter = 0;
+        9:  122:			ctxt->OffCounter = 0;
         -:  123:		}
         -:  124:
         -:  125:		// ON側の状態を更新
-       28:  126:		if ((input >= ctxt->OnThreshold) &&
-       12:  127:			(ctxt->OnCounter >= ctxt->OnPeriod))
+       14:  126:		if ((input >= ctxt->OnThreshold) &&
+        6:  127:			(ctxt->OnCounter >= ctxt->OnPeriod))
         -:  128:		{
-        6:  129:			ctxt->State = 1;
+        3:  129:			ctxt->State = 1;
         -:  130:		}
         -:  131:		// OFF側の状態を更新
-       28:  132:		if ((input < ctxt->OffThreshold) &&
-       10:  133:			(ctxt->OffCounter >= ctxt->OffPeriod))
+       14:  132:		if ((input < ctxt->OffThreshold) &&
+        5:  133:			(ctxt->OffCounter >= ctxt->OffPeriod))
         -:  134:		{
-        4:  135:			ctxt->State = 0;
+        2:  135:			ctxt->State = 0;
         -:  136:		}
         -:  137:
         -:  138:		// 報告
-       28:  139:		state = ctxt->State;
+       14:  139:		state = ctxt->State;
         -:  140:	}
         -:  141:
-       28:  142:	return state;
+       14:  142:	return state;
         -:  143:}
         -:  144:
         -:  145:/// <summary>
@@ -153,15 +153,15 @@
         -:  148:/// </summary>
         -:  149:/// <param name="ctxt">コンテキスト。</param>
         -:  150:/// <returns>非0:ON / 0:OFF。</returns>
-        4:  151:int SchmittTrigger_State(
+        2:  151:int SchmittTrigger_State(
         -:  152:	SchmittTrigger* ctxt)
         -:  153:{
-        4:  154:	int state = 0;
-        4:  155:	if (nullptr != ctxt)
+        2:  154:	int state = 0;
+        2:  155:	if (nullptr != ctxt)
         -:  156:	{
-        4:  157:		state = ctxt->State;
+        2:  157:		state = ctxt->State;
         -:  158:	}
-        4:  159:	return state;
+        2:  159:	return state;
         -:  160:}
         -:  161:
         -:  162:/* -------------------------------------------------------------------
@@ -169,101 +169,101 @@
         -:  164:*/
         -:  165:#ifdef _UNIT_TEST
         -:  166:#include "Assertions.h"
-        2:  167:void SchmittTrigger_UnitTest(void)
+        1:  167:void SchmittTrigger_UnitTest(void)
         -:  168:{
-        2:  169:	Assertions* assertions = Assertions_Instance();
+        1:  169:	Assertions* assertions = Assertions_Instance();
         -:  170:	int state;
-        2:  171:	int32_t onThreshold = 10;
-        2:  172:	int32_t offThreshold = -5;
+        1:  171:	int32_t onThreshold = 10;
+        1:  172:	int32_t offThreshold = -5;
         -:  173:	SchmittTrigger st;
-        2:  174:	SchmittTrigger_Init(0, onThreshold, 2, offThreshold, 3, &st);
+        1:  174:	SchmittTrigger_Init(0, onThreshold, 2, offThreshold, 3, &st);
         -:  175:
         -:  176:	// -----------------------------------------
         -:  177:	// 1-1
         -:  178:	// 1度、ON未満とし、OFFのままである
-        2:  179:	state = SchmittTrigger_Drive(onThreshold - 1, &st);
-        2:  180:	Assertions_Assert(state == 0, assertions);
+        1:  179:	state = SchmittTrigger_Drive(onThreshold - 1, &st);
+        1:  180:	Assertions_Assert(state == 0, assertions);
         -:  181:	// -----------------------------------------
         -:  182:	// 1-2
         -:  183:	// 2回設定で、1回だけON以上になっても、まだONしない
-        2:  184:	state = SchmittTrigger_Drive(onThreshold, &st);
-        2:  185:	Assertions_Assert(state == 0, assertions);
+        1:  184:	state = SchmittTrigger_Drive(onThreshold, &st);
+        1:  185:	Assertions_Assert(state == 0, assertions);
         -:  186:	// -----------------------------------------
         -:  187:	// 1-3
         -:  188:	// 2回設定で、一度ON未満になる
-        2:  189:	state = SchmittTrigger_Drive(onThreshold - 1, &st);
-        2:  190:	Assertions_Assert(state == 0, assertions);
+        1:  189:	state = SchmittTrigger_Drive(onThreshold - 1, &st);
+        1:  190:	Assertions_Assert(state == 0, assertions);
         -:  191:	// -----------------------------------------
         -:  192:	// 1-4
         -:  193:	// 2回設定で、1回だけON以上になっても、まだONしない
-        2:  194:	state = SchmittTrigger_Drive(onThreshold, &st);
-        2:  195:	Assertions_Assert(state == 0, assertions);
+        1:  194:	state = SchmittTrigger_Drive(onThreshold, &st);
+        1:  195:	Assertions_Assert(state == 0, assertions);
         -:  196:	// -----------------------------------------
         -:  197:	// 1-5
         -:  198:	// 2回設定で、2回連続ON以上になれば、ONになる
-        2:  199:	state = SchmittTrigger_Drive(onThreshold, &st);
-        2:  200:	Assertions_Assert(state != 0, assertions);
+        1:  199:	state = SchmittTrigger_Drive(onThreshold, &st);
+        1:  200:	Assertions_Assert(state != 0, assertions);
         -:  201:
         -:  202:	// -----------------------------------------
         -:  203:	// 2-1
         -:  204:	// 2回設定で、OFF未満に飛ぶが、ここではまだONを維持する
-        2:  205:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
-        2:  206:	Assertions_Assert(state != 0, assertions);
+        1:  205:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
+        1:  206:	Assertions_Assert(state != 0, assertions);
         -:  207:	// -----------------------------------------
         -:  208:	// 2-2
         -:  209:	// 2回設定で、OFF以上に1回戻る
-        2:  210:	state = SchmittTrigger_Drive(offThreshold, &st);
-        2:  211:	Assertions_Assert(state != 0, assertions);
+        1:  210:	state = SchmittTrigger_Drive(offThreshold, &st);
+        1:  211:	Assertions_Assert(state != 0, assertions);
         -:  212:	// -----------------------------------------
         -:  213:	// 2-3
         -:  214:	// 2回設定で、OFF未満1回目
-        2:  215:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
-        2:  216:	Assertions_Assert(state != 0, assertions);
+        1:  215:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
+        1:  216:	Assertions_Assert(state != 0, assertions);
         -:  217:	// -----------------------------------------
         -:  218:	// 2-4
         -:  219:	// 2回設定で、OFF未満2回目
-        2:  220:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
-        2:  221:	Assertions_Assert(state != 0, assertions);
+        1:  220:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
+        1:  221:	Assertions_Assert(state != 0, assertions);
         -:  222:	// -----------------------------------------
         -:  223:	// 2-5
         -:  224:	// 2回設定で、OFF未満3回目、OFFになる
-        2:  225:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
-        2:  226:	Assertions_Assert(state == 0, assertions);
+        1:  225:	state = SchmittTrigger_Drive(offThreshold - 1, &st);
+        1:  226:	Assertions_Assert(state == 0, assertions);
         -:  227:
         -:  228:	// -----------------------------------------
         -:  229:	// 3-1
         -:  230:	// ON側に暴れる、1回目
-        2:  231:	state = SchmittTrigger_Drive(onThreshold, &st);
-        2:  232:	Assertions_Assert(state == 0, assertions);
+        1:  231:	state = SchmittTrigger_Drive(onThreshold, &st);
+        1:  232:	Assertions_Assert(state == 0, assertions);
         -:  233:	// -----------------------------------------
         -:  234:	// 3-2
         -:  235:	// ON側に暴れる、2回目でON
-        2:  236:	state = SchmittTrigger_Drive(onThreshold, &st);
-        2:  237:	Assertions_Assert(state != 0, assertions);
+        1:  236:	state = SchmittTrigger_Drive(onThreshold, &st);
+        1:  237:	Assertions_Assert(state != 0, assertions);
         -:  238:
         -:  239:	// -----------------------------------------
         -:  240:	// 4-1
         -:  241:	// State
-        2:  242:	int gstate = SchmittTrigger_State(&st);
-        2:  243:	Assertions_Assert(state == gstate, assertions);
+        1:  242:	int gstate = SchmittTrigger_State(&st);
+        1:  243:	Assertions_Assert(state == gstate, assertions);
         -:  244:
         -:  245:	// -----------------------------------------
         -:  246:	// 5-1
         -:  247:	// Reset
-        2:  248:	SchmittTrigger_Reset(0, &st);
-        2:  249:	state = SchmittTrigger_State(&st);
-        2:  250:	Assertions_Assert(state == 0, assertions);
+        1:  248:	SchmittTrigger_Reset(0, &st);
+        1:  249:	state = SchmittTrigger_State(&st);
+        1:  250:	Assertions_Assert(state == 0, assertions);
         -:  251:
         -:  252:	// -----------------------------------------
         -:  253:	// 6-1
-        2:  254:	SchmittTrigger_Init(0, onThreshold, 1, onThreshold, 1, &st);
+        1:  254:	SchmittTrigger_Init(0, onThreshold, 1, onThreshold, 1, &st);
         -:  255:	// ヒステリシスなし用途、ON
-        2:  256:	state = SchmittTrigger_Drive(onThreshold, &st);
-        2:  257:	Assertions_Assert(state != 0, assertions);
+        1:  256:	state = SchmittTrigger_Drive(onThreshold, &st);
+        1:  257:	Assertions_Assert(state != 0, assertions);
         -:  258:	// -----------------------------------------
         -:  259:	// 6-2
         -:  260:	// ヒステリシスなし用途、OFF
-        2:  261:	state = SchmittTrigger_Drive(onThreshold - 1, &st);
-        2:  262:	Assertions_Assert(state == 0, assertions);
-        2:  263:}
+        1:  261:	state = SchmittTrigger_Drive(onThreshold - 1, &st);
+        1:  262:	Assertions_Assert(state == 0, assertions);
+        1:  263:}
         -:  264:#endif

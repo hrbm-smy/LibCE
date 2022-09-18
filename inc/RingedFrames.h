@@ -39,7 +39,7 @@ SOFTWARE.
 /// <summary>
 /// <para>フレームヘッダのサイズ。</para>
 /// </summary>
-#define RF_FRAME_HEADER_SIZE (10)
+#define RF_FRAME_HEADER_SIZE (12)
 
 /// <summary>
 /// <para>ストライド幅(切り上げられた1フレームあたりのワード数)を取得する。</para>
