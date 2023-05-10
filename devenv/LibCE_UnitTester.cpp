@@ -5,6 +5,7 @@
 #include "AvlTree.h"
 #include "Map.h"
 #include "SchmittTrigger.h"
+#include "MmIo.h"
 
 static int32_t ShowResults(const Assertions* assertions)
 {
@@ -54,8 +55,7 @@ int main(int argc, char** argv)
 	AvlTree_UnitTest();
 	Map_UnitTest();
 	SchmittTrigger_UnitTest();
-
-
+	MmIo_UnitTest();
 
 
 

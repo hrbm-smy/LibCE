@@ -17,6 +17,9 @@
 			"corecrt_memcpy_s.h": "c",
 			"string.h": "c",
 			"xlocale": "c"
-		}
+		},
+		"C_Cpp.default.defines": [
+			"_UNIT_TEST"
+		]
 	}
 }

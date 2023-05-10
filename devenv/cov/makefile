@@ -35,6 +35,7 @@ SRCS_02 += ../../src/Assertions.c
 SRCS_02 += ../../src/AvlTree.c
 SRCS_02 += ../../src/Indices.c
 SRCS_02 += ../../src/Map.c
+SRCS_02 += ../../src/MmIo.c
 SRCS_02 += ../../src/RingedFrames.c
 SRCS_02 += ../../src/SchmittTrigger.c
 OBJS_02 = $(SRCS_02:../../%.c=obj/%.o)
