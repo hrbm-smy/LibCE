@@ -1,0 +1,352 @@
+.TH "R:/Owned/LibCE/WC/main/inc/RingedFrames.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/RingedFrames.h \- Frame ring buffer\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_RingedFrames\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBRF_FRAME_HEADER_SIZE\fP   (12)"
+.br
+.ti -1c
+.RI "#define \fBRF_STRIDE_WORDS\fP(frameSize)   (((\fBRF_FRAME_HEADER_SIZE\fP + (frameSize) \- 1) / 4) + 1)"
+.br
+.ti -1c
+.RI "#define \fBRF_NEEDED_BUFFER_WORDS\fP(capacity,  frameSize)   (\fBRF_STRIDE_WORDS\fP(frameSize) * (capacity))"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_RingedFrames\fP \fBRingedFrames\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBRingedFrames_Init\fP (int32_t capacity, int32_t frameSize, int32_t *buffer, \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "void \fBRingedFrames_Clear\fP (\fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBRingedFrames_Count\fP (const \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "int64_t \fBRingedFrames_UpdateCount\fP (const \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBRingedFrames_Capacity\fP (const \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBRingedFrames_FrameSize\fP (const \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "void \fBRingedFrames_Push\fP (const void *frame, int32_t length, int64_t timestamp, \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "const void * \fBRingedFrames_ReferWithOld\fP (int32_t index, int32_t *length, int64_t *timestamp, const \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "const void * \fBRingedFrames_ReferWithNew\fP (int32_t index, int32_t *length, int64_t *timestamp, const \fBRingedFrames\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBRingedFrames_Pop\fP (void *buffer, int32_t bufferSize, int64_t *timestamp, \fBRingedFrames\fP *ctxt)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Frame ring buffer\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2021/07/28
+.RE
+.PP
+MIT License
+.PP
+Copyright (c) 2021 Hirobumi Someya
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.PP
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&. 
+.PP
+Definition in file \fBRingedFrames\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define RF_FRAME_HEADER_SIZE   (12)"
+
+.PP
+フレームヘッダのサイズ。
+.PP
+Definition at line 43 of file RingedFrames\&.h\&.
+.SS "#define RF_STRIDE_WORDS(frameSize)   (((\fBRF_FRAME_HEADER_SIZE\fP + (frameSize) \- 1) / 4) + 1)"
+
+.PP
+ストライド幅(切り上げられた1フレームあたりのワード数)を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIframeSize\fP 最大フレームサイズ。
+.RE
+.PP
+
+.PP
+Definition at line 49 of file RingedFrames\&.h\&.
+.SS "#define RF_NEEDED_BUFFER_WORDS(capacity, frameSize)   (\fBRF_STRIDE_WORDS\fP(frameSize) * (capacity))"
+
+.PP
+バッファに必要なワード数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcapacity\fP 最大蓄積可能フレーム数。
+.br
+\fIframeSize\fP 最大フレームサイズ。
+.RE
+.PP
+
+.PP
+Definition at line 57 of file RingedFrames\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_RingedFrames\fP \fBRingedFrames\fP"
+
+.PP
+フレームリングバッファ
+.SH "Function Documentation"
+.PP 
+.SS "void RingedFrames_Init (int32_t capacity, int32_t frameSize, int32_t * buffer, \fBRingedFrames\fP * ctxt)"
+
+.PP
+フレームリングバッファを初期化する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcapacity\fP 最大蓄積可能フレーム数。
+.br
+\fIframeSize\fP 最大フレームサイズ。
+.br
+\fIbuffer\fP 動作に必要なバッファ。 RF_NEEDED_BUFFER_WORDS分の要素数を持つ領域を確保して指定すること。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "void RingedFrames_Clear (\fBRingedFrames\fP * ctxt)"
+
+.PP
+クリアする。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "int32_t RingedFrames_Count (const \fBRingedFrames\fP * ctxt)"
+
+.PP
+現在のフレーム蓄積数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+現在のフレーム蓄積数。
+.RE
+.PP
+
+.SS "int64_t RingedFrames_UpdateCount (const \fBRingedFrames\fP * ctxt)"
+
+.PP
+現在のフレーム更新数を取得する。
+.PP
+フレームリングバッファは最古を上書きするが、蓄積数は最大で停止する。
+.PP
+更新数は、最大蓄積数を蓄積した後でも更新される。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+現在のフレーム更新数。
+.RE
+.PP
+
+.SS "int32_t RingedFrames_Capacity (const \fBRingedFrames\fP * ctxt)"
+
+.PP
+最大蓄積可能フレーム数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+最大蓄積可能フレーム数。
+.RE
+.PP
+
+.SS "int32_t RingedFrames_FrameSize (const \fBRingedFrames\fP * ctxt)"
+
+.PP
+最大フレームサイズを取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+最大フレームサイズ。
+.RE
+.PP
+
+.SS "void RingedFrames_Push (const void * frame, int32_t length, int64_t timestamp, \fBRingedFrames\fP * ctxt)"
+
+.PP
+フレームをPushする。
+.PP
+最大蓄積可能フレーム数まで蓄積されていると、最古を上書きする。
+.PP
+\fBParameters\fP
+.RS 4
+\fIframe\fP フレーム。
+.br
+\fIlength\fP フレームの長さ。
+.br
+\fItimestamp\fP タイムスタンプ。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "const void* RingedFrames_ReferWithOld (int32_t index, int32_t * length, int64_t * timestamp, const \fBRingedFrames\fP * ctxt)"
+
+.PP
+最古を0としたインデックスで、フレームを参照する。
+.PP
+コピーせず、内部メモリを直接参照する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 最古を0としたインデックス。
+.br
+\fIlength\fP フレーム長の格納先。
+.br
+\fItimestamp\fP タイムスタンプの格納先。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+フレーム。nullでなし。
+.RE
+.PP
+
+.SS "const void* RingedFrames_ReferWithNew (int32_t index, int32_t * length, int64_t * timestamp, const \fBRingedFrames\fP * ctxt)"
+
+.PP
+最新を0としたインデックスで、フレームを参照する。
+.PP
+コピーせず、内部メモリを直接参照する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 最新を0としたインデックス。
+.br
+\fIlength\fP フレーム長の格納先。
+.br
+\fItimestamp\fP タイムスタンプの格納先。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+フレーム。nullでなし。
+.RE
+.PP
+
+.SS "int32_t RingedFrames_Pop (void * buffer, int32_t bufferSize, int64_t * timestamp, \fBRingedFrames\fP * ctxt)"
+
+.PP
+最古のフレームをPopする。
+.PP
+フレームが無い場合は負を返す。
+.PP
+格納先が足りない場合は、格納できる分だけ返す。
+.PP
+\fBParameters\fP
+.RS 4
+\fIbuffer\fP フレームの格納先バッファ。
+.br
+\fIbufferSize\fP フレーム格納先バッファのサイズ。
+.br
+\fItimestamp\fP タイムスタンプの格納先。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+フレーム長。
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

@@ -1,0 +1,144 @@
+\hypertarget{_encoders_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Encoders.h File Reference}
+\label{_encoders_8h}\index{R:/Owned/LibCE/WC/main/inc/Encoders.h@{R:/Owned/LibCE/WC/main/inc/Encoders.h}}
+
+
+Encoders.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_encoders_8h_ad622e8b3fefcf3b157b8ba78e77f8236}{Encoders\+\_\+\+Can\+Encode}} (int32\+\_\+t needed\+Size, const void $\ast$dest, int32\+\_\+t dest\+Size)
+\begin{DoxyCompactList}\small\item\em エンコード可能判定 ~\newline
+ 編集先のバッファがエンコード可能か判定する。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_encoders_8h_aa3ea65117d6a3f60b8008211559b7e04}{Encoders\+\_\+\+Encode16\+At}} (int32\+\_\+t index, int32\+\_\+t value, int big\+Endian, void $\ast$dest)
+\begin{DoxyCompactList}\small\item\em 16ビットエンコード ~\newline
+ 16ビットの値をエンコードする。 ~\newline
+ エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_encoders_8h_af8436c0294eb70df1a551e60e682b612}{Encoders\+\_\+\+Encode32\+At}} (int32\+\_\+t index, int32\+\_\+t value, int big\+Endian, void $\ast$dest)
+\begin{DoxyCompactList}\small\item\em 32ビットエンコード ~\newline
+ 32ビットの値をエンコードする。 ~\newline
+ エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_encoders_8h_adb4350c26b030c844867fba98d97cc17}{Encoders\+\_\+\+Encode64\+At}} (int32\+\_\+t index, int64\+\_\+t value, int big\+Endian, void $\ast$dest)
+\begin{DoxyCompactList}\small\item\em 64ビットエンコード ~\newline
+ 64ビットの値をエンコードする。 ~\newline
+ エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Encoders. 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023/05/12 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_encoders_8h_ad622e8b3fefcf3b157b8ba78e77f8236}\label{_encoders_8h_ad622e8b3fefcf3b157b8ba78e77f8236}} 
+\index{Encoders.h@{Encoders.h}!Encoders\_CanEncode@{Encoders\_CanEncode}}
+\index{Encoders\_CanEncode@{Encoders\_CanEncode}!Encoders.h@{Encoders.h}}
+\doxysubsubsection{\texorpdfstring{Encoders\_CanEncode()}{Encoders\_CanEncode()}}
+{\footnotesize\ttfamily int Encoders\+\_\+\+Can\+Encode (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{needed\+Size,  }\item[{const void $\ast$}]{dest,  }\item[{int32\+\_\+t}]{dest\+Size }\end{DoxyParamCaption})}
+
+
+
+エンコード可能判定 ~\newline
+ 編集先のバッファがエンコード可能か判定する。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em needed\+Size} & エンコードに必要なサイズ。 \\
+\hline
+{\em dest} & エンコード先バッファ。 \\
+\hline
+{\em dest\+Size} & エンコード先バッファのサイズ。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0\+:不可、非0\+:可能。 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_encoders_8h_aa3ea65117d6a3f60b8008211559b7e04}\label{_encoders_8h_aa3ea65117d6a3f60b8008211559b7e04}} 
+\index{Encoders.h@{Encoders.h}!Encoders\_Encode16At@{Encoders\_Encode16At}}
+\index{Encoders\_Encode16At@{Encoders\_Encode16At}!Encoders.h@{Encoders.h}}
+\doxysubsubsection{\texorpdfstring{Encoders\_Encode16At()}{Encoders\_Encode16At()}}
+{\footnotesize\ttfamily void Encoders\+\_\+\+Encode16\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
+
+
+
+16ビットエンコード ~\newline
+ 16ビットの値をエンコードする。 ~\newline
+ エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & エンコード先のインデックス。 \\
+\hline
+{\em value} & エンコードする値。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+{\em dest} & エンコード先バッファ。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_encoders_8h_af8436c0294eb70df1a551e60e682b612}\label{_encoders_8h_af8436c0294eb70df1a551e60e682b612}} 
+\index{Encoders.h@{Encoders.h}!Encoders\_Encode32At@{Encoders\_Encode32At}}
+\index{Encoders\_Encode32At@{Encoders\_Encode32At}!Encoders.h@{Encoders.h}}
+\doxysubsubsection{\texorpdfstring{Encoders\_Encode32At()}{Encoders\_Encode32At()}}
+{\footnotesize\ttfamily void Encoders\+\_\+\+Encode32\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
+
+
+
+32ビットエンコード ~\newline
+ 32ビットの値をエンコードする。 ~\newline
+ エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & エンコード先のインデックス。 \\
+\hline
+{\em value} & エンコードする値。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+{\em dest} & エンコード先バッファ。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_encoders_8h_adb4350c26b030c844867fba98d97cc17}\label{_encoders_8h_adb4350c26b030c844867fba98d97cc17}} 
+\index{Encoders.h@{Encoders.h}!Encoders\_Encode64At@{Encoders\_Encode64At}}
+\index{Encoders\_Encode64At@{Encoders\_Encode64At}!Encoders.h@{Encoders.h}}
+\doxysubsubsection{\texorpdfstring{Encoders\_Encode64At()}{Encoders\_Encode64At()}}
+{\footnotesize\ttfamily void Encoders\+\_\+\+Encode64\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int64\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
+
+
+
+64ビットエンコード ~\newline
+ 64ビットの値をエンコードする。 ~\newline
+ エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & エンコード先のインデックス。 \\
+\hline
+{\em value} & エンコードする値。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+{\em dest} & エンコード先バッファ。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。 
+\end{DoxyReturn}

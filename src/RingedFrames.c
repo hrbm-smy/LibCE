@@ -1,7 +1,7 @@
 ﻿/** ------------------------------------------------------------------
 *
 *	@file	RingedFrames.c
-*	@brief	フレームリングバッファ
+*	@brief	Frame ring buffer
 *	@author	H.Someya
 *	@date	2021/07/28
 *

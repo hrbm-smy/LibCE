@@ -1,0 +1,247 @@
+.TH "R:/Owned/LibCE/WC/main/inc/Map.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/Map.h \- Map\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include 'AvlTree\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_MapElm\fP"
+.br
+.ti -1c
+.RI "struct \fB_Map\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef \fBAvlKey_t\fP \fBMapKey_t\fP"
+.br
+.ti -1c
+.RI "typedef struct \fB_MapElm\fP \fBMapElm\fP"
+.br
+.ti -1c
+.RI "typedef struct \fB_Map\fP \fBMap\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBMap_Init\fP (int32_t capacity, \fBMapElm\fP *elements, \fBMap\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBMap_Capacity\fP (const \fBMap\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBMap_Count\fP (const \fBMap\fP *ctxt)"
+.br
+.ti -1c
+.RI "void \fBMap_Clear\fP (\fBMap\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBMap_Relate\fP (const void *value, \fBMapKey_t\fP key, \fBMap\fP *ctxt)"
+.br
+.ti -1c
+.RI "void * \fBMap_ValueFor\fP (\fBMapKey_t\fP key, const \fBMap\fP *ctxt)"
+.br
+.ti -1c
+.RI "void * \fBMap_ValueAt\fP (int32_t index, const \fBMap\fP *ctxt)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Map\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2021/08/06
+.RE
+.PP
+MIT License
+.PP
+Copyright (c) 2021 Hirobumi Someya
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.PP
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&. 
+.PP
+Definition in file \fBMap\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef \fBAvlKey_t\fP \fBMapKey_t\fP"
+
+.PP
+MapのKey
+.PP
+Definition at line 51 of file Map\&.h\&.
+.SS "typedef struct \fB_MapElm\fP \fBMapElm\fP"
+
+.PP
+Map要素
+.SS "typedef struct \fB_Map\fP \fBMap\fP"
+
+.PP
+Map
+.SH "Function Documentation"
+.PP 
+.SS "void Map_Init (int32_t capacity, \fBMapElm\fP * elements, \fBMap\fP * ctxt)"
+
+.PP
+Mapを初期化する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcapacity\fP 最大要素数。
+.br
+\fIelements\fP 動作に必要な要素バッファ。 最大要素数分確保して指定すること。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "int32_t Map_Capacity (const \fBMap\fP * ctxt)"
+
+.PP
+Mapの最大要素数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+最大要素数。
+.RE
+.PP
+
+.SS "int32_t Map_Count (const \fBMap\fP * ctxt)"
+
+.PP
+Mapの蓄積済み要素数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+蓄積済み要素数。
+.RE
+.PP
+
+.SS "void Map_Clear (\fBMap\fP * ctxt)"
+
+.PP
+Mapをクリアする。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "int32_t Map_Relate (const void * value, \fBMapKey_t\fP key, \fBMap\fP * ctxt)"
+
+.PP
+valueをkeyに関連付ける。
+.PP
+同じkeyが既にある場合、関連付けを上書きする。
+.PP
+※　keyとvalueを関連付けるだけであって、valueのスコープと定数/変数は、 ValueFor/ValueAtと合わせ、ユーザーが考慮しなければならない。　※
+.PP
+関連付けできた場合、蓄積済み要素数を返す。
+.PP
+関連付けできなかった場合は0または負。
+.PP
+\fBParameters\fP
+.RS 4
+\fIvalue\fP 値。
+.br
+\fIkey\fP キー。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+蓄積済み要素数。
+.RE
+.PP
+
+.SS "void* Map_ValueFor (\fBMapKey_t\fP key, const \fBMap\fP * ctxt)"
+
+.PP
+keyに対応するvalueを取得する。
+.PP
+※　Relateで関連付けたアドレスを返すものである。 従って、valueのスコープと定数/変数は、 Relateと合わせ、ユーザーが考慮しなければならない。　※
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP キー。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+keyに対応するvalue。
+.RE
+.PP
+
+.SS "void* Map_ValueAt (int32_t index, const \fBMap\fP * ctxt)"
+
+.PP
+指定したインデックス位置のvalueを取得する。
+.PP
+※　Relateで関連付けたアドレスを返すものである。 従って、valueのスコープと定数/変数は、 Relateと合わせ、ユーザーが考慮しなければならない。　※
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP インデックス位置(0～)。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+インデックス位置のvalue。
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

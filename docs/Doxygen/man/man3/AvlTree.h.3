@@ -1,0 +1,155 @@
+.TH "R:/Owned/LibCE/WC/main/inc/AvlTree.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/AvlTree.h \- AVL Tree (32bits key, without deletion)  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_AvlContent\fP"
+.br
+.ti -1c
+.RI "struct \fB_AvlNode\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef int32_t \fBAvlKey_t\fP"
+.br
+.ti -1c
+.RI "typedef struct \fB_AvlContent\fP \fBAvlContent\fP"
+.br
+.ti -1c
+.RI "typedef struct \fB_AvlNode\fP \fBAvlNode\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBAvlNode_Init\fP (\fBAvlKey_t\fP key, const void *value, \fBAvlNode\fP *node)"
+.br
+.ti -1c
+.RI "\fBAvlNode\fP * \fBAvlTree_Search\fP (\fBAvlKey_t\fP key, \fBAvlNode\fP *root)"
+.br
+.ti -1c
+.RI "\fBAvlNode\fP * \fBAvlTree_Insert\fP (\fBAvlNode\fP *node, \fBAvlNode\fP *root)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+AVL Tree (32bits key, without deletion) 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2021/04/26
+.RE
+.PP
+MIT License
+.PP
+Copyright (c) 2021 Hirobumi Someya
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.PP
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&. 
+.PP
+Definition in file \fBAvlTree\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef int32_t \fBAvlKey_t\fP"
+
+.PP
+AVLキー
+.PP
+Definition at line 50 of file AvlTree\&.h\&.
+.SS "typedef struct \fB_AvlContent\fP \fBAvlContent\fP"
+
+.PP
+AVL内容
+.SS "typedef struct \fB_AvlNode\fP \fBAvlNode\fP"
+
+.PP
+AVLノード
+.PP
+Definition at line 50 of file AvlTree\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "void AvlNode_Init (\fBAvlKey_t\fP key, const void * value, \fBAvlNode\fP * node)"
+
+.PP
+AVLノードを初期化する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP 内容のKey。
+.br
+\fIvalue\fP 内容のValue。
+.br
+\fInode\fP ノード。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "\fBAvlNode\fP* AvlTree_Search (\fBAvlKey_t\fP key, \fBAvlNode\fP * root)"
+
+.PP
+Keyに該当するノードを検索する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIkey\fP 検索する内容のKey。
+.br
+\fIroot\fP 検索開始rootノード。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+該当するノード。
+.RE
+.PP
+
+.SS "\fBAvlNode\fP* AvlTree_Insert (\fBAvlNode\fP * node, \fBAvlNode\fP * root)"
+
+.PP
+ノードを挿入する。
+.PP
+\fBParameters\fP
+.RS 4
+\fInode\fP 挿入するノード。
+.br
+\fIroot\fP 挿入先treeのrootノード。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+更新されたtreeのrootノード。
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

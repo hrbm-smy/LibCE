@@ -1,0 +1,190 @@
+.TH "R:/Owned/LibCE/WC/main/inc/Indices.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/Indices.h \- Index Operations\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int32_t \fBNextIndex\fP (int32_t index, int32_t max, int32_t min)"
+.br
+.RI "次インデックス取得 "
+.ti -1c
+.RI "int32_t \fBPreviousIndex\fP (int32_t index, int32_t max, int32_t min)"
+.br
+.RI "前インデックス取得 "
+.ti -1c
+.RI "int32_t \fBRoundIndex\fP (int32_t index, int32_t max, int32_t min)"
+.br
+.RI "巡回インデックス取得 "
+.ti -1c
+.RI "int32_t \fBInc2Max\fP (int32_t d, int32_t max)"
+.br
+.RI "最大まで増加させる。 "
+.ti -1c
+.RI "int32_t \fBDec2Min\fP (int32_t d, int32_t min)"
+.br
+.RI "最小まで減算する。 "
+.ti -1c
+.RI "int32_t \fBNextWithin\fP (int32_t minimum, int32_t maximum, int32_t value)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Index Operations\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2019/12/12
+.RE
+.PP
+MIT License
+.PP
+Copyright (c) 2019 Hirobumi Someya
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.PP
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&. 
+.PP
+Definition in file \fBIndices\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int32_t NextIndex (int32_t index, int32_t max, int32_t min)"
+
+.PP
+次インデックス取得 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 現在インデックス
+.br
+\fImax\fP 最大インデックス
+.br
+\fImin\fP 最小インデックス
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+次インデックス
+.RE
+.PP
+
+.SS "int32_t PreviousIndex (int32_t index, int32_t max, int32_t min)"
+
+.PP
+前インデックス取得 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 現在インデックス
+.br
+\fImax\fP 最大インデックス
+.br
+\fImin\fP 最小インデックス
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+前インデックス
+.RE
+.PP
+
+.SS "int32_t RoundIndex (int32_t index, int32_t max, int32_t min)"
+
+.PP
+巡回インデックス取得 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP 現在インデックス
+.br
+\fImax\fP 最大インデックス
+.br
+\fImin\fP 最小インデックス
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+巡回インデックス
+.RE
+.PP
+
+.SS "int32_t Inc2Max (int32_t d, int32_t max)"
+
+.PP
+最大まで増加させる。 
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP 現在値
+.br
+\fImax\fP 最大値
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+更新された値
+.RE
+.PP
+
+.SS "int32_t Dec2Min (int32_t d, int32_t min)"
+
+.PP
+最小まで減算する。 
+.PP
+\fBParameters\fP
+.RS 4
+\fId\fP 現在値
+.br
+\fImin\fP 最小値
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+更新された値
+.RE
+.PP
+
+.SS "int32_t NextWithin (int32_t minimum, int32_t maximum, int32_t value)"
+
+.PP
+最小～最大の間で次の値を得る。
+.PP
+最大は含まれる。
+.PP
+\fBParameters\fP
+.RS 4
+\fIminimum\fP 最小値
+.br
+\fImaximum\fP 最大値
+.br
+\fIvalue\fP 現在値
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+更新された値
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

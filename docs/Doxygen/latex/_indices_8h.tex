@@ -1,0 +1,180 @@
+\hypertarget{_indices_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Indices.h File Reference}
+\label{_indices_8h}\index{R:/Owned/LibCE/WC/main/inc/Indices.h@{R:/Owned/LibCE/WC/main/inc/Indices.h}}
+
+
+Index Operations.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{_indices_8h_ad120e9995dc012ee4e302fc562e58360}{Next\+Index}} (int32\+\_\+t index, int32\+\_\+t max, int32\+\_\+t min)
+\begin{DoxyCompactList}\small\item\em 次インデックス取得 \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{_indices_8h_ac7466983c84e9178ffaa1c8bd5378bd4}{Previous\+Index}} (int32\+\_\+t index, int32\+\_\+t max, int32\+\_\+t min)
+\begin{DoxyCompactList}\small\item\em 前インデックス取得 \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{_indices_8h_a9dc573129baea08988180ece4e923ca8}{Round\+Index}} (int32\+\_\+t index, int32\+\_\+t max, int32\+\_\+t min)
+\begin{DoxyCompactList}\small\item\em 巡回インデックス取得 \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{_indices_8h_aa85eea8c18e33e9c306077b67c0c8ac5}{Inc2\+Max}} (int32\+\_\+t d, int32\+\_\+t max)
+\begin{DoxyCompactList}\small\item\em 最大まで増加させる。 \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{_indices_8h_a26085da7c84b8777584c978bf0fa4921}{Dec2\+Min}} (int32\+\_\+t d, int32\+\_\+t min)
+\begin{DoxyCompactList}\small\item\em 最小まで減算する。 \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{_indices_8h_a6c0e39e9698e39bb94c498f35824e62c}{Next\+Within}} (int32\+\_\+t minimum, int32\+\_\+t maximum, int32\+\_\+t value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Index Operations. 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019/12/12
+\end{DoxyDate}
+M\+IT License
+
+Copyright (c) 2019 Hirobumi Someya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_indices_8h_ad120e9995dc012ee4e302fc562e58360}\label{_indices_8h_ad120e9995dc012ee4e302fc562e58360}} 
+\index{Indices.h@{Indices.h}!NextIndex@{NextIndex}}
+\index{NextIndex@{NextIndex}!Indices.h@{Indices.h}}
+\doxysubsubsection{\texorpdfstring{NextIndex()}{NextIndex()}}
+{\footnotesize\ttfamily int32\+\_\+t Next\+Index (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{max,  }\item[{int32\+\_\+t}]{min }\end{DoxyParamCaption})}
+
+
+
+次インデックス取得 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 現在インデックス\\
+\hline
+{\em max} & 最大インデックス\\
+\hline
+{\em min} & 最小インデックス\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+次インデックス
+\end{DoxyReturn}
+\mbox{\Hypertarget{_indices_8h_ac7466983c84e9178ffaa1c8bd5378bd4}\label{_indices_8h_ac7466983c84e9178ffaa1c8bd5378bd4}} 
+\index{Indices.h@{Indices.h}!PreviousIndex@{PreviousIndex}}
+\index{PreviousIndex@{PreviousIndex}!Indices.h@{Indices.h}}
+\doxysubsubsection{\texorpdfstring{PreviousIndex()}{PreviousIndex()}}
+{\footnotesize\ttfamily int32\+\_\+t Previous\+Index (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{max,  }\item[{int32\+\_\+t}]{min }\end{DoxyParamCaption})}
+
+
+
+前インデックス取得 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 現在インデックス\\
+\hline
+{\em max} & 最大インデックス\\
+\hline
+{\em min} & 最小インデックス\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+前インデックス
+\end{DoxyReturn}
+\mbox{\Hypertarget{_indices_8h_a9dc573129baea08988180ece4e923ca8}\label{_indices_8h_a9dc573129baea08988180ece4e923ca8}} 
+\index{Indices.h@{Indices.h}!RoundIndex@{RoundIndex}}
+\index{RoundIndex@{RoundIndex}!Indices.h@{Indices.h}}
+\doxysubsubsection{\texorpdfstring{RoundIndex()}{RoundIndex()}}
+{\footnotesize\ttfamily int32\+\_\+t Round\+Index (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{max,  }\item[{int32\+\_\+t}]{min }\end{DoxyParamCaption})}
+
+
+
+巡回インデックス取得 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 現在インデックス\\
+\hline
+{\em max} & 最大インデックス\\
+\hline
+{\em min} & 最小インデックス\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+巡回インデックス
+\end{DoxyReturn}
+\mbox{\Hypertarget{_indices_8h_aa85eea8c18e33e9c306077b67c0c8ac5}\label{_indices_8h_aa85eea8c18e33e9c306077b67c0c8ac5}} 
+\index{Indices.h@{Indices.h}!Inc2Max@{Inc2Max}}
+\index{Inc2Max@{Inc2Max}!Indices.h@{Indices.h}}
+\doxysubsubsection{\texorpdfstring{Inc2Max()}{Inc2Max()}}
+{\footnotesize\ttfamily int32\+\_\+t Inc2\+Max (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{d,  }\item[{int32\+\_\+t}]{max }\end{DoxyParamCaption})}
+
+
+
+最大まで増加させる。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & 現在値\\
+\hline
+{\em max} & 最大値\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+更新された値
+\end{DoxyReturn}
+\mbox{\Hypertarget{_indices_8h_a26085da7c84b8777584c978bf0fa4921}\label{_indices_8h_a26085da7c84b8777584c978bf0fa4921}} 
+\index{Indices.h@{Indices.h}!Dec2Min@{Dec2Min}}
+\index{Dec2Min@{Dec2Min}!Indices.h@{Indices.h}}
+\doxysubsubsection{\texorpdfstring{Dec2Min()}{Dec2Min()}}
+{\footnotesize\ttfamily int32\+\_\+t Dec2\+Min (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{d,  }\item[{int32\+\_\+t}]{min }\end{DoxyParamCaption})}
+
+
+
+最小まで減算する。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & 現在値\\
+\hline
+{\em min} & 最小値\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+更新された値
+\end{DoxyReturn}
+\mbox{\Hypertarget{_indices_8h_a6c0e39e9698e39bb94c498f35824e62c}\label{_indices_8h_a6c0e39e9698e39bb94c498f35824e62c}} 
+\index{Indices.h@{Indices.h}!NextWithin@{NextWithin}}
+\index{NextWithin@{NextWithin}!Indices.h@{Indices.h}}
+\doxysubsubsection{\texorpdfstring{NextWithin()}{NextWithin()}}
+{\footnotesize\ttfamily int32\+\_\+t Next\+Within (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{minimum,  }\item[{int32\+\_\+t}]{maximum,  }\item[{int32\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+
+
+最小～最大の間で次の値を得る。
+
+最大は含まれる。
+
+
+\begin{DoxyParams}{Parameters}
+{\em minimum} & 最小値\\
+\hline
+{\em maximum} & 最大値\\
+\hline
+{\em value} & 現在値\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+更新された値
+\end{DoxyReturn}

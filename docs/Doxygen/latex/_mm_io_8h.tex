@@ -1,0 +1,76 @@
+\hypertarget{_mm_io_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Mm\+Io.h File Reference}
+\label{_mm_io_8h}\index{R:/Owned/LibCE/WC/main/inc/MmIo.h@{R:/Owned/LibCE/WC/main/inc/MmIo.h}}
+
+
+Memory Mapped I/O.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_mm_io_8h_aadb195dcc6b9d4947627eae8aa04fb7d}{M\+M\+I\+O\+\_\+\+I\+N\+L\+I\+NE}}~inline
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{_mm_io_8h_aa5b35910747dda4e8d2b69fdbcc2c2ff}{Mm\+Io\+\_\+\+Write\+Bits\+U32}} (uint32\+\_\+t value, int32\+\_\+t bit\+Start, int32\+\_\+t bit\+Count, uintptr\+\_\+t base, uintptr\+\_\+t offset)
+\begin{DoxyCompactList}\small\item\em Few bits I/O data writer ~\newline
+ Write few bits to base + offset. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Memory Mapped I/O. 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023/05/09 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_mm_io_8h_aadb195dcc6b9d4947627eae8aa04fb7d}\label{_mm_io_8h_aadb195dcc6b9d4947627eae8aa04fb7d}} 
+\index{MmIo.h@{MmIo.h}!MMIO\_INLINE@{MMIO\_INLINE}}
+\index{MMIO\_INLINE@{MMIO\_INLINE}!MmIo.h@{MmIo.h}}
+\doxysubsubsection{\texorpdfstring{MMIO\_INLINE}{MMIO\_INLINE}}
+{\footnotesize\ttfamily \#define M\+M\+I\+O\+\_\+\+I\+N\+L\+I\+NE~inline}
+
+inline definition 
+
+Definition at line 45 of file Mm\+Io.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_mm_io_8h_aa5b35910747dda4e8d2b69fdbcc2c2ff}\label{_mm_io_8h_aa5b35910747dda4e8d2b69fdbcc2c2ff}} 
+\index{MmIo.h@{MmIo.h}!MmIo\_WriteBitsU32@{MmIo\_WriteBitsU32}}
+\index{MmIo\_WriteBitsU32@{MmIo\_WriteBitsU32}!MmIo.h@{MmIo.h}}
+\doxysubsubsection{\texorpdfstring{MmIo\_WriteBitsU32()}{MmIo\_WriteBitsU32()}}
+{\footnotesize\ttfamily uint32\+\_\+t Mm\+Io\+\_\+\+Write\+Bits\+U32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value,  }\item[{int32\+\_\+t}]{bit\+Start,  }\item[{int32\+\_\+t}]{bit\+Count,  }\item[{uintptr\+\_\+t}]{base,  }\item[{uintptr\+\_\+t}]{offset }\end{DoxyParamCaption})}
+
+
+
+Few bits I/O data writer ~\newline
+ Write few bits to base + offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Write value. \\
+\hline
+{\em bit\+Start} & Bit start index. \\
+\hline
+{\em bit\+Count} & Bit count. \\
+\hline
+{\em base} & Base address. \\
+\hline
+{\em offset} & Offset to the base address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Wrote value, not a device read value. 
+\end{DoxyReturn}

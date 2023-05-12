@@ -1,0 +1,235 @@
+.TH "R:/Owned/LibCE/WC/main/inc/Assertions.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/Assertions.h \- Storable assertions\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+\fC#include 'RingedFrames\&.h'\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_Assertions_Item\fP"
+.br
+.ti -1c
+.RI "struct \fB_Assertions\fP"
+.br
+.in -1c
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBSA_NEEDED_BUFFER_WORDS\fP(capacity)   (\fBRF_NEEDED_BUFFER_WORDS\fP(capacity, sizeof(\fBAssertions_Item\fP)))"
+.br
+.ti -1c
+.RI "#define \fBAssertions_Assert\fP(condition,  ctxt)"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_Assertions_Item\fP \fBAssertions_Item\fP"
+.br
+.ti -1c
+.RI "typedef struct \fB_Assertions\fP \fBAssertions\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "\fBAssertions\fP * \fBAssertions_Instance\fP (void)"
+.br
+.ti -1c
+.RI "void \fBAssertions_Init\fP (int32_t capacity, int32_t *buffer, \fBAssertions\fP *ctxt)"
+.br
+.ti -1c
+.RI "void \fBAssertions_AssertWith\fP (int condition, const char *fileName, int32_t line, \fBAssertions\fP *ctxt)"
+.br
+.ti -1c
+.RI "int32_t \fBAssertions_Count\fP (const \fBAssertions\fP *ctxt)"
+.br
+.ti -1c
+.RI "const \fBAssertions_Item\fP * \fBAssertions_Refer\fP (int32_t index, const \fBAssertions\fP *ctxt)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Storable assertions\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2021/08/02
+.RE
+.PP
+MIT License
+.PP
+Copyright (c) 2021 Hirobumi Someya
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.PP
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&. 
+.PP
+Definition in file \fBAssertions\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define SA_NEEDED_BUFFER_WORDS(capacity)   (\fBRF_NEEDED_BUFFER_WORDS\fP(capacity, sizeof(\fBAssertions_Item\fP)))"
+
+.PP
+バッファに必要なワード数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcapacity\fP 最大蓄積可能フレーム数。
+.RE
+.PP
+
+.PP
+Definition at line 45 of file Assertions\&.h\&.
+.SS "#define Assertions_Assert(condition, ctxt)"
+\fBValue:\fP
+.PP
+.nf
+       Assertions_AssertWith( \
+        (condition), __FILE__, __LINE__, (ctxt))
+.fi
+.PP
+条件の偽(0)を表示する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcondition\fP 条件。0(偽)の場合に表示される。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.PP
+Definition at line 114 of file Assertions\&.h\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_Assertions_Item\fP \fBAssertions_Item\fP"
+
+.PP
+Assertion item
+.SS "typedef struct \fB_Assertions\fP \fBAssertions\fP"
+
+.PP
+Storable assertions
+.SH "Function Documentation"
+.PP 
+.SS "\fBAssertions\fP* Assertions_Instance (void)"
+
+.PP
+共有インスタンスを取得する。
+.PP
+共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。
+.PP
+\fBReturns\fP
+.RS 4
+共有インスタンス。
+.RE
+.PP
+
+.SS "void Assertions_Init (int32_t capacity, int32_t * buffer, \fBAssertions\fP * ctxt)"
+
+.PP
+蓄積可能アサーションを初期化する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcapacity\fP 蓄積可能数。
+.br
+\fIbuffer\fP 動作に必要なバッファ。 SA_NEEDED_BUFFER_WORDS分の要素数を持つ領域を確保して指定すること。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "void Assertions_AssertWith (int condition, const char * fileName, int32_t line, \fBAssertions\fP * ctxt)"
+
+.PP
+条件の偽(0)を表示する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIcondition\fP 条件。0(偽)の場合に表示される。
+.br
+\fIfileName\fP ファイル名。
+.br
+\fIline\fP 行番号。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "int32_t Assertions_Count (const \fBAssertions\fP * ctxt)"
+
+.PP
+記憶されている項目の数を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+項目数。
+.RE
+.PP
+
+.SS "const \fBAssertions_Item\fP* Assertions_Refer (int32_t index, const \fBAssertions\fP * ctxt)"
+
+.PP
+指定されたインデックス位置に記憶されている項目を取得する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP インデックス(0～、最古基準)。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+項目。
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

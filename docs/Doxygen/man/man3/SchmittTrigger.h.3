@@ -1,0 +1,165 @@
+.TH "R:/Owned/LibCE/WC/main/inc/SchmittTrigger.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/SchmittTrigger.h \- Schmitt Trigger Circuit\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Data Structures"
+
+.in +1c
+.ti -1c
+.RI "struct \fB_SchmittTrigger\fP"
+.br
+.in -1c
+.SS "Typedefs"
+
+.in +1c
+.ti -1c
+.RI "typedef struct \fB_SchmittTrigger\fP \fBSchmittTrigger\fP"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "void \fBSchmittTrigger_Init\fP (int initialState, int32_t onThreshold, int32_t onPeriod, int32_t offThreshold, int32_t offPeriod, \fBSchmittTrigger\fP *ctxt)"
+.br
+.ti -1c
+.RI "void \fBSchmittTrigger_Reset\fP (int state, \fBSchmittTrigger\fP *ctxt)"
+.br
+.ti -1c
+.RI "int \fBSchmittTrigger_Drive\fP (int32_t input, \fBSchmittTrigger\fP *ctxt)"
+.br
+.ti -1c
+.RI "int \fBSchmittTrigger_State\fP (\fBSchmittTrigger\fP *ctxt)"
+.br
+.in -1c
+.SH "Detailed Description"
+.PP 
+Schmitt Trigger Circuit\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2021/08/11
+.RE
+.PP
+MIT License
+.PP
+Copyright (c) 2021 Hirobumi Someya
+.PP
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the 'Software'), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+.PP
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software\&.
+.PP
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\&. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE\&. 
+.PP
+Definition in file \fBSchmittTrigger\&.h\fP\&.
+.SH "Typedef Documentation"
+.PP 
+.SS "typedef struct \fB_SchmittTrigger\fP \fBSchmittTrigger\fP"
+
+.PP
+シュミットトリガ
+.SH "Function Documentation"
+.PP 
+.SS "void SchmittTrigger_Init (int initialState, int32_t onThreshold, int32_t onPeriod, int32_t offThreshold, int32_t offPeriod, \fBSchmittTrigger\fP * ctxt)"
+
+.PP
+シュミットトリガを初期化する。
+.PP
+\fBParameters\fP
+.RS 4
+\fIinitialState\fP 初期状態。非0:ON / 0:OFF
+.br
+\fIonThreshold\fP ONしきい値。
+.br
+\fIonPeriod\fP ON確定期間。
+.br
+\fIoffThreshold\fP OFFしきい値。
+.br
+\fIoffPeriod\fP OFF確定期間。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "void SchmittTrigger_Reset (int state, \fBSchmittTrigger\fP * ctxt)"
+
+.PP
+シュミットトリガをリセットする。
+.PP
+\fBParameters\fP
+.RS 4
+\fIstate\fP リセット状態。非0:ON / 0:OFF
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。
+.RE
+.PP
+
+.SS "int SchmittTrigger_Drive (int32_t input, \fBSchmittTrigger\fP * ctxt)"
+
+.PP
+シュミットトリガを駆動する。
+.PP
+入力値 >= ONしきい値でON、入力値 < OFFしきい値でOFF。
+.PP
+更新された状態(非0:ON / 0:OFF)を返す。
+.PP
+\fBParameters\fP
+.RS 4
+\fIinput\fP 入力値。
+.br
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+非0:ON / 0:OFF。
+.RE
+.PP
+
+.SS "int SchmittTrigger_State (\fBSchmittTrigger\fP * ctxt)"
+
+.PP
+シュミットトリガの状態を取得する。
+.PP
+非0:ON / 0:OFF。
+.PP
+\fBParameters\fP
+.RS 4
+\fIctxt\fP コンテキスト。
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+非0:ON / 0:OFF。
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

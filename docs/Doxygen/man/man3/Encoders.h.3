@@ -1,0 +1,171 @@
+.TH "R:/Owned/LibCE/WC/main/inc/Encoders.h" 3 "Fri May 12 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/Encoders.h \- Encoders\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBEncoders_CanEncode\fP (int32_t neededSize, const void *dest, int32_t destSize)"
+.br
+.RI "エンコード可能判定 
+.br
+ 編集先のバッファがエンコード可能か判定する。 "
+.ti -1c
+.RI "void \fBEncoders_Encode16At\fP (int32_t index, int32_t value, int bigEndian, void *dest)"
+.br
+.RI "16ビットエンコード 
+.br
+ 16ビットの値をエンコードする。 
+.br
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 "
+.ti -1c
+.RI "void \fBEncoders_Encode32At\fP (int32_t index, int32_t value, int bigEndian, void *dest)"
+.br
+.RI "32ビットエンコード 
+.br
+ 32ビットの値をエンコードする。 
+.br
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 "
+.ti -1c
+.RI "void \fBEncoders_Encode64At\fP (int32_t index, int64_t value, int bigEndian, void *dest)"
+.br
+.RI "64ビットエンコード 
+.br
+ 64ビットの値をエンコードする。 
+.br
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Encoders\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2023/05/12 
+.RE
+.PP
+
+.PP
+Definition in file \fBEncoders\&.h\fP\&.
+.SH "Function Documentation"
+.PP 
+.SS "int Encoders_CanEncode (int32_t neededSize, const void * dest, int32_t destSize)"
+
+.PP
+エンコード可能判定 
+.br
+ 編集先のバッファがエンコード可能か判定する。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIneededSize\fP エンコードに必要なサイズ。 
+.br
+\fIdest\fP エンコード先バッファ。 
+.br
+\fIdestSize\fP エンコード先バッファのサイズ。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0:不可、非0:可能。 
+.RE
+.PP
+
+.SS "void Encoders_Encode16At (int32_t index, int32_t value, int bigEndian, void * dest)"
+
+.PP
+16ビットエンコード 
+.br
+ 16ビットの値をエンコードする。 
+.br
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP エンコード先のインデックス。 
+.br
+\fIvalue\fP エンコードする値。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.br
+\fIdest\fP エンコード先バッファ。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。 
+.RE
+.PP
+
+.SS "void Encoders_Encode32At (int32_t index, int32_t value, int bigEndian, void * dest)"
+
+.PP
+32ビットエンコード 
+.br
+ 32ビットの値をエンコードする。 
+.br
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP エンコード先のインデックス。 
+.br
+\fIvalue\fP エンコードする値。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.br
+\fIdest\fP エンコード先バッファ。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。 
+.RE
+.PP
+
+.SS "void Encoders_Encode64At (int32_t index, int64_t value, int bigEndian, void * dest)"
+
+.PP
+64ビットエンコード 
+.br
+ 64ビットの値をエンコードする。 
+.br
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP エンコード先のインデックス。 
+.br
+\fIvalue\fP エンコードする値。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.br
+\fIdest\fP エンコード先バッファ。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+なし。 
+.RE
+.PP
+
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

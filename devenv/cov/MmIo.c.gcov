@@ -1,8 +1,8 @@
         -:    0:Source:../../src/MmIo.c
         -:    0:Graph:obj/src/MmIo.gcno
         -:    0:Data:obj/src/MmIo.gcda
-        -:    0:Runs:3
-        -:    0:Programs:3
+        -:    0:Runs:1
+        -:    0:Programs:1
         -:    1:/** ------------------------------------------------------------------
         -:    2: *
         -:    3: *	@file	MmIo.c
@@ -53,39 +53,39 @@
         -:   48: *  @param offset Offset to the base address.
         -:   49: *  @return Wrote value, not a device read value.
         -:   50: */
-        9:   51:uint32_t MmIo_WriteBitsU32(
+        3:   51:uint32_t MmIo_WriteBitsU32(
         -:   52:	uint32_t value,
         -:   53:	int32_t bitStart, int32_t bitCount,
         -:   54:	uintptr_t base, uintptr_t offset)
         -:   55:{
-        9:   56:	uint32_t result = 0;
+        3:   56:	uint32_t result = 0;
         -:   57:
-        9:   58:	uint32_t mask = ~0;
-        9:   59:	mask <<= (32 - bitCount);
-        9:   60:	mask >>= ((32 - bitCount) - bitStart);
+        3:   58:	uint32_t mask = ~0;
+        3:   59:	mask <<= (32 - bitCount);
+        3:   60:	mask >>= ((32 - bitCount) - bitStart);
         -:   61:
-        9:   62:	uint32_t d = MmIo_ReadU32(base, offset);
-        9:   63:	d &= ~mask;
-        9:   64:	d |= ((value << bitStart) & mask);
-        9:   65:	MmIo_WriteU32(d, base, offset);
-        9:   66:	result = d;
+        3:   62:	uint32_t d = MmIo_ReadU32(base, offset);
+        3:   63:	d &= ~mask;
+        3:   64:	d |= ((value << bitStart) & mask);
+        3:   65:	MmIo_WriteU32(d, base, offset);
+        3:   66:	result = d;
         -:   67:
-        9:   68:	return result;
+        3:   68:	return result;
         -:   69:}
         -:   70:
         -:   71:#ifdef _UNIT_TEST
         -:   72:#include "Assertions.h"
-        3:   73:void MmIo_UnitTest(void)
+        1:   73:void MmIo_UnitTest(void)
         -:   74:{
-        3:   75:	Assertions *ast = Assertions_Instance();
+        1:   75:	Assertions *ast = Assertions_Instance();
         -:   76:
         -:   77:	uint32_t ioArea[4];
         -:   78:#define IOBASE (uintptr_t)(&ioArea[0])
         -:   79:
-        3:   80:	ioArea[0] = 0x11223344;
-        3:   81:	ioArea[1] = 0x55667788;
-        3:   82:	ioArea[2] = 0x99aabbcc;
-        3:   83:	ioArea[3] = 0xddeeff00;
+        1:   80:	ioArea[0] = 0x11223344;
+        1:   81:	ioArea[1] = 0x55667788;
+        1:   82:	ioArea[2] = 0x99aabbcc;
+        1:   83:	ioArea[3] = 0xddeeff00;
         -:   84:
         -:   85:	/*
         -:   86:	1-x MmIo_ReadU32
@@ -93,11 +93,11 @@
         -:   88:	/*
         -:   89:	1-1 MmIo_ReadU32
         -:   90:	*/
-        3:   91:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0) == 0x11223344, ast);
+        1:   91:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0) == 0x11223344, ast);
         -:   92:	/*
         -:   93:	1-2 MmIo_ReadU32
         -:   94:	*/
-        3:   95:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0xc) == 0xddeeff00, ast);
+        1:   95:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0xc) == 0xddeeff00, ast);
         -:   96:
         -:   97:	/*
         -:   98:	2-x MmIo_WriteU32
@@ -105,13 +105,13 @@
         -:  100:	/*
         -:  101:	2-1 MmIo_WriteU32
         -:  102:	*/
-        3:  103:	MmIo_WriteU32(0x01234567, IOBASE, 0);
-        3:  104:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0) == 0x01234567, ast);
+        1:  103:	MmIo_WriteU32(0x01234567, IOBASE, 0);
+        1:  104:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0) == 0x01234567, ast);
         -:  105:	/*
         -:  106:	2-2 MmIo_WriteU32
         -:  107:	*/
-        3:  108:	MmIo_WriteU32(0xfedcba98, IOBASE, 0x8);
-        3:  109:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xfedcba98, ast);
+        1:  108:	MmIo_WriteU32(0xfedcba98, IOBASE, 0x8);
+        1:  109:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xfedcba98, ast);
         -:  110:
         -:  111:	/*
         -:  112:	3-x MmIo_WriteBitsU32
@@ -119,17 +119,17 @@
         -:  114:	/*
         -:  115:	3-1 MmIo_WriteBitsU32
         -:  116:	*/
-        3:  117:	MmIo_WriteBitsU32(0xab, 24, 8, IOBASE, 0x8);
-        3:  118:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xabdcba98, ast);
+        1:  117:	MmIo_WriteBitsU32(0xab, 24, 8, IOBASE, 0x8);
+        1:  118:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xabdcba98, ast);
         -:  119:	/*
         -:  120:	3-2 MmIo_WriteBitsU32
         -:  121:	*/
-        3:  122:	MmIo_WriteBitsU32(0xef, 8, 8, IOBASE, 0x8);
-        3:  123:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xabdcef98, ast);
+        1:  122:	MmIo_WriteBitsU32(0xef, 8, 8, IOBASE, 0x8);
+        1:  123:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xabdcef98, ast);
         -:  124:	/*
         -:  125:	3-2 MmIo_WriteBitsU32
         -:  126:	*/
-        3:  127:	MmIo_WriteBitsU32(0x89, 4, 8, IOBASE, 0x8);
-        3:  128:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xabdce898, ast);
-        3:  129:}
+        1:  127:	MmIo_WriteBitsU32(0x89, 4, 8, IOBASE, 0x8);
+        1:  128:	Assertions_Assert(MmIo_ReadU32(IOBASE, 0x8) == 0xabdce898, ast);
+        1:  129:}
         -:  130:#endif

@@ -1,0 +1,256 @@
+\hypertarget{_assertions_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Assertions.h File Reference}
+\label{_assertions_8h}\index{R:/Owned/LibCE/WC/main/inc/Assertions.h@{R:/Owned/LibCE/WC/main/inc/Assertions.h}}
+
+
+Storable assertions.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Ringed\+Frames.\+h\char`\"{}}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct___assertions___item}{\+\_\+\+Assertions\+\_\+\+Item}}
+\item 
+struct \mbox{\hyperlink{struct___assertions}{\+\_\+\+Assertions}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_assertions_8h_a0340cdb4e2ac707fe151a746d7db2535}{S\+A\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+DS}}(capacity)~(\mbox{\hyperlink{_ringed_frames_8h_a815ba57d25c20f3d00de7166d998e997}{R\+F\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+DS}}(capacity, sizeof(\mbox{\hyperlink{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}{Assertions\+\_\+\+Item}})))
+\item 
+\#define \mbox{\hyperlink{_assertions_8h_a824ed15cd05da638ef19a028a401c2f9}{Assertions\+\_\+\+Assert}}(condition,  ctxt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct___assertions___item}{\+\_\+\+Assertions\+\_\+\+Item}} \mbox{\hyperlink{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}{Assertions\+\_\+\+Item}}
+\item 
+typedef struct \mbox{\hyperlink{struct___assertions}{\+\_\+\+Assertions}} \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$ \mbox{\hyperlink{_assertions_8h_a2f13d70ce25717db95a35e48599874a7}{Assertions\+\_\+\+Instance}} (void)
+\item 
+void \mbox{\hyperlink{_assertions_8h_a752804a747ba7cd10bc1be3322b7686c}{Assertions\+\_\+\+Init}} (int32\+\_\+t capacity, int32\+\_\+t $\ast$buffer, \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$ctxt)
+\item 
+void \mbox{\hyperlink{_assertions_8h_ad7316ad9d458054c8aef30b267c8123e}{Assertions\+\_\+\+Assert\+With}} (int condition, const char $\ast$file\+Name, int32\+\_\+t line, \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$ctxt)
+\item 
+int32\+\_\+t \mbox{\hyperlink{_assertions_8h_a5d6bd70b52db338c345b15233f895d17}{Assertions\+\_\+\+Count}} (const \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$ctxt)
+\item 
+const \mbox{\hyperlink{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}{Assertions\+\_\+\+Item}} $\ast$ \mbox{\hyperlink{_assertions_8h_a38d5e1a2ae2a35c654abef0b10a61a90}{Assertions\+\_\+\+Refer}} (int32\+\_\+t index, const \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$ctxt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Storable assertions. 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2021/08/02
+\end{DoxyDate}
+M\+IT License
+
+Copyright (c) 2021 Hirobumi Someya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_assertions_8h_a0340cdb4e2ac707fe151a746d7db2535}\label{_assertions_8h_a0340cdb4e2ac707fe151a746d7db2535}} 
+\index{Assertions.h@{Assertions.h}!SA\_NEEDED\_BUFFER\_WORDS@{SA\_NEEDED\_BUFFER\_WORDS}}
+\index{SA\_NEEDED\_BUFFER\_WORDS@{SA\_NEEDED\_BUFFER\_WORDS}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{SA\_NEEDED\_BUFFER\_WORDS}{SA\_NEEDED\_BUFFER\_WORDS}}
+{\footnotesize\ttfamily \#define S\+A\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+DS(\begin{DoxyParamCaption}\item[{}]{capacity }\end{DoxyParamCaption})~(\mbox{\hyperlink{_ringed_frames_8h_a815ba57d25c20f3d00de7166d998e997}{R\+F\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+DS}}(capacity, sizeof(\mbox{\hyperlink{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}{Assertions\+\_\+\+Item}})))}
+
+
+
+
+
+バッファに必要なワード数を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & 最大蓄積可能フレーム数。\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 45 of file Assertions.\+h.
+
+\mbox{\Hypertarget{_assertions_8h_a824ed15cd05da638ef19a028a401c2f9}\label{_assertions_8h_a824ed15cd05da638ef19a028a401c2f9}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_Assert@{Assertions\_Assert}}
+\index{Assertions\_Assert@{Assertions\_Assert}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_Assert}{Assertions\_Assert}}
+{\footnotesize\ttfamily \#define Assertions\+\_\+\+Assert(\begin{DoxyParamCaption}\item[{}]{condition,  }\item[{}]{ctxt }\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{        \mbox{\hyperlink{_assertions_8h_ad7316ad9d458054c8aef30b267c8123e}{Assertions\_AssertWith}}( \(\backslash\)}
+\DoxyCodeLine{        (condition), \_\_FILE\_\_, \_\_LINE\_\_, (ctxt))}
+
+\end{DoxyCode}
+
+
+
+
+条件の偽(0)を表示する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em condition} & 条件。0(偽)の場合に表示される。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+
+
+Definition at line 114 of file Assertions.\+h.
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}\label{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_Item@{Assertions\_Item}}
+\index{Assertions\_Item@{Assertions\_Item}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_Item}{Assertions\_Item}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct___assertions___item}{\+\_\+\+Assertions\+\_\+\+Item}} \mbox{\hyperlink{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}{Assertions\+\_\+\+Item}}}
+
+
+
+
+
+Assertion item\mbox{\Hypertarget{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}\label{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}} 
+\index{Assertions.h@{Assertions.h}!Assertions@{Assertions}}
+\index{Assertions@{Assertions}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions}{Assertions}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct___assertions}{\+\_\+\+Assertions}} \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}}}
+
+
+
+
+
+Storable assertions
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_assertions_8h_a2f13d70ce25717db95a35e48599874a7}\label{_assertions_8h_a2f13d70ce25717db95a35e48599874a7}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_Instance@{Assertions\_Instance}}
+\index{Assertions\_Instance@{Assertions\_Instance}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_Instance()}{Assertions\_Instance()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}}$\ast$ Assertions\+\_\+\+Instance (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+
+
+共有インスタンスを取得する。
+
+共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。
+
+\begin{DoxyReturn}{Returns}
+共有インスタンス。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_assertions_8h_a752804a747ba7cd10bc1be3322b7686c}\label{_assertions_8h_a752804a747ba7cd10bc1be3322b7686c}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_Init@{Assertions\_Init}}
+\index{Assertions\_Init@{Assertions\_Init}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_Init()}{Assertions\_Init()}}
+{\footnotesize\ttfamily void Assertions\+\_\+\+Init (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{capacity,  }\item[{int32\+\_\+t $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+蓄積可能アサーションを初期化する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & 蓄積可能数。\\
+\hline
+{\em buffer} & 動作に必要なバッファ。 S\+A\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+D\+S分の要素数を持つ領域を確保して指定すること。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_assertions_8h_ad7316ad9d458054c8aef30b267c8123e}\label{_assertions_8h_ad7316ad9d458054c8aef30b267c8123e}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_AssertWith@{Assertions\_AssertWith}}
+\index{Assertions\_AssertWith@{Assertions\_AssertWith}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_AssertWith()}{Assertions\_AssertWith()}}
+{\footnotesize\ttfamily void Assertions\+\_\+\+Assert\+With (\begin{DoxyParamCaption}\item[{int}]{condition,  }\item[{const char $\ast$}]{file\+Name,  }\item[{int32\+\_\+t}]{line,  }\item[{\mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+条件の偽(0)を表示する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em condition} & 条件。0(偽)の場合に表示される。\\
+\hline
+{\em file\+Name} & ファイル名。\\
+\hline
+{\em line} & 行番号。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_assertions_8h_a5d6bd70b52db338c345b15233f895d17}\label{_assertions_8h_a5d6bd70b52db338c345b15233f895d17}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_Count@{Assertions\_Count}}
+\index{Assertions\_Count@{Assertions\_Count}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_Count()}{Assertions\_Count()}}
+{\footnotesize\ttfamily int32\+\_\+t Assertions\+\_\+\+Count (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+記憶されている項目の数を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+項目数。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_assertions_8h_a38d5e1a2ae2a35c654abef0b10a61a90}\label{_assertions_8h_a38d5e1a2ae2a35c654abef0b10a61a90}} 
+\index{Assertions.h@{Assertions.h}!Assertions\_Refer@{Assertions\_Refer}}
+\index{Assertions\_Refer@{Assertions\_Refer}!Assertions.h@{Assertions.h}}
+\doxysubsubsection{\texorpdfstring{Assertions\_Refer()}{Assertions\_Refer()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{_assertions_8h_a3beed421f16f50e20269e68e38a9fbcb}{Assertions\+\_\+\+Item}}$\ast$ Assertions\+\_\+\+Refer (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const \mbox{\hyperlink{_assertions_8h_a5023e71bf8460b5e1a7833b2046745a4}{Assertions}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+指定されたインデックス位置に記憶されている項目を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & インデックス(0～、最古基準)。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+項目。
+\end{DoxyReturn}

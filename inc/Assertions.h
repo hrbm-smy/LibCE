@@ -41,7 +41,6 @@ SOFTWARE.
 /// <para>バッファに必要なワード数を取得する。</para>
 /// </summary>
 /// <param name="capacity">最大蓄積可能フレーム数。</param>
-/// <param name="frameSize">最大フレームサイズ。</param>
 #define SA_NEEDED_BUFFER_WORDS(capacity) \
 	(RF_NEEDED_BUFFER_WORDS(capacity, sizeof(Assertions_Item)))
 

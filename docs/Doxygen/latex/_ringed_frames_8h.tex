@@ -1,0 +1,393 @@
+\hypertarget{_ringed_frames_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Ringed\+Frames.h File Reference}
+\label{_ringed_frames_8h}\index{R:/Owned/LibCE/WC/main/inc/RingedFrames.h@{R:/Owned/LibCE/WC/main/inc/RingedFrames.h}}
+
+
+Frame ring buffer.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct___ringed_frames}{\+\_\+\+Ringed\+Frames}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_ringed_frames_8h_a7085f5f64db0eb924997d007e8e00543}{R\+F\+\_\+\+F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}}~(12)
+\item 
+\#define \mbox{\hyperlink{_ringed_frames_8h_a8cf33d0af16725bae1e857de69012cf0}{R\+F\+\_\+\+S\+T\+R\+I\+D\+E\+\_\+\+W\+O\+R\+DS}}(frame\+Size)~(((\mbox{\hyperlink{_ringed_frames_8h_a7085f5f64db0eb924997d007e8e00543}{R\+F\+\_\+\+F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}} + (frame\+Size) -\/ 1) / 4) + 1)
+\item 
+\#define \mbox{\hyperlink{_ringed_frames_8h_a815ba57d25c20f3d00de7166d998e997}{R\+F\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+DS}}(capacity,  frame\+Size)~(\mbox{\hyperlink{_ringed_frames_8h_a8cf33d0af16725bae1e857de69012cf0}{R\+F\+\_\+\+S\+T\+R\+I\+D\+E\+\_\+\+W\+O\+R\+DS}}(frame\+Size) $\ast$ (capacity))
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{struct___ringed_frames}{\+\_\+\+Ringed\+Frames}} \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_ringed_frames_8h_acb9754c02c3820c9eb6cad5dc686b7df}{Ringed\+Frames\+\_\+\+Init}} (int32\+\_\+t capacity, int32\+\_\+t frame\+Size, int32\+\_\+t $\ast$buffer, \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+void \mbox{\hyperlink{_ringed_frames_8h_a7347ab717fcff7644f5c092714625cbd}{Ringed\+Frames\+\_\+\+Clear}} (\mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+int32\+\_\+t \mbox{\hyperlink{_ringed_frames_8h_ab2747399873e262b370fe0be9877cb5c}{Ringed\+Frames\+\_\+\+Count}} (const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+int64\+\_\+t \mbox{\hyperlink{_ringed_frames_8h_a9fdf5700d18ef0446978d38ea215022c}{Ringed\+Frames\+\_\+\+Update\+Count}} (const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+int32\+\_\+t \mbox{\hyperlink{_ringed_frames_8h_ac1f613de187470c081aa871579e27035}{Ringed\+Frames\+\_\+\+Capacity}} (const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+int32\+\_\+t \mbox{\hyperlink{_ringed_frames_8h_adc491ebba1c91866e57b1bd096311c0e}{Ringed\+Frames\+\_\+\+Frame\+Size}} (const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+void \mbox{\hyperlink{_ringed_frames_8h_a0de1384bc22019d6ff278365c332788c}{Ringed\+Frames\+\_\+\+Push}} (const void $\ast$frame, int32\+\_\+t length, int64\+\_\+t timestamp, \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+const void $\ast$ \mbox{\hyperlink{_ringed_frames_8h_a938fb312e9f9d1145fabe6c32abe0746}{Ringed\+Frames\+\_\+\+Refer\+With\+Old}} (int32\+\_\+t index, int32\+\_\+t $\ast$length, int64\+\_\+t $\ast$timestamp, const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+const void $\ast$ \mbox{\hyperlink{_ringed_frames_8h_a164b0cd132aa4ad208308f4b54804281}{Ringed\+Frames\+\_\+\+Refer\+With\+New}} (int32\+\_\+t index, int32\+\_\+t $\ast$length, int64\+\_\+t $\ast$timestamp, const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\item 
+int32\+\_\+t \mbox{\hyperlink{_ringed_frames_8h_a2fdee03ea276d85c59c6ec339a43b0e9}{Ringed\+Frames\+\_\+\+Pop}} (void $\ast$buffer, int32\+\_\+t buffer\+Size, int64\+\_\+t $\ast$timestamp, \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$ctxt)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Frame ring buffer. 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2021/07/28
+\end{DoxyDate}
+M\+IT License
+
+Copyright (c) 2021 Hirobumi Someya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_ringed_frames_8h_a7085f5f64db0eb924997d007e8e00543}\label{_ringed_frames_8h_a7085f5f64db0eb924997d007e8e00543}} 
+\index{RingedFrames.h@{RingedFrames.h}!RF\_FRAME\_HEADER\_SIZE@{RF\_FRAME\_HEADER\_SIZE}}
+\index{RF\_FRAME\_HEADER\_SIZE@{RF\_FRAME\_HEADER\_SIZE}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RF\_FRAME\_HEADER\_SIZE}{RF\_FRAME\_HEADER\_SIZE}}
+{\footnotesize\ttfamily \#define R\+F\+\_\+\+F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE~(12)}
+
+
+
+
+
+フレームヘッダのサイズ。
+
+Definition at line 43 of file Ringed\+Frames.\+h.
+
+\mbox{\Hypertarget{_ringed_frames_8h_a8cf33d0af16725bae1e857de69012cf0}\label{_ringed_frames_8h_a8cf33d0af16725bae1e857de69012cf0}} 
+\index{RingedFrames.h@{RingedFrames.h}!RF\_STRIDE\_WORDS@{RF\_STRIDE\_WORDS}}
+\index{RF\_STRIDE\_WORDS@{RF\_STRIDE\_WORDS}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RF\_STRIDE\_WORDS}{RF\_STRIDE\_WORDS}}
+{\footnotesize\ttfamily \#define R\+F\+\_\+\+S\+T\+R\+I\+D\+E\+\_\+\+W\+O\+R\+DS(\begin{DoxyParamCaption}\item[{}]{frame\+Size }\end{DoxyParamCaption})~(((\mbox{\hyperlink{_ringed_frames_8h_a7085f5f64db0eb924997d007e8e00543}{R\+F\+\_\+\+F\+R\+A\+M\+E\+\_\+\+H\+E\+A\+D\+E\+R\+\_\+\+S\+I\+ZE}} + (frame\+Size) -\/ 1) / 4) + 1)}
+
+
+
+
+
+ストライド幅(切り上げられた1フレームあたりのワード数)を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame\+Size} & 最大フレームサイズ。\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 49 of file Ringed\+Frames.\+h.
+
+\mbox{\Hypertarget{_ringed_frames_8h_a815ba57d25c20f3d00de7166d998e997}\label{_ringed_frames_8h_a815ba57d25c20f3d00de7166d998e997}} 
+\index{RingedFrames.h@{RingedFrames.h}!RF\_NEEDED\_BUFFER\_WORDS@{RF\_NEEDED\_BUFFER\_WORDS}}
+\index{RF\_NEEDED\_BUFFER\_WORDS@{RF\_NEEDED\_BUFFER\_WORDS}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RF\_NEEDED\_BUFFER\_WORDS}{RF\_NEEDED\_BUFFER\_WORDS}}
+{\footnotesize\ttfamily \#define R\+F\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+DS(\begin{DoxyParamCaption}\item[{}]{capacity,  }\item[{}]{frame\+Size }\end{DoxyParamCaption})~(\mbox{\hyperlink{_ringed_frames_8h_a8cf33d0af16725bae1e857de69012cf0}{R\+F\+\_\+\+S\+T\+R\+I\+D\+E\+\_\+\+W\+O\+R\+DS}}(frame\+Size) $\ast$ (capacity))}
+
+
+
+
+
+バッファに必要なワード数を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & 最大蓄積可能フレーム数。\\
+\hline
+{\em frame\+Size} & 最大フレームサイズ。\\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 57 of file Ringed\+Frames.\+h.
+
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}\label{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames@{RingedFrames}}
+\index{RingedFrames@{RingedFrames}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames}{RingedFrames}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct___ringed_frames}{\+\_\+\+Ringed\+Frames}} \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}}}
+
+
+
+
+
+フレームリングバッファ
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_ringed_frames_8h_acb9754c02c3820c9eb6cad5dc686b7df}\label{_ringed_frames_8h_acb9754c02c3820c9eb6cad5dc686b7df}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_Init@{RingedFrames\_Init}}
+\index{RingedFrames\_Init@{RingedFrames\_Init}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_Init()}{RingedFrames\_Init()}}
+{\footnotesize\ttfamily void Ringed\+Frames\+\_\+\+Init (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{capacity,  }\item[{int32\+\_\+t}]{frame\+Size,  }\item[{int32\+\_\+t $\ast$}]{buffer,  }\item[{\mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+フレームリングバッファを初期化する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & 最大蓄積可能フレーム数。\\
+\hline
+{\em frame\+Size} & 最大フレームサイズ。\\
+\hline
+{\em buffer} & 動作に必要なバッファ。 R\+F\+\_\+\+N\+E\+E\+D\+E\+D\+\_\+\+B\+U\+F\+F\+E\+R\+\_\+\+W\+O\+R\+D\+S分の要素数を持つ領域を確保して指定すること。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_a7347ab717fcff7644f5c092714625cbd}\label{_ringed_frames_8h_a7347ab717fcff7644f5c092714625cbd}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_Clear@{RingedFrames\_Clear}}
+\index{RingedFrames\_Clear@{RingedFrames\_Clear}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_Clear()}{RingedFrames\_Clear()}}
+{\footnotesize\ttfamily void Ringed\+Frames\+\_\+\+Clear (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+クリアする。
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_ab2747399873e262b370fe0be9877cb5c}\label{_ringed_frames_8h_ab2747399873e262b370fe0be9877cb5c}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_Count@{RingedFrames\_Count}}
+\index{RingedFrames\_Count@{RingedFrames\_Count}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_Count()}{RingedFrames\_Count()}}
+{\footnotesize\ttfamily int32\+\_\+t Ringed\+Frames\+\_\+\+Count (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+現在のフレーム蓄積数を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+現在のフレーム蓄積数。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_a9fdf5700d18ef0446978d38ea215022c}\label{_ringed_frames_8h_a9fdf5700d18ef0446978d38ea215022c}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_UpdateCount@{RingedFrames\_UpdateCount}}
+\index{RingedFrames\_UpdateCount@{RingedFrames\_UpdateCount}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_UpdateCount()}{RingedFrames\_UpdateCount()}}
+{\footnotesize\ttfamily int64\+\_\+t Ringed\+Frames\+\_\+\+Update\+Count (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+現在のフレーム更新数を取得する。
+
+フレームリングバッファは最古を上書きするが、蓄積数は最大で停止する。
+
+更新数は、最大蓄積数を蓄積した後でも更新される。
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+現在のフレーム更新数。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_ac1f613de187470c081aa871579e27035}\label{_ringed_frames_8h_ac1f613de187470c081aa871579e27035}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_Capacity@{RingedFrames\_Capacity}}
+\index{RingedFrames\_Capacity@{RingedFrames\_Capacity}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_Capacity()}{RingedFrames\_Capacity()}}
+{\footnotesize\ttfamily int32\+\_\+t Ringed\+Frames\+\_\+\+Capacity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+最大蓄積可能フレーム数を取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+最大蓄積可能フレーム数。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_adc491ebba1c91866e57b1bd096311c0e}\label{_ringed_frames_8h_adc491ebba1c91866e57b1bd096311c0e}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_FrameSize@{RingedFrames\_FrameSize}}
+\index{RingedFrames\_FrameSize@{RingedFrames\_FrameSize}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_FrameSize()}{RingedFrames\_FrameSize()}}
+{\footnotesize\ttfamily int32\+\_\+t Ringed\+Frames\+\_\+\+Frame\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+最大フレームサイズを取得する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+最大フレームサイズ。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_a0de1384bc22019d6ff278365c332788c}\label{_ringed_frames_8h_a0de1384bc22019d6ff278365c332788c}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_Push@{RingedFrames\_Push}}
+\index{RingedFrames\_Push@{RingedFrames\_Push}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_Push()}{RingedFrames\_Push()}}
+{\footnotesize\ttfamily void Ringed\+Frames\+\_\+\+Push (\begin{DoxyParamCaption}\item[{const void $\ast$}]{frame,  }\item[{int32\+\_\+t}]{length,  }\item[{int64\+\_\+t}]{timestamp,  }\item[{\mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+フレームを\+Pushする。
+
+最大蓄積可能フレーム数まで蓄積されていると、最古を上書きする。
+
+
+\begin{DoxyParams}{Parameters}
+{\em frame} & フレーム。\\
+\hline
+{\em length} & フレームの長さ。\\
+\hline
+{\em timestamp} & タイムスタンプ。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_a938fb312e9f9d1145fabe6c32abe0746}\label{_ringed_frames_8h_a938fb312e9f9d1145fabe6c32abe0746}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_ReferWithOld@{RingedFrames\_ReferWithOld}}
+\index{RingedFrames\_ReferWithOld@{RingedFrames\_ReferWithOld}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_ReferWithOld()}{RingedFrames\_ReferWithOld()}}
+{\footnotesize\ttfamily const void$\ast$ Ringed\+Frames\+\_\+\+Refer\+With\+Old (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t $\ast$}]{length,  }\item[{int64\+\_\+t $\ast$}]{timestamp,  }\item[{const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+最古を0としたインデックスで、フレームを参照する。
+
+コピーせず、内部メモリを直接参照する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 最古を0としたインデックス。\\
+\hline
+{\em length} & フレーム長の格納先。\\
+\hline
+{\em timestamp} & タイムスタンプの格納先。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+フレーム。nullでなし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_a164b0cd132aa4ad208308f4b54804281}\label{_ringed_frames_8h_a164b0cd132aa4ad208308f4b54804281}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_ReferWithNew@{RingedFrames\_ReferWithNew}}
+\index{RingedFrames\_ReferWithNew@{RingedFrames\_ReferWithNew}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_ReferWithNew()}{RingedFrames\_ReferWithNew()}}
+{\footnotesize\ttfamily const void$\ast$ Ringed\+Frames\+\_\+\+Refer\+With\+New (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t $\ast$}]{length,  }\item[{int64\+\_\+t $\ast$}]{timestamp,  }\item[{const \mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+最新を0としたインデックスで、フレームを参照する。
+
+コピーせず、内部メモリを直接参照する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & 最新を0としたインデックス。\\
+\hline
+{\em length} & フレーム長の格納先。\\
+\hline
+{\em timestamp} & タイムスタンプの格納先。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+フレーム。nullでなし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_ringed_frames_8h_a2fdee03ea276d85c59c6ec339a43b0e9}\label{_ringed_frames_8h_a2fdee03ea276d85c59c6ec339a43b0e9}} 
+\index{RingedFrames.h@{RingedFrames.h}!RingedFrames\_Pop@{RingedFrames\_Pop}}
+\index{RingedFrames\_Pop@{RingedFrames\_Pop}!RingedFrames.h@{RingedFrames.h}}
+\doxysubsubsection{\texorpdfstring{RingedFrames\_Pop()}{RingedFrames\_Pop()}}
+{\footnotesize\ttfamily int32\+\_\+t Ringed\+Frames\+\_\+\+Pop (\begin{DoxyParamCaption}\item[{void $\ast$}]{buffer,  }\item[{int32\+\_\+t}]{buffer\+Size,  }\item[{int64\+\_\+t $\ast$}]{timestamp,  }\item[{\mbox{\hyperlink{_ringed_frames_8h_a6b3c0f15f0f05fd5fed5bb77a465013c}{Ringed\+Frames}} $\ast$}]{ctxt }\end{DoxyParamCaption})}
+
+
+
+
+
+最古のフレームを\+Popする。
+
+フレームが無い場合は負を返す。
+
+格納先が足りない場合は、格納できる分だけ返す。
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & フレームの格納先バッファ。\\
+\hline
+{\em buffer\+Size} & フレーム格納先バッファのサイズ。\\
+\hline
+{\em timestamp} & タイムスタンプの格納先。\\
+\hline
+{\em ctxt} & コンテキスト。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+フレーム長。
+\end{DoxyReturn}

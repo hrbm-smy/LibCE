@@ -35,6 +35,9 @@ SOFTWARE.
 *	Definitions
 */
 #ifndef __cplusplus
+/**
+ * nullptr in C
+ */
 #define nullptr ((void*)0)
 #endif
 

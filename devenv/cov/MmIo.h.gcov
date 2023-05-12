@@ -1,8 +1,8 @@
         -:    0:Source:../../inc/MmIo.h
         -:    0:Graph:obj/src/MmIo.gcno
         -:    0:Data:obj/src/MmIo.gcda
-        -:    0:Runs:3
-        -:    0:Programs:3
+        -:    0:Runs:1
+        -:    0:Programs:1
         -:    1:#ifndef __MmIo_H__
         -:    2:#define __MmIo_H__
         -:    3:
@@ -64,13 +64,13 @@
         -:   59:     *  @param offset Offset to the base address.
         -:   60:     *  @return Read value.
         -:   61:     */
-       30:   62:    static MMIO_INLINE uint32_t MmIo_ReadU32(
+       10:   62:    static MMIO_INLINE uint32_t MmIo_ReadU32(
         -:   63:        uintptr_t base, uintptr_t offset)
         -:   64:    {
-       30:   65:        uint32_t result = 0;
-       30:   66:        volatile uint32_t *addr = (volatile uint32_t *)(base + offset);
-       30:   67:        result = *addr;
-       30:   68:        return result;
+       10:   65:        uint32_t result = 0;
+       10:   66:        volatile uint32_t *addr = (volatile uint32_t *)(base + offset);
+       10:   67:        result = *addr;
+       10:   68:        return result;
         -:   69:    }
         -:   70:
         -:   71:    /**
@@ -81,15 +81,15 @@
         -:   76:     *  @param offset Offset to the base address.
         -:   77:     *  @return Wrote value, not a device read value.
         -:   78:     */
-       15:   79:    static MMIO_INLINE uint32_t MmIo_WriteU32(
+        5:   79:    static MMIO_INLINE uint32_t MmIo_WriteU32(
         -:   80:        uint32_t value,
         -:   81:        uintptr_t base, uintptr_t offset)
         -:   82:    {
-       15:   83:        uint32_t result = 0;
-       15:   84:        volatile uint32_t *addr = (volatile uint32_t *)(base + offset);
-       15:   85:        *addr = value;
-       15:   86:        result = value;
-       15:   87:        return result;
+        5:   83:        uint32_t result = 0;
+        5:   84:        volatile uint32_t *addr = (volatile uint32_t *)(base + offset);
+        5:   85:        *addr = value;
+        5:   86:        result = value;
+        5:   87:        return result;
         -:   88:    }
         -:   89:
         -:   90:    /**

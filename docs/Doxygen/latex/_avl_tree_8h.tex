@@ -1,0 +1,167 @@
+\hypertarget{_avl_tree_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Avl\+Tree.h File Reference}
+\label{_avl_tree_8h}\index{R:/Owned/LibCE/WC/main/inc/AvlTree.h@{R:/Owned/LibCE/WC/main/inc/AvlTree.h}}
+
+
+A\+VL Tree (32bits key, without deletion)  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{struct___avl_content}{\+\_\+\+Avl\+Content}}
+\item 
+struct \mbox{\hyperlink{struct___avl_node}{\+\_\+\+Avl\+Node}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef int32\+\_\+t \mbox{\hyperlink{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}{Avl\+Key\+\_\+t}}
+\item 
+typedef struct \mbox{\hyperlink{struct___avl_content}{\+\_\+\+Avl\+Content}} \mbox{\hyperlink{_avl_tree_8h_a3e7c08139b194bc488b02d95298ae788}{Avl\+Content}}
+\item 
+typedef struct \mbox{\hyperlink{struct___avl_node}{\+\_\+\+Avl\+Node}} \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_avl_tree_8h_a0c0a288fdd847066984fb4a7536f800b}{Avl\+Node\+\_\+\+Init}} (\mbox{\hyperlink{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}{Avl\+Key\+\_\+t}} key, const void $\ast$value, \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$node)
+\item 
+\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$ \mbox{\hyperlink{_avl_tree_8h_a9da52e066137e58277deca7597d7f371}{Avl\+Tree\+\_\+\+Search}} (\mbox{\hyperlink{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}{Avl\+Key\+\_\+t}} key, \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$root)
+\item 
+\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$ \mbox{\hyperlink{_avl_tree_8h_a7f874b193b00186f41b428f905ac9e6e}{Avl\+Tree\+\_\+\+Insert}} (\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$node, \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$root)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A\+VL Tree (32bits key, without deletion) 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2021/04/26
+\end{DoxyDate}
+M\+IT License
+
+Copyright (c) 2021 Hirobumi Someya
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the \char`\"{}\+Software\char`\"{}), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions\+:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+T\+HE S\+O\+F\+T\+W\+A\+RE IS P\+R\+O\+V\+I\+D\+ED \char`\"{}\+A\+S I\+S\char`\"{}, W\+I\+T\+H\+O\+UT W\+A\+R\+R\+A\+N\+TY OF A\+NY K\+I\+ND, E\+X\+P\+R\+E\+SS OR I\+M\+P\+L\+I\+ED, I\+N\+C\+L\+U\+D\+I\+NG B\+UT N\+OT L\+I\+M\+I\+T\+ED TO T\+HE W\+A\+R\+R\+A\+N\+T\+I\+ES OF M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY, F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE A\+ND N\+O\+N\+I\+N\+F\+R\+I\+N\+G\+E\+M\+E\+NT. IN NO E\+V\+E\+NT S\+H\+A\+LL T\+HE A\+U\+T\+H\+O\+RS OR C\+O\+P\+Y\+R\+I\+G\+HT H\+O\+L\+D\+E\+RS BE L\+I\+A\+B\+LE F\+OR A\+NY C\+L\+A\+IM, D\+A\+M\+A\+G\+ES OR O\+T\+H\+ER L\+I\+A\+B\+I\+L\+I\+TY, W\+H\+E\+T\+H\+ER IN AN A\+C\+T\+I\+ON OF C\+O\+N\+T\+R\+A\+CT, T\+O\+RT OR O\+T\+H\+E\+R\+W\+I\+SE, A\+R\+I\+S\+I\+NG F\+R\+OM, O\+UT OF OR IN C\+O\+N\+N\+E\+C\+T\+I\+ON W\+I\+TH T\+HE S\+O\+F\+T\+W\+A\+RE OR T\+HE U\+SE OR O\+T\+H\+ER D\+E\+A\+L\+I\+N\+GS IN T\+HE S\+O\+F\+T\+W\+A\+RE. 
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}\label{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}} 
+\index{AvlTree.h@{AvlTree.h}!AvlKey\_t@{AvlKey\_t}}
+\index{AvlKey\_t@{AvlKey\_t}!AvlTree.h@{AvlTree.h}}
+\doxysubsubsection{\texorpdfstring{AvlKey\_t}{AvlKey\_t}}
+{\footnotesize\ttfamily typedef int32\+\_\+t \mbox{\hyperlink{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}{Avl\+Key\+\_\+t}}}
+
+
+
+
+
+A\+V\+Lキー
+
+Definition at line 50 of file Avl\+Tree.\+h.
+
+\mbox{\Hypertarget{_avl_tree_8h_a3e7c08139b194bc488b02d95298ae788}\label{_avl_tree_8h_a3e7c08139b194bc488b02d95298ae788}} 
+\index{AvlTree.h@{AvlTree.h}!AvlContent@{AvlContent}}
+\index{AvlContent@{AvlContent}!AvlTree.h@{AvlTree.h}}
+\doxysubsubsection{\texorpdfstring{AvlContent}{AvlContent}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct___avl_content}{\+\_\+\+Avl\+Content}} \mbox{\hyperlink{_avl_tree_8h_a3e7c08139b194bc488b02d95298ae788}{Avl\+Content}}}
+
+
+
+
+
+A\+V\+L内容\mbox{\Hypertarget{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}\label{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}} 
+\index{AvlTree.h@{AvlTree.h}!AvlNode@{AvlNode}}
+\index{AvlNode@{AvlNode}!AvlTree.h@{AvlTree.h}}
+\doxysubsubsection{\texorpdfstring{AvlNode}{AvlNode}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{struct___avl_node}{\+\_\+\+Avl\+Node}} \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}}}
+
+
+
+
+
+A\+V\+Lノード
+
+Definition at line 50 of file Avl\+Tree.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_avl_tree_8h_a0c0a288fdd847066984fb4a7536f800b}\label{_avl_tree_8h_a0c0a288fdd847066984fb4a7536f800b}} 
+\index{AvlTree.h@{AvlTree.h}!AvlNode\_Init@{AvlNode\_Init}}
+\index{AvlNode\_Init@{AvlNode\_Init}!AvlTree.h@{AvlTree.h}}
+\doxysubsubsection{\texorpdfstring{AvlNode\_Init()}{AvlNode\_Init()}}
+{\footnotesize\ttfamily void Avl\+Node\+\_\+\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}{Avl\+Key\+\_\+t}}}]{key,  }\item[{const void $\ast$}]{value,  }\item[{\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$}]{node }\end{DoxyParamCaption})}
+
+
+
+
+
+A\+V\+Lノードを初期化する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & 内容の\+Key。\\
+\hline
+{\em value} & 内容の\+Value。\\
+\hline
+{\em node} & ノード。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+なし。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_avl_tree_8h_a9da52e066137e58277deca7597d7f371}\label{_avl_tree_8h_a9da52e066137e58277deca7597d7f371}} 
+\index{AvlTree.h@{AvlTree.h}!AvlTree\_Search@{AvlTree\_Search}}
+\index{AvlTree\_Search@{AvlTree\_Search}!AvlTree.h@{AvlTree.h}}
+\doxysubsubsection{\texorpdfstring{AvlTree\_Search()}{AvlTree\_Search()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}}$\ast$ Avl\+Tree\+\_\+\+Search (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_avl_tree_8h_a594d845f4333ea318b576ab88c1bb147}{Avl\+Key\+\_\+t}}}]{key,  }\item[{\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$}]{root }\end{DoxyParamCaption})}
+
+
+
+
+
+Keyに該当するノードを検索する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & 検索する内容の\+Key。\\
+\hline
+{\em root} & 検索開始rootノード。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+該当するノード。
+\end{DoxyReturn}
+\mbox{\Hypertarget{_avl_tree_8h_a7f874b193b00186f41b428f905ac9e6e}\label{_avl_tree_8h_a7f874b193b00186f41b428f905ac9e6e}} 
+\index{AvlTree.h@{AvlTree.h}!AvlTree\_Insert@{AvlTree\_Insert}}
+\index{AvlTree\_Insert@{AvlTree\_Insert}!AvlTree.h@{AvlTree.h}}
+\doxysubsubsection{\texorpdfstring{AvlTree\_Insert()}{AvlTree\_Insert()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}}$\ast$ Avl\+Tree\+\_\+\+Insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$}]{node,  }\item[{\mbox{\hyperlink{_avl_tree_8h_a0a6712050c4629346903df81be3d5fe4}{Avl\+Node}} $\ast$}]{root }\end{DoxyParamCaption})}
+
+
+
+
+
+ノードを挿入する。
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & 挿入するノード。\\
+\hline
+{\em root} & 挿入先treeのrootノード。\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+更新されたtreeのrootノード。
+\end{DoxyReturn}
