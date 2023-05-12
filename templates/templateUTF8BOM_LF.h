@@ -1,9 +1,9 @@
-#ifndef __templateUTF8_LF_H__
-#define __templateUTF8_LF_H__
+﻿#ifndef __templateUTF8BOM_LF_H__
+#define __templateUTF8BOM_LF_H__
 
 /** ------------------------------------------------------------------
  *
- *	@file	templateUTF8_LF.h
+ *	@file	templateUTF8BOM_LF.h
  *	@brief	新規モジュール作成時のテンプレート
  *	@author	H.Someya
  *	@date	2023/04/14
@@ -110,7 +110,7 @@ extern "C"
 	 *		2:受信データ破棄。
 	 *		マイナス値:ドライバエラー。
 	 */
-	int ExampleFuncUTF8_LF(
+	int ExampleFuncUTF8BOM_LF(
 		const unsigned char *buffer, int size,
 		unsigned int *info);
 

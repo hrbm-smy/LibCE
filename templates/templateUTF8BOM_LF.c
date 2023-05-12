@@ -1,6 +1,6 @@
-/** ------------------------------------------------------------------
+﻿/** ------------------------------------------------------------------
  *
- *	@file	templateUTF8_LF.c
+ *	@file	templateUTF8BOM_LF.c
  *	@brief	新規モジュール作成時のテンプレート
  *	@author	H.Someya
  *	@date	2023/04/14
@@ -29,7 +29,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
-#include "templateUTF8_LF.h"
+#include "templateUTF8BOM_LF.h"
 
 /*----------------------------------------------------------------------
  *  P R I V A T E S
@@ -50,7 +50,7 @@ SOFTWARE.
  *		2:受信データ破棄。
  *		マイナス値:ドライバエラー。
  */
-int ExampleFuncUTF8_LF(
+int ExampleFuncUTF8BOM_LF(
 	const unsigned char *buffer, int size,
 	unsigned int *info)
 {
