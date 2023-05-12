@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "SchmittTrigger.h"
 #include "MmIo.h"
+#include "Encoders.h"
 
 static int32_t ShowResults(const Assertions* assertions)
 {
@@ -56,7 +57,7 @@ int main(int argc, char** argv)
 	Map_UnitTest();
 	SchmittTrigger_UnitTest();
 	MmIo_UnitTest();
-
+	Encoders_UnitTest();
 
 
 

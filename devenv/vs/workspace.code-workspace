@@ -16,7 +16,20 @@
 			"corecrt_memory.h": "c",
 			"corecrt_memcpy_s.h": "c",
 			"string.h": "c",
-			"xlocale": "c"
+			"xlocale": "c",
+			"encoders.h": "c",
+			"atomic": "c",
+			"compare": "c",
+			"concepts": "c",
+			"exception": "c",
+			"initializer_list": "c",
+			"ios": "c",
+			"iterator": "c",
+			"memory": "c",
+			"streambuf": "c",
+			"xiosbase": "c",
+			"xlocinfo": "c",
+			"xmemory": "c"
 		},
 		"C_Cpp.default.defines": [
 			"_UNIT_TEST"

@@ -1,0 +1,300 @@
+        -:    0:Source:../../src/Encoders.c
+        -:    0:Graph:obj/src/Encoders.gcno
+        -:    0:Data:obj/src/Encoders.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:﻿/** ------------------------------------------------------------------
+        -:    2: *
+        -:    3: *	@file	Encoders.c
+        -:    4: *	@brief	Encoders
+        -:    5: *	@author	H.Someya
+        -:    6: *	@date	2023/05/12
+        -:    7: *
+        -:    8: */
+        -:    9:/*
+        -:   10:MIT License
+        -:   11:
+        -:   12:Copyright (c) 2021 Hirobumi Someya
+        -:   13:
+        -:   14:Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:   15:of this software and associated documentation files (the "Software"), to deal
+        -:   16:in the Software without restriction, including without limitation the rights
+        -:   17:to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   18:copies of the Software, and to permit persons to whom the Software is
+        -:   19:furnished to do so, subject to the following conditions:
+        -:   20:
+        -:   21:The above copyright notice and this permission notice shall be included in all
+        -:   22:copies or substantial portions of the Software.
+        -:   23:
+        -:   24:THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   25:IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   26:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   27:AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   28:LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   29:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   30:SOFTWARE.
+        -:   31:*/
+        -:   32:#include "Encoders.h"
+        -:   33:
+        -:   34:#include "nullptr.h"
+        -:   35:
+        -:   36:/*----------------------------------------------------------------------
+        -:   37: *  P R I V A T E S
+        -:   38: */
+        -:   39:/*----------------------------------------------------------------------
+        -:   40: *  P U B L I C   I N T E R F A C E S
+        -:   41: */
+        -:   42:
+        -:   43:/**
+        -:   44: *  @brief エンコード可能判定 @n
+        -:   45: *    編集先のバッファがエンコード可能か判定する。
+        -:   46: *  @param neededSize エンコードに必要なサイズ。
+        -:   47: *  @param dest エンコード先バッファ。
+        -:   48: *  @param destSize エンコード先バッファのサイズ。
+        -:   49: *  @return 0:不可、非0:可能。
+        -:   50: */
+        3:   51:int Encoders_CanEncode(
+        -:   52:	int32_t neededSize,
+        -:   53:	const void *dest, int32_t destSize)
+        -:   54:{
+        3:   55:	int result = 0;
+        3:   56:	if ((dest != nullptr) &&
+        -:   57:		(destSize >= neededSize))
+        -:   58:	{
+        1:   59:		result = 1;
+        -:   60:	}
+        3:   61:	return result;
+        -:   62:}
+        -:   63:
+        -:   64:/**
+        -:   65: *  @brief 16ビットエンコード @n
+        -:   66: *    16ビットの値をエンコードする。 @n
+        -:   67: *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
+        -:   68: *    ここではエンコード先バッファのチェックは行わない。
+        -:   69: *  @param index エンコード先のインデックス。
+        -:   70: *  @param value エンコードする値。
+        -:   71: *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:   72: *  @param dest エンコード先バッファ。
+        -:   73: *  @return なし。
+        -:   74: */
+        2:   75:void Encoders_Encode16At(
+        -:   76:	int32_t index,
+        -:   77:	int32_t value,
+        -:   78:	int bigEndian,
+        -:   79:	void *dest)
+        -:   80:{
+        2:   81:	uint8_t *buffer = (uint8_t *)dest;
+        2:   82:	if (bigEndian != 0)
+        -:   83:	{
+        1:   84:		buffer[index + 1] = (uint8_t)value;
+        1:   85:		value >>= 8;
+        1:   86:		buffer[index + 0] = (uint8_t)value;
+        -:   87:	}
+        -:   88:	else
+        -:   89:	{
+        1:   90:		buffer[index + 0] = (uint8_t)value;
+        1:   91:		value >>= 8;
+        1:   92:		buffer[index + 1] = (uint8_t)value;
+        -:   93:	}
+        2:   94:}
+        -:   95:
+        -:   96:/**
+        -:   97: *  @brief 32ビットエンコード @n
+        -:   98: *    32ビットの値をエンコードする。 @n
+        -:   99: *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
+        -:  100: *    ここではエンコード先バッファのチェックは行わない。
+        -:  101: *  @param index エンコード先のインデックス。
+        -:  102: *  @param value エンコードする値。
+        -:  103: *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  104: *  @param dest エンコード先バッファ。
+        -:  105: *  @return なし。
+        -:  106: */
+        2:  107:void Encoders_Encode32At(
+        -:  108:	int32_t index,
+        -:  109:	int32_t value,
+        -:  110:	int bigEndian,
+        -:  111:	void *dest)
+        -:  112:{
+        2:  113:	uint8_t *buffer = (uint8_t *)dest;
+        2:  114:	if (bigEndian != 0)
+        -:  115:	{
+        1:  116:		buffer[index + 3] = (uint8_t)value;
+        1:  117:		value >>= 8;
+        1:  118:		buffer[index + 2] = (uint8_t)value;
+        1:  119:		value >>= 8;
+        1:  120:		buffer[index + 1] = (uint8_t)value;
+        1:  121:		value >>= 8;
+        1:  122:		buffer[index + 0] = (uint8_t)value;
+        -:  123:	}
+        -:  124:	else
+        -:  125:	{
+        1:  126:		buffer[index + 0] = (uint8_t)value;
+        1:  127:		value >>= 8;
+        1:  128:		buffer[index + 1] = (uint8_t)value;
+        1:  129:		value >>= 8;
+        1:  130:		buffer[index + 2] = (uint8_t)value;
+        1:  131:		value >>= 8;
+        1:  132:		buffer[index + 3] = (uint8_t)value;
+        -:  133:	}
+        2:  134:}
+        -:  135:
+        -:  136:/**
+        -:  137: *  @brief 64ビットエンコード @n
+        -:  138: *    64ビットの値をエンコードする。 @n
+        -:  139: *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
+        -:  140: *    ここではエンコード先バッファのチェックは行わない。
+        -:  141: *  @param index エンコード先のインデックス。
+        -:  142: *  @param value エンコードする値。
+        -:  143: *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  144: *  @param dest エンコード先バッファ。
+        -:  145: *  @return なし。
+        -:  146: */
+        2:  147:void Encoders_Encode64At(
+        -:  148:	int32_t index,
+        -:  149:	int64_t value,
+        -:  150:	int bigEndian,
+        -:  151:	void *dest)
+        -:  152:{
+        2:  153:	uint8_t *buffer = (uint8_t *)dest;
+        2:  154:	if (bigEndian != 0)
+        -:  155:	{
+        1:  156:		buffer[index + 7] = (uint8_t)value;
+        1:  157:		value >>= 8;
+        1:  158:		buffer[index + 6] = (uint8_t)value;
+        1:  159:		value >>= 8;
+        1:  160:		buffer[index + 5] = (uint8_t)value;
+        1:  161:		value >>= 8;
+        1:  162:		buffer[index + 4] = (uint8_t)value;
+        1:  163:		value >>= 8;
+        1:  164:		buffer[index + 3] = (uint8_t)value;
+        1:  165:		value >>= 8;
+        1:  166:		buffer[index + 2] = (uint8_t)value;
+        1:  167:		value >>= 8;
+        1:  168:		buffer[index + 1] = (uint8_t)value;
+        1:  169:		value >>= 8;
+        1:  170:		buffer[index + 0] = (uint8_t)value;
+        -:  171:	}
+        -:  172:	else
+        -:  173:	{
+        1:  174:		buffer[index + 0] = (uint8_t)value;
+        1:  175:		value >>= 8;
+        1:  176:		buffer[index + 1] = (uint8_t)value;
+        1:  177:		value >>= 8;
+        1:  178:		buffer[index + 2] = (uint8_t)value;
+        1:  179:		value >>= 8;
+        1:  180:		buffer[index + 3] = (uint8_t)value;
+        1:  181:		value >>= 8;
+        1:  182:		buffer[index + 4] = (uint8_t)value;
+        1:  183:		value >>= 8;
+        1:  184:		buffer[index + 5] = (uint8_t)value;
+        1:  185:		value >>= 8;
+        1:  186:		buffer[index + 6] = (uint8_t)value;
+        1:  187:		value >>= 8;
+        1:  188:		buffer[index + 7] = (uint8_t)value;
+        -:  189:	}
+        2:  190:}
+        -:  191:
+        -:  192:/* -------------------------------------------------------------------
+        -:  193: *	Unit Test
+        -:  194: */
+        -:  195:#ifdef _UNIT_TEST
+        -:  196:
+        -:  197:#include <string.h>
+        -:  198:#include "Assertions.h"
+        -:  199:
+        1:  200:void Encoders_UnitTest(void)
+        -:  201:{
+        1:  202:	Assertions *ast = Assertions_Instance();
+        -:  203:
+        -:  204:	int canEncode;
+        -:  205:	uint8_t dest[15];
+        -:  206:
+        -:  207:	// -----------------------------------------
+        -:  208:	// 1-x Encoders_CanEncode
+        -:  209:	// -----------------------------------------
+        -:  210:	// 1-1 destがNULLだと不可
+        1:  211:	canEncode = Encoders_CanEncode(0, nullptr, 0);
+        1:  212:	Assertions_Assert(canEncode == 0, ast);
+        -:  213:	// -----------------------------------------
+        -:  214:	// 1-2 サイズが足りないと不可
+        1:  215:	canEncode = Encoders_CanEncode((sizeof dest) + 1, &dest[0], sizeof dest);
+        1:  216:	Assertions_Assert(canEncode == 0, ast);
+        -:  217:	// -----------------------------------------
+        -:  218:	// 1-3 サイズ足りればOK
+        1:  219:	canEncode = Encoders_CanEncode(sizeof dest, &dest[0], sizeof dest);
+        1:  220:	Assertions_Assert(canEncode != 0, ast);
+        -:  221:
+        -:  222:	// -----------------------------------------
+        -:  223:	// 2-x Encoders_Encode16At
+        -:  224:	// -----------------------------------------
+        -:  225:	// 2-1 リトルエンディアン
+        1:  226:	memset(dest, 0, sizeof dest);
+        1:  227:	Encoders_Encode16At(1, 0x1234, 0, dest);
+        1:  228:	Assertions_Assert(dest[0] == 0x00, ast);
+        1:  229:	Assertions_Assert(dest[1] == 0x34, ast);
+        1:  230:	Assertions_Assert(dest[2] == 0x12, ast);
+        1:  231:	Assertions_Assert(dest[3] == 0x00, ast);
+        -:  232:	// -----------------------------------------
+        -:  233:	// 2-2 ビッグエンディアン
+        1:  234:	memset(dest, 0, sizeof dest);
+        1:  235:	Encoders_Encode16At(1, 0x1234, 1, dest);
+        1:  236:	Assertions_Assert(dest[0] == 0x00, ast);
+        1:  237:	Assertions_Assert(dest[1] == 0x12, ast);
+        1:  238:	Assertions_Assert(dest[2] == 0x34, ast);
+        1:  239:	Assertions_Assert(dest[3] == 0x00, ast);
+        -:  240:
+        -:  241:	// -----------------------------------------
+        -:  242:	// 3-x Encoders_Encode32At
+        -:  243:	// -----------------------------------------
+        -:  244:	// 3-1 リトルエンディアン
+        1:  245:	memset(dest, 0, sizeof dest);
+        1:  246:	Encoders_Encode32At(1, 0x1234abcd, 0, dest);
+        1:  247:	Assertions_Assert(dest[0] == 0x00, ast);
+        1:  248:	Assertions_Assert(dest[1] == 0xcd, ast);
+        1:  249:	Assertions_Assert(dest[2] == 0xab, ast);
+        1:  250:	Assertions_Assert(dest[3] == 0x34, ast);
+        1:  251:	Assertions_Assert(dest[4] == 0x12, ast);
+        1:  252:	Assertions_Assert(dest[5] == 0x00, ast);
+        -:  253:	// -----------------------------------------
+        -:  254:	// 3-2 ビッグエンディアン
+        1:  255:	memset(dest, 0, sizeof dest);
+        1:  256:	Encoders_Encode32At(1, 0x1234abcd, 1, dest);
+        1:  257:	Assertions_Assert(dest[0] == 0x00, ast);
+        1:  258:	Assertions_Assert(dest[1] == 0x12, ast);
+        1:  259:	Assertions_Assert(dest[2] == 0x34, ast);
+        1:  260:	Assertions_Assert(dest[3] == 0xab, ast);
+        1:  261:	Assertions_Assert(dest[4] == 0xcd, ast);
+        1:  262:	Assertions_Assert(dest[5] == 0x00, ast);
+        -:  263:
+        -:  264:	// -----------------------------------------
+        -:  265:	// 4-x Encoders_Encode64At
+        -:  266:	// -----------------------------------------
+        -:  267:	// 4-1 リトルエンディアン
+        1:  268:	memset(dest, 0, sizeof dest);
+        1:  269:	Encoders_Encode64At(1, 0x1234abcd5678fedcLL, 0, dest);
+        1:  270:	Assertions_Assert(dest[0] == 0x00, ast);
+        1:  271:	Assertions_Assert(dest[1] == 0xdc, ast);
+        1:  272:	Assertions_Assert(dest[2] == 0xfe, ast);
+        1:  273:	Assertions_Assert(dest[3] == 0x78, ast);
+        1:  274:	Assertions_Assert(dest[4] == 0x56, ast);
+        1:  275:	Assertions_Assert(dest[5] == 0xcd, ast);
+        1:  276:	Assertions_Assert(dest[6] == 0xab, ast);
+        1:  277:	Assertions_Assert(dest[7] == 0x34, ast);
+        1:  278:	Assertions_Assert(dest[8] == 0x12, ast);
+        1:  279:	Assertions_Assert(dest[9] == 0x00, ast);
+        -:  280:	// -----------------------------------------
+        -:  281:	// 4-2 ビッグエンディアン
+        1:  282:	memset(dest, 0, sizeof dest);
+        1:  283:	Encoders_Encode64At(1, 0x1234abcd5678fedcLL, 1, dest);
+        1:  284:	Assertions_Assert(dest[0] == 0x00, ast);
+        1:  285:	Assertions_Assert(dest[1] == 0x12, ast);
+        1:  286:	Assertions_Assert(dest[2] == 0x34, ast);
+        1:  287:	Assertions_Assert(dest[3] == 0xab, ast);
+        1:  288:	Assertions_Assert(dest[4] == 0xcd, ast);
+        1:  289:	Assertions_Assert(dest[5] == 0x56, ast);
+        1:  290:	Assertions_Assert(dest[6] == 0x78, ast);
+        1:  291:	Assertions_Assert(dest[7] == 0xfe, ast);
+        1:  292:	Assertions_Assert(dest[8] == 0xdc, ast);
+        1:  293:	Assertions_Assert(dest[9] == 0x00, ast);
+        1:  294:}
+        -:  295:#endif
