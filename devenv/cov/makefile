@@ -17,7 +17,7 @@ GCOV = gcov
 COVFLAGS =
 
 RM = del
-RMFLAGS = /F /Q
+RMFLAGS = /F /S /Q
 
 # Sources, Objects
 # $(VARIABLE:OLD_PREFIX%OLD_SUFFIX=NEW_PREFIX%NEW_SUFFIX)
@@ -26,9 +26,6 @@ RMFLAGS = /F /Q
 SRCS_01 += ../LibCE_UnitTester.cpp
 OBJS_01 = $(SRCS_01:../%.cpp=obj/%.o)
 OBJS += $(OBJS_01)
-
-obj/%.o: ../%.cpp
-	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
 
 # ../../src
 SRCS_02 += ../../src/Assertions.c
@@ -42,14 +39,24 @@ SRCS_02 += ../../src/SchmittTrigger.c
 OBJS_02 = $(SRCS_02:../../%.c=obj/%.o)
 OBJS += $(OBJS_02)
 
-obj/src/%.o: ../../src/%.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
-
 COVS_02 = $(SRCS_02:../../src/%.c=%.c.gcov)
 COVS += $(COVS_02)
 
 %.c.gcov: obj/src/%.gcda
 	$(GCOV) $(COVFLAGS) -o obj/src $< > $@.log
+
+# Generic rules
+obj/%.o: ../%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+obj/%.o: ../%.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
+
+obj/%.o: ../../%.c
+	$(CC) $(CFLAGS) $(INCLUDES) -o $@ -c $<
+
+obj/%.o: ../../%.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -o $@ -c $<
 
 # Targets
 all: $(TARGET) gcov
