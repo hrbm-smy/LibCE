@@ -1,7 +1,7 @@
 ﻿#ifndef __Encoders_H__
 #define __Encoders_H__
 
-/** ------------------------------------------------------------------
+/** -------------------------------------------------------------------------
  *
  *	@file	Encoders.h
  *	@brief	Encoders
@@ -34,11 +34,16 @@ SOFTWARE.
 */
 #include <stdint.h>
 
-/*----------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *  P U B L I C   D E F I N I T I O N S
  */
 
-/*----------------------------------------------------------------------
+/**
+ * inline
+ */
+#define ENCODERS_INLINE static inline
+
+/* --------------------------------------------------------------------------
  *  P U B L I C   I N T E R F A C E S
  */
 
@@ -46,14 +51,6 @@ SOFTWARE.
 extern "C"
 {
 #endif
-
-	/*----------------------------------------------------------------------
-	 *  P R I V A T E S
-	 */
-
-	/*----------------------------------------------------------------------
-	 *  P U B L I C   I N T E R F A C E S
-	 */
 
 	/**
 	 *  @brief エンコード可能判定 @n
@@ -78,11 +75,26 @@ extern "C"
 	 *  @param dest エンコード先バッファ。
 	 *  @return なし。
 	 */
-	void Encoders_Encode16At(
+	ENCODERS_INLINE void Encoders_Encode16At(
 		int32_t index,
 		int32_t value,
 		int bigEndian,
-		void *dest);
+		void *dest)
+	{
+		uint8_t *buffer = (uint8_t *)dest;
+		if (bigEndian != 0)
+		{
+			buffer[index + 1] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 0] = (uint8_t)value;
+		}
+		else
+		{
+			buffer[index + 0] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 1] = (uint8_t)value;
+		}
+	}
 
 	/**
 	 *  @brief 32ビットエンコード @n
@@ -95,11 +107,34 @@ extern "C"
 	 *  @param dest エンコード先バッファ。
 	 *  @return なし。
 	 */
-	void Encoders_Encode32At(
+	ENCODERS_INLINE void Encoders_Encode32At(
 		int32_t index,
 		int32_t value,
 		int bigEndian,
-		void *dest);
+		void *dest)
+	{
+		uint8_t *buffer = (uint8_t *)dest;
+		if (bigEndian != 0)
+		{
+			buffer[index + 3] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 2] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 1] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 0] = (uint8_t)value;
+		}
+		else
+		{
+			buffer[index + 0] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 1] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 2] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 3] = (uint8_t)value;
+		}
+	}
 
 	/**
 	 *  @brief 64ビットエンコード @n
@@ -112,11 +147,50 @@ extern "C"
 	 *  @param dest エンコード先バッファ。
 	 *  @return なし。
 	 */
-	void Encoders_Encode64At(
+	ENCODERS_INLINE void Encoders_Encode64At(
 		int32_t index,
 		int64_t value,
 		int bigEndian,
-		void *dest);
+		void *dest)
+	{
+		uint8_t *buffer = (uint8_t *)dest;
+		if (bigEndian != 0)
+		{
+			buffer[index + 7] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 6] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 5] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 4] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 3] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 2] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 1] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 0] = (uint8_t)value;
+		}
+		else
+		{
+			buffer[index + 0] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 1] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 2] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 3] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 4] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 5] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 6] = (uint8_t)value;
+			value >>= 8;
+			buffer[index + 7] = (uint8_t)value;
+		}
+	}
 
 #ifdef _UNIT_TEST
 	void Encoders_UnitTest(void);

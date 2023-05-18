@@ -83,6 +83,7 @@ $(document).ready(function(){initNavTree('_encoders_8h.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
+<a href="#define-members">Macros</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">Encoders.h File Reference</div>  </div>
@@ -95,27 +96,32 @@ $(document).ready(function(){initNavTree('_encoders_8h.html',''); initResizable(
 </div>
 <p><a href="_encoders_8h_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:a7f586a75511ecccb5de62b50b83f907b"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a>&#160;&#160;&#160;static inline</td></tr>
+<tr class="separator:a7f586a75511ecccb5de62b50b83f907b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:ad622e8b3fefcf3b157b8ba78e77f8236"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#ad622e8b3fefcf3b157b8ba78e77f8236">Encoders_CanEncode</a> (int32_t neededSize, const void *dest, int32_t destSize)</td></tr>
 <tr class="memdesc:ad622e8b3fefcf3b157b8ba78e77f8236"><td class="mdescLeft">&#160;</td><td class="mdescRight">エンコード可能判定 <br  />
  編集先のバッファがエンコード可能か判定する。  <a href="_encoders_8h.html#ad622e8b3fefcf3b157b8ba78e77f8236">More...</a><br /></td></tr>
 <tr class="separator:ad622e8b3fefcf3b157b8ba78e77f8236"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa3ea65117d6a3f60b8008211559b7e04"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#aa3ea65117d6a3f60b8008211559b7e04">Encoders_Encode16At</a> (int32_t index, int32_t value, int bigEndian, void *dest)</td></tr>
-<tr class="memdesc:aa3ea65117d6a3f60b8008211559b7e04"><td class="mdescLeft">&#160;</td><td class="mdescRight">16ビットエンコード <br  />
+<tr class="memitem:a9fd58a12997dc8260c4c4ddb7ebd46b0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#a9fd58a12997dc8260c4c4ddb7ebd46b0">Encoders_Encode16At</a> (int32_t index, int32_t value, int bigEndian, void *dest)</td></tr>
+<tr class="memdesc:a9fd58a12997dc8260c4c4ddb7ebd46b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">16ビットエンコード <br  />
  16ビットの値をエンコードする。 <br  />
- エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。  <a href="_encoders_8h.html#aa3ea65117d6a3f60b8008211559b7e04">More...</a><br /></td></tr>
-<tr class="separator:aa3ea65117d6a3f60b8008211559b7e04"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af8436c0294eb70df1a551e60e682b612"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#af8436c0294eb70df1a551e60e682b612">Encoders_Encode32At</a> (int32_t index, int32_t value, int bigEndian, void *dest)</td></tr>
-<tr class="memdesc:af8436c0294eb70df1a551e60e682b612"><td class="mdescLeft">&#160;</td><td class="mdescRight">32ビットエンコード <br  />
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。  <a href="_encoders_8h.html#a9fd58a12997dc8260c4c4ddb7ebd46b0">More...</a><br /></td></tr>
+<tr class="separator:a9fd58a12997dc8260c4c4ddb7ebd46b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac57c38c31a6e4cba728445384c3e6384"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#ac57c38c31a6e4cba728445384c3e6384">Encoders_Encode32At</a> (int32_t index, int32_t value, int bigEndian, void *dest)</td></tr>
+<tr class="memdesc:ac57c38c31a6e4cba728445384c3e6384"><td class="mdescLeft">&#160;</td><td class="mdescRight">32ビットエンコード <br  />
  32ビットの値をエンコードする。 <br  />
- エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。  <a href="_encoders_8h.html#af8436c0294eb70df1a551e60e682b612">More...</a><br /></td></tr>
-<tr class="separator:af8436c0294eb70df1a551e60e682b612"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adb4350c26b030c844867fba98d97cc17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#adb4350c26b030c844867fba98d97cc17">Encoders_Encode64At</a> (int32_t index, int64_t value, int bigEndian, void *dest)</td></tr>
-<tr class="memdesc:adb4350c26b030c844867fba98d97cc17"><td class="mdescLeft">&#160;</td><td class="mdescRight">64ビットエンコード <br  />
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。  <a href="_encoders_8h.html#ac57c38c31a6e4cba728445384c3e6384">More...</a><br /></td></tr>
+<tr class="separator:ac57c38c31a6e4cba728445384c3e6384"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b95ba16cf945c76647a44e1ce13824b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a> void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_encoders_8h.html#a1b95ba16cf945c76647a44e1ce13824b">Encoders_Encode64At</a> (int32_t index, int64_t value, int bigEndian, void *dest)</td></tr>
+<tr class="memdesc:a1b95ba16cf945c76647a44e1ce13824b"><td class="mdescLeft">&#160;</td><td class="mdescRight">64ビットエンコード <br  />
  64ビットの値をエンコードする。 <br  />
- エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。  <a href="_encoders_8h.html#adb4350c26b030c844867fba98d97cc17">More...</a><br /></td></tr>
-<tr class="separator:adb4350c26b030c844867fba98d97cc17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+ エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。  <a href="_encoders_8h.html#a1b95ba16cf945c76647a44e1ce13824b">More...</a><br /></td></tr>
+<tr class="separator:a1b95ba16cf945c76647a44e1ce13824b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Encoders. </p>
@@ -124,7 +130,25 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>2023/05/12 </dd></dl>
 
 <p class="definition">Definition in file <a class="el" href="_encoders_8h_source.html">Encoders.h</a>.</p>
-</div><h2 class="groupheader">Function Documentation</h2>
+</div><h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="a7f586a75511ecccb5de62b50b83f907b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f586a75511ecccb5de62b50b83f907b">&#9670;&nbsp;</a></span>ENCODERS_INLINE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ENCODERS_INLINE&#160;&#160;&#160;static inline</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>inline </p>
+
+<p class="definition">Definition at line <a class="el" href="_encoders_8h_source.html#l00045">45</a> of file <a class="el" href="_encoders_8h_source.html">Encoders.h</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
 <a id="ad622e8b3fefcf3b157b8ba78e77f8236"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad622e8b3fefcf3b157b8ba78e77f8236">&#9670;&nbsp;</a></span>Encoders_CanEncode()</h2>
 
@@ -171,14 +195,14 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="aa3ea65117d6a3f60b8008211559b7e04"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa3ea65117d6a3f60b8008211559b7e04">&#9670;&nbsp;</a></span>Encoders_Encode16At()</h2>
+<a id="a9fd58a12997dc8260c4c4ddb7ebd46b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9fd58a12997dc8260c4c4ddb7ebd46b0">&#9670;&nbsp;</a></span>Encoders_Encode16At()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Encoders_Encode16At </td>
+          <td class="memname"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a> void Encoders_Encode16At </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
           <td class="paramname"><em>index</em>, </td>
@@ -223,16 +247,18 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>なし。 </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_encoders_8h_source.html#l00078">78</a> of file <a class="el" href="_encoders_8h_source.html">Encoders.h</a>.</p>
+
 </div>
 </div>
-<a id="af8436c0294eb70df1a551e60e682b612"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af8436c0294eb70df1a551e60e682b612">&#9670;&nbsp;</a></span>Encoders_Encode32At()</h2>
+<a id="ac57c38c31a6e4cba728445384c3e6384"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac57c38c31a6e4cba728445384c3e6384">&#9670;&nbsp;</a></span>Encoders_Encode32At()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Encoders_Encode32At </td>
+          <td class="memname"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a> void Encoders_Encode32At </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
           <td class="paramname"><em>index</em>, </td>
@@ -277,16 +303,18 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>なし。 </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_encoders_8h_source.html#l00110">110</a> of file <a class="el" href="_encoders_8h_source.html">Encoders.h</a>.</p>
+
 </div>
 </div>
-<a id="adb4350c26b030c844867fba98d97cc17"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#adb4350c26b030c844867fba98d97cc17">&#9670;&nbsp;</a></span>Encoders_Encode64At()</h2>
+<a id="a1b95ba16cf945c76647a44e1ce13824b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b95ba16cf945c76647a44e1ce13824b">&#9670;&nbsp;</a></span>Encoders_Encode64At()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Encoders_Encode64At </td>
+          <td class="memname"><a class="el" href="_encoders_8h.html#a7f586a75511ecccb5de62b50b83f907b">ENCODERS_INLINE</a> void Encoders_Encode64At </td>
           <td>(</td>
           <td class="paramtype">int32_t&#160;</td>
           <td class="paramname"><em>index</em>, </td>
@@ -330,6 +358,8 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>なし。 </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_encoders_8h_source.html#l00150">150</a> of file <a class="el" href="_encoders_8h_source.html">Encoders.h</a>.</p>
 
 </div>
 </div>

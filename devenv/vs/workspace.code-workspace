@@ -29,7 +29,9 @@
 			"streambuf": "c",
 			"xiosbase": "c",
 			"xlocinfo": "c",
-			"xmemory": "c"
+			"xmemory": "c",
+			"templateutf8bom_lf.h": "c",
+			"xutility": "c"
 		},
 		"C_Cpp.default.defines": [
 			"_UNIT_TEST"

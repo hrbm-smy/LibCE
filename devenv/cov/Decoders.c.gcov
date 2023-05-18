@@ -1,0 +1,276 @@
+        -:    0:Source:../../src/Decoders.c
+        -:    0:Graph:obj/src/Decoders.gcno
+        -:    0:Data:obj/src/Decoders.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:﻿/** -------------------------------------------------------------------------
+        -:    2: *
+        -:    3: *	@file	Decoders.h
+        -:    4: *	@brief	Decoders
+        -:    5: *	@author	H.Someya
+        -:    6: *	@date	2023/05/18
+        -:    7: *
+        -:    8: */
+        -:    9:/*
+        -:   10:MIT License
+        -:   11:
+        -:   12:Copyright (c) 2021 Hirobumi Someya
+        -:   13:
+        -:   14:Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:   15:of this software and associated documentation files (the "Software"), to deal
+        -:   16:in the Software without restriction, including without limitation the rights
+        -:   17:to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   18:copies of the Software, and to permit persons to whom the Software is
+        -:   19:furnished to do so, subject to the following conditions:
+        -:   20:
+        -:   21:The above copyright notice and this permission notice shall be included in all
+        -:   22:copies or substantial portions of the Software.
+        -:   23:
+        -:   24:THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   25:IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   26:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   27:AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   28:LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   29:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   30:SOFTWARE.
+        -:   31:*/
+        -:   32:#include "Decoders.h"
+        -:   33:
+        -:   34:#include "nullptr.h"
+        -:   35:
+        -:   36:/* --------------------------------------------------------------------------
+        -:   37: *  P R I V A T E S
+        -:   38: */
+        -:   39:
+        -:   40:/* --------------------------------------------------------------------------
+        -:   41: *  P U B L I C   I N T E R F A C E S
+        -:   42: */
+        -:   43:
+        -:   44:/**
+        -:   45: *  @brief デコード可能判定 @n
+        -:   46: *    デコード元のバッファがデコード可能か判定する。
+        -:   47: *  @param neededSize デコードに必要なサイズ。
+        -:   48: *  @param src デコード元バッファ。
+        -:   49: *  @param srcSize デコード元バッファのサイズ。
+        -:   50: *  @return 0:不可、非0:可能。
+        -:   51: */
+       15:   52:int Decoders_CanDecode(
+        -:   53:	int32_t neededSize,
+        -:   54:	const void *src, int32_t srcSize)
+        -:   55:{
+       15:   56:	int result = 0;
+       15:   57:	if ((src != nullptr) &&
+        -:   58:		(srcSize >= neededSize))
+        -:   59:	{
+        7:   60:		result = 1;
+        -:   61:	}
+       15:   62:	return result;
+        -:   63:}
+        -:   64:
+        -:   65:/* --------------------------------------------------------------------------
+        -:   66: *  Unit Test
+        -:   67: */
+        -:   68:#ifdef _UNIT_TEST
+        -:   69:
+        -:   70:#include <string.h>
+        -:   71:#include "Assertions.h"
+        -:   72:
+        1:   73:void Decoders_UnitTest(void)
+        -:   74:{
+        1:   75:	Assertions *ast = Assertions_Instance();
+        -:   76:
+        -:   77:	int canDecode;
+        -:   78:	uint8_t src[11];
+        -:   79:	int32_t val32;
+        -:   80:	int64_t val64;
+        -:   81:
+        -:   82:	// -----------------------------------------
+        -:   83:	// 1-x Decoders_CanDecode
+        -:   84:	// -----------------------------------------
+        -:   85:	// 1-1 srcがnullだと不可
+        1:   86:	canDecode = Decoders_CanDecode(0, nullptr, 0);
+        1:   87:	Assertions_Assert(canDecode == 0, ast);
+        -:   88:	// -----------------------------------------
+        -:   89:	// 1-2 サイズが足りないと不可
+        1:   90:	canDecode = Decoders_CanDecode((sizeof src) + 1, &src[0], sizeof src);
+        1:   91:	Assertions_Assert(canDecode == 0, ast);
+        -:   92:	// -----------------------------------------
+        -:   93:	// 1-3 サイズ足りればOK
+        1:   94:	canDecode = Decoders_CanDecode(sizeof src, &src[0], sizeof src);
+        1:   95:	Assertions_Assert(canDecode != 0, ast);
+        -:   96:
+        -:   97:	// -----------------------------------------
+        -:   98:	// 2-x Decoders_16At
+        -:   99:	// -----------------------------------------
+        -:  100:	// 2-1 リトルエンディアン
+        1:  101:	src[3] = 0x12;
+        1:  102:	src[4] = 0x34;
+        1:  103:	val32 = Decoders_16At(3, src, 0);
+        1:  104:	Assertions_Assert(val32 == 0x3412, ast);
+        -:  105:	// -----------------------------------------
+        -:  106:	// 2-2 ビッグエンディアン
+        1:  107:	src[3] = 0x12;
+        1:  108:	src[4] = 0x34;
+        1:  109:	val32 = Decoders_16At(3, src, 1);
+        1:  110:	Assertions_Assert(val32 == 0x1234, ast);
+        -:  111:
+        -:  112:	// -----------------------------------------
+        -:  113:	// 3-x Decoders_Defaulted16At
+        -:  114:	// -----------------------------------------
+        -:  115:	// 3-1 リトルエンディアン
+        1:  116:	src[9] = 0xab;
+        1:  117:	src[10] = 0xcd;
+        1:  118:	val32 = Decoders_Defaulted16At(9, src, sizeof src, -1, 0);
+        1:  119:	Assertions_Assert(val32 == 0xcdab, ast);
+        -:  120:	// -----------------------------------------
+        -:  121:	// 3-2 ビッグエンディアン
+        1:  122:	src[9] = 0xab;
+        1:  123:	src[10] = 0xcd;
+        1:  124:	val32 = Decoders_Defaulted16At(9, src, sizeof src, -1, 1);
+        1:  125:	Assertions_Assert(val32 == 0xabcd, ast);
+        -:  126:	// -----------------------------------------
+        -:  127:	// 3-3 srcがnull
+        1:  128:	src[9] = 0xab;
+        1:  129:	src[10] = 0xcd;
+        1:  130:	val32 = Decoders_Defaulted16At(9, nullptr, sizeof src, -1, 1);
+        1:  131:	Assertions_Assert(val32 == -1, ast);
+        -:  132:	// -----------------------------------------
+        -:  133:	// 3-4 サイズが足りない
+        1:  134:	src[9] = 0xab;
+        1:  135:	src[10] = 0xcd;
+        1:  136:	val32 = Decoders_Defaulted16At(10, src, sizeof src, -1, 1);
+        1:  137:	Assertions_Assert(val32 == -1, ast);
+        -:  138:
+        -:  139:	// -----------------------------------------
+        -:  140:	// 4-x Decoders_32At
+        -:  141:	// -----------------------------------------
+        -:  142:	// 4-1 リトルエンディアン
+        1:  143:	src[6] = 0x12;
+        1:  144:	src[7] = 0x34;
+        1:  145:	src[8] = 0x56;
+        1:  146:	src[9] = 0x78;
+        1:  147:	val32 = Decoders_32At(6, src, 0);
+        1:  148:	Assertions_Assert(val32 == 0x78563412, ast);
+        -:  149:	// -----------------------------------------
+        -:  150:	// 4-2 ビッグエンディアン
+        1:  151:	src[6] = 0x12;
+        1:  152:	src[7] = 0x34;
+        1:  153:	src[8] = 0x56;
+        1:  154:	src[9] = 0x78;
+        1:  155:	val32 = Decoders_32At(6, src, 1);
+        1:  156:	Assertions_Assert(val32 == 0x12345678, ast);
+        -:  157:
+        -:  158:	// -----------------------------------------
+        -:  159:	// 5-x Decoders_Defaulted32At
+        -:  160:	// -----------------------------------------
+        -:  161:	// 5-1 リトルエンディアン
+        1:  162:	src[7] = 0x12;
+        1:  163:	src[8] = 0x34;
+        1:  164:	src[9] = 0x56;
+        1:  165:	src[10] = 0x78;
+        1:  166:	val32 = Decoders_Defaulted32At(7, src, sizeof src, -1, 0);
+        1:  167:	Assertions_Assert(val32 == 0x78563412, ast);
+        -:  168:	// -----------------------------------------
+        -:  169:	// 5-2 ビッグエンディアン
+        1:  170:	src[7] = 0x12;
+        1:  171:	src[8] = 0x34;
+        1:  172:	src[9] = 0x56;
+        1:  173:	src[10] = 0x78;
+        1:  174:	val32 = Decoders_Defaulted32At(7, src, sizeof src, -1, 1);
+        1:  175:	Assertions_Assert(val32 == 0x12345678, ast);
+        -:  176:	// -----------------------------------------
+        -:  177:	// 5-3 srcがnull
+        1:  178:	src[7] = 0x12;
+        1:  179:	src[8] = 0x34;
+        1:  180:	src[9] = 0x56;
+        1:  181:	src[10] = 0x78;
+        1:  182:	val32 = Decoders_Defaulted32At(7, nullptr, sizeof src, -1, 1);
+        1:  183:	Assertions_Assert(val32 == -1, ast);
+        -:  184:	// -----------------------------------------
+        -:  185:	// 5-4 サイズが足りない
+        1:  186:	src[7] = 0x12;
+        1:  187:	src[8] = 0x34;
+        1:  188:	src[9] = 0x56;
+        1:  189:	src[10] = 0x78;
+        1:  190:	val32 = Decoders_Defaulted32At(8, src, sizeof src, -1, 1);
+        1:  191:	Assertions_Assert(val32 == -1, ast);
+        -:  192:
+        -:  193:	// -----------------------------------------
+        -:  194:	// 6-x Decoders_64At
+        -:  195:	// -----------------------------------------
+        -:  196:	// 6-1 リトルエンディアン
+        1:  197:	src[1] = 0x12;
+        1:  198:	src[2] = 0x34;
+        1:  199:	src[3] = 0x56;
+        1:  200:	src[4] = 0x78;
+        1:  201:	src[5] = 0x9a;
+        1:  202:	src[6] = 0xbc;
+        1:  203:	src[7] = 0xde;
+        1:  204:	src[8] = 0xf0;
+        1:  205:	val64 = Decoders_64At(1, src, 0);
+        1:  206:	Assertions_Assert(val64 == 0xf0debc9a78563412LL, ast);
+        -:  207:	// -----------------------------------------
+        -:  208:	// 6-2 ビッグエンディアン
+        1:  209:	src[1] = 0x12;
+        1:  210:	src[2] = 0x34;
+        1:  211:	src[3] = 0x56;
+        1:  212:	src[4] = 0x78;
+        1:  213:	src[5] = 0x9a;
+        1:  214:	src[6] = 0xbc;
+        1:  215:	src[7] = 0xde;
+        1:  216:	src[8] = 0xf0;
+        1:  217:	val64 = Decoders_64At(1, src, 1);
+        1:  218:	Assertions_Assert(val64 == 0x123456789abcdef0LL, ast);
+        -:  219:
+        -:  220:	// -----------------------------------------
+        -:  221:	// 7-x Decoders_Defaulted64At
+        -:  222:	// -----------------------------------------
+        -:  223:	// 7-1 リトルエンディアン
+        1:  224:	src[3] = 0xab;
+        1:  225:	src[4] = 0xcd;
+        1:  226:	src[5] = 0xef;
+        1:  227:	src[6] = 0x01;
+        1:  228:	src[7] = 0x23;
+        1:  229:	src[8] = 0x45;
+        1:  230:	src[9] = 0x67;
+        1:  231:	src[10] = 0x89;
+        1:  232:	val64 = Decoders_Defaulted64At(3, src, sizeof src, -1, 0);
+        1:  233:	Assertions_Assert(val64 == 0x8967452301efcdabLL, ast);
+        -:  234:	// -----------------------------------------
+        -:  235:	// 7-2 ビッグエンディアン
+        1:  236:	src[3] = 0xab;
+        1:  237:	src[4] = 0xcd;
+        1:  238:	src[5] = 0xef;
+        1:  239:	src[6] = 0x01;
+        1:  240:	src[7] = 0x23;
+        1:  241:	src[8] = 0x45;
+        1:  242:	src[9] = 0x67;
+        1:  243:	src[10] = 0x89;
+        1:  244:	val64 = Decoders_Defaulted64At(3, src, sizeof src, -1, 1);
+        1:  245:	Assertions_Assert(val64 == 0xabcdef0123456789LL, ast);
+        -:  246:	// -----------------------------------------
+        -:  247:	// 7-3 srcがnull
+        1:  248:	src[3] = 0xab;
+        1:  249:	src[4] = 0xcd;
+        1:  250:	src[5] = 0xef;
+        1:  251:	src[6] = 0x01;
+        1:  252:	src[7] = 0x23;
+        1:  253:	src[8] = 0x45;
+        1:  254:	src[9] = 0x67;
+        1:  255:	src[10] = 0x89;
+        1:  256:	val64 = Decoders_Defaulted64At(3, nullptr, sizeof src, -1, 1);
+        1:  257:	Assertions_Assert(val64 == -1, ast);
+        -:  258:	// -----------------------------------------
+        -:  259:	// 7-4 サイズが足りない
+        1:  260:	src[3] = 0xab;
+        1:  261:	src[4] = 0xcd;
+        1:  262:	src[5] = 0xef;
+        1:  263:	src[6] = 0x01;
+        1:  264:	src[7] = 0x23;
+        1:  265:	src[8] = 0x45;
+        1:  266:	src[9] = 0x67;
+        1:  267:	src[10] = 0x89;
+        1:  268:	val64 = Decoders_Defaulted64At(4, src, sizeof src, -1, 1);
+        1:  269:	Assertions_Assert(val64 == -1, ast);
+        1:  270:}
+        -:  271:#endif

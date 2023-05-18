@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sa_5fneeded_5fbuffer_5fwords_203',['SA_NEEDED_BUFFER_WORDS',['../_assertions_8h.html#a0340cdb4e2ac707fe151a746d7db2535',1,'Assertions.h']]]
+  ['nullptr_219',['nullptr',['../nullptr_8h.html#ab979d9d4b4923f7c54d6caa6e1a61936',1,'nullptr.h']]]
 ];

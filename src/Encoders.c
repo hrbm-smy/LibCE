@@ -1,4 +1,4 @@
-﻿/** ------------------------------------------------------------------
+﻿/** -------------------------------------------------------------------------
  *
  *	@file	Encoders.c
  *	@brief	Encoders
@@ -33,10 +33,11 @@ SOFTWARE.
 
 #include "nullptr.h"
 
-/*----------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *  P R I V A T E S
  */
-/*----------------------------------------------------------------------
+
+/* --------------------------------------------------------------------------
  *  P U B L I C   I N T E R F A C E S
  */
 
@@ -61,136 +62,8 @@ int Encoders_CanEncode(
 	return result;
 }
 
-/**
- *  @brief 16ビットエンコード @n
- *    16ビットの値をエンコードする。 @n
- *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
- *    ここではエンコード先バッファのチェックは行わない。
- *  @param index エンコード先のインデックス。
- *  @param value エンコードする値。
- *  @param bigEndian 非0でBig Endianでエンコードする。
- *  @param dest エンコード先バッファ。
- *  @return なし。
- */
-void Encoders_Encode16At(
-	int32_t index,
-	int32_t value,
-	int bigEndian,
-	void *dest)
-{
-	uint8_t *buffer = (uint8_t *)dest;
-	if (bigEndian != 0)
-	{
-		buffer[index + 1] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 0] = (uint8_t)value;
-	}
-	else
-	{
-		buffer[index + 0] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 1] = (uint8_t)value;
-	}
-}
-
-/**
- *  @brief 32ビットエンコード @n
- *    32ビットの値をエンコードする。 @n
- *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
- *    ここではエンコード先バッファのチェックは行わない。
- *  @param index エンコード先のインデックス。
- *  @param value エンコードする値。
- *  @param bigEndian 非0でBig Endianでエンコードする。
- *  @param dest エンコード先バッファ。
- *  @return なし。
- */
-void Encoders_Encode32At(
-	int32_t index,
-	int32_t value,
-	int bigEndian,
-	void *dest)
-{
-	uint8_t *buffer = (uint8_t *)dest;
-	if (bigEndian != 0)
-	{
-		buffer[index + 3] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 2] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 1] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 0] = (uint8_t)value;
-	}
-	else
-	{
-		buffer[index + 0] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 1] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 2] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 3] = (uint8_t)value;
-	}
-}
-
-/**
- *  @brief 64ビットエンコード @n
- *    64ビットの値をエンコードする。 @n
- *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
- *    ここではエンコード先バッファのチェックは行わない。
- *  @param index エンコード先のインデックス。
- *  @param value エンコードする値。
- *  @param bigEndian 非0でBig Endianでエンコードする。
- *  @param dest エンコード先バッファ。
- *  @return なし。
- */
-void Encoders_Encode64At(
-	int32_t index,
-	int64_t value,
-	int bigEndian,
-	void *dest)
-{
-	uint8_t *buffer = (uint8_t *)dest;
-	if (bigEndian != 0)
-	{
-		buffer[index + 7] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 6] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 5] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 4] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 3] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 2] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 1] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 0] = (uint8_t)value;
-	}
-	else
-	{
-		buffer[index + 0] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 1] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 2] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 3] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 4] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 5] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 6] = (uint8_t)value;
-		value >>= 8;
-		buffer[index + 7] = (uint8_t)value;
-	}
-}
-
-/* -------------------------------------------------------------------
- *	Unit Test
+/* --------------------------------------------------------------------------
+ *  Unit Test
  */
 #ifdef _UNIT_TEST
 

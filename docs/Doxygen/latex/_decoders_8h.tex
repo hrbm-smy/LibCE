@@ -1,0 +1,276 @@
+\hypertarget{_decoders_8h}{}\doxysection{R\+:/\+Owned/\+Lib\+C\+E/\+W\+C/main/inc/\+Decoders.h File Reference}
+\label{_decoders_8h}\index{R:/Owned/LibCE/WC/main/inc/Decoders.h@{R:/Owned/LibCE/WC/main/inc/Decoders.h}}
+
+
+Decoders.  
+
+
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}}~static inline
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_decoders_8h_aeae9e44aa29519a95edba3690c66d3c1}{Decoders\+\_\+\+Can\+Decode}} (int32\+\_\+t needed\+Size, const void $\ast$src, int32\+\_\+t src\+Size)
+\begin{DoxyCompactList}\small\item\em デコード可能判定 ~\newline
+ デコード元のバッファがデコード可能か判定する。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t \mbox{\hyperlink{_decoders_8h_a3a9a343cc801ace3730ed136b71b8cd7}{Decoders\+\_\+16\+At}} (int32\+\_\+t index, const void $\ast$src, int big\+Endian)
+\begin{DoxyCompactList}\small\item\em 16ビットデコード ~\newline
+ 16ビットの値をデコードする。 ~\newline
+ デコード元バッファは、\+Decoders\+\_\+\+Can\+Decodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t \mbox{\hyperlink{_decoders_8h_af772dccc480a493959b00dcc631d0397}{Decoders\+\_\+\+Defaulted16\+At}} (int32\+\_\+t index, const void $\ast$src, int32\+\_\+t src\+Size, int32\+\_\+t or\+Default, int big\+Endian)
+\begin{DoxyCompactList}\small\item\em チェック付き16ビットデコード ~\newline
+ 16ビットの値をデコードする。 ~\newline
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t \mbox{\hyperlink{_decoders_8h_a69c046fcac19b8c43476cd11629494f2}{Decoders\+\_\+32\+At}} (int32\+\_\+t index, const void $\ast$src, int big\+Endian)
+\begin{DoxyCompactList}\small\item\em 32ビットデコード ~\newline
+ 32ビットの値をデコードする。 ~\newline
+ デコード元バッファは、\+Decoders\+\_\+\+Can\+Decodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t \mbox{\hyperlink{_decoders_8h_ac3295534f5b01171230c057e73be29e1}{Decoders\+\_\+\+Defaulted32\+At}} (int32\+\_\+t index, const void $\ast$src, int32\+\_\+t src\+Size, int32\+\_\+t or\+Default, int big\+Endian)
+\begin{DoxyCompactList}\small\item\em チェック付き32ビットデコード ~\newline
+ 32ビットの値をデコードする。 ~\newline
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int64\+\_\+t \mbox{\hyperlink{_decoders_8h_af99acb74e74cfaa4ad5d8293940b84b2}{Decoders\+\_\+64\+At}} (int32\+\_\+t index, const void $\ast$src, int big\+Endian)
+\begin{DoxyCompactList}\small\item\em 64ビットデコード ~\newline
+ 64ビットの値をデコードする。 ~\newline
+ デコード元バッファは、\+Decoders\+\_\+\+Can\+Decodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int64\+\_\+t \mbox{\hyperlink{_decoders_8h_ab1b0073c11390ff4908afe599c168116}{Decoders\+\_\+\+Defaulted64\+At}} (int32\+\_\+t index, const void $\ast$src, int32\+\_\+t src\+Size, int64\+\_\+t or\+Default, int big\+Endian)
+\begin{DoxyCompactList}\small\item\em チェック付き64ビットデコード ~\newline
+ 64ビットの値をデコードする。 ~\newline
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Decoders. 
+
+\DoxyHorRuler{0}
+
+
+\begin{DoxyAuthor}{Author}
+H.\+Someya 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023/05/18 
+\end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_decoders_8h_a6b047e57160a7020629d8da410b5160a}\label{_decoders_8h_a6b047e57160a7020629d8da410b5160a}} 
+\index{Decoders.h@{Decoders.h}!DECODERS\_INLINE@{DECODERS\_INLINE}}
+\index{DECODERS\_INLINE@{DECODERS\_INLINE}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{DECODERS\_INLINE}{DECODERS\_INLINE}}
+{\footnotesize\ttfamily \#define D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE~static inline}
+
+inline 
+
+Definition at line 45 of file Decoders.\+h.
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_decoders_8h_aeae9e44aa29519a95edba3690c66d3c1}\label{_decoders_8h_aeae9e44aa29519a95edba3690c66d3c1}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_CanDecode@{Decoders\_CanDecode}}
+\index{Decoders\_CanDecode@{Decoders\_CanDecode}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_CanDecode()}{Decoders\_CanDecode()}}
+{\footnotesize\ttfamily int Decoders\+\_\+\+Can\+Decode (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{needed\+Size,  }\item[{const void $\ast$}]{src,  }\item[{int32\+\_\+t}]{src\+Size }\end{DoxyParamCaption})}
+
+
+
+デコード可能判定 ~\newline
+ デコード元のバッファがデコード可能か判定する。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em needed\+Size} & デコードに必要なサイズ。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em src\+Size} & デコード元バッファのサイズ。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0\+:不可、非0\+:可能。 
+\end{DoxyReturn}
+\mbox{\Hypertarget{_decoders_8h_a3a9a343cc801ace3730ed136b71b8cd7}\label{_decoders_8h_a3a9a343cc801ace3730ed136b71b8cd7}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_16At@{Decoders\_16At}}
+\index{Decoders\_16At@{Decoders\_16At}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_16At()}{Decoders\_16At()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t Decoders\+\_\+16\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const void $\ast$}]{src,  }\item[{int}]{big\+Endian }\end{DoxyParamCaption})}
+
+
+
+16ビットデコード ~\newline
+ 16ビットの値をデコードする。 ~\newline
+ デコード元バッファは、\+Decoders\+\_\+\+Can\+Decodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & デコード元のインデックス。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+デコードした値。 
+\end{DoxyReturn}
+
+
+Definition at line 77 of file Decoders.\+h.
+
+\mbox{\Hypertarget{_decoders_8h_af772dccc480a493959b00dcc631d0397}\label{_decoders_8h_af772dccc480a493959b00dcc631d0397}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_Defaulted16At@{Decoders\_Defaulted16At}}
+\index{Decoders\_Defaulted16At@{Decoders\_Defaulted16At}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_Defaulted16At()}{Decoders\_Defaulted16At()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t Decoders\+\_\+\+Defaulted16\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const void $\ast$}]{src,  }\item[{int32\+\_\+t}]{src\+Size,  }\item[{int32\+\_\+t}]{or\+Default,  }\item[{int}]{big\+Endian }\end{DoxyParamCaption})}
+
+
+
+チェック付き16ビットデコード ~\newline
+ 16ビットの値をデコードする。 ~\newline
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & デコード元のインデックス。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em src\+Size} & デコード元バッファのサイズ。 \\
+\hline
+{\em or\+Default} & デコードできない場合のデフォルト値。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+デコードした値。 
+\end{DoxyReturn}
+
+
+Definition at line 110 of file Decoders.\+h.
+
+\mbox{\Hypertarget{_decoders_8h_a69c046fcac19b8c43476cd11629494f2}\label{_decoders_8h_a69c046fcac19b8c43476cd11629494f2}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_32At@{Decoders\_32At}}
+\index{Decoders\_32At@{Decoders\_32At}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_32At()}{Decoders\_32At()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t Decoders\+\_\+32\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const void $\ast$}]{src,  }\item[{int}]{big\+Endian }\end{DoxyParamCaption})}
+
+
+
+32ビットデコード ~\newline
+ 32ビットの値をデコードする。 ~\newline
+ デコード元バッファは、\+Decoders\+\_\+\+Can\+Decodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & デコード元のインデックス。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+デコードした値。 
+\end{DoxyReturn}
+
+
+Definition at line 134 of file Decoders.\+h.
+
+\mbox{\Hypertarget{_decoders_8h_ac3295534f5b01171230c057e73be29e1}\label{_decoders_8h_ac3295534f5b01171230c057e73be29e1}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_Defaulted32At@{Decoders\_Defaulted32At}}
+\index{Decoders\_Defaulted32At@{Decoders\_Defaulted32At}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_Defaulted32At()}{Decoders\_Defaulted32At()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int32\+\_\+t Decoders\+\_\+\+Defaulted32\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const void $\ast$}]{src,  }\item[{int32\+\_\+t}]{src\+Size,  }\item[{int32\+\_\+t}]{or\+Default,  }\item[{int}]{big\+Endian }\end{DoxyParamCaption})}
+
+
+
+チェック付き32ビットデコード ~\newline
+ 32ビットの値をデコードする。 ~\newline
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & デコード元のインデックス。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em src\+Size} & デコード元バッファのサイズ。 \\
+\hline
+{\em or\+Default} & デコードできない場合のデフォルト値。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+デコードした値。 
+\end{DoxyReturn}
+
+
+Definition at line 175 of file Decoders.\+h.
+
+\mbox{\Hypertarget{_decoders_8h_af99acb74e74cfaa4ad5d8293940b84b2}\label{_decoders_8h_af99acb74e74cfaa4ad5d8293940b84b2}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_64At@{Decoders\_64At}}
+\index{Decoders\_64At@{Decoders\_64At}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_64At()}{Decoders\_64At()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int64\+\_\+t Decoders\+\_\+64\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const void $\ast$}]{src,  }\item[{int}]{big\+Endian }\end{DoxyParamCaption})}
+
+
+
+64ビットデコード ~\newline
+ 64ビットの値をデコードする。 ~\newline
+ デコード元バッファは、\+Decoders\+\_\+\+Can\+Decodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & デコード元のインデックス。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+デコードした値。 
+\end{DoxyReturn}
+
+
+Definition at line 199 of file Decoders.\+h.
+
+\mbox{\Hypertarget{_decoders_8h_ab1b0073c11390ff4908afe599c168116}\label{_decoders_8h_ab1b0073c11390ff4908afe599c168116}} 
+\index{Decoders.h@{Decoders.h}!Decoders\_Defaulted64At@{Decoders\_Defaulted64At}}
+\index{Decoders\_Defaulted64At@{Decoders\_Defaulted64At}!Decoders.h@{Decoders.h}}
+\doxysubsubsection{\texorpdfstring{Decoders\_Defaulted64At()}{Decoders\_Defaulted64At()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{_decoders_8h_a6b047e57160a7020629d8da410b5160a}{D\+E\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} int64\+\_\+t Decoders\+\_\+\+Defaulted64\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{const void $\ast$}]{src,  }\item[{int32\+\_\+t}]{src\+Size,  }\item[{int64\+\_\+t}]{or\+Default,  }\item[{int}]{big\+Endian }\end{DoxyParamCaption})}
+
+
+
+チェック付き64ビットデコード ~\newline
+ 64ビットの値をデコードする。 ~\newline
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & デコード元のインデックス。 \\
+\hline
+{\em src} & デコード元バッファ。 \\
+\hline
+{\em src\+Size} & デコード元バッファのサイズ。 \\
+\hline
+{\em or\+Default} & デコードできない場合のデフォルト値。 \\
+\hline
+{\em big\+Endian} & 非0で\+Big Endianでエンコードする。 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+デコードした値。 
+\end{DoxyReturn}
+
+
+Definition at line 256 of file Decoders.\+h.
+

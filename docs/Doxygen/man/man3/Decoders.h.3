@@ -1,0 +1,298 @@
+.TH "R:/Owned/LibCE/WC/main/inc/Decoders.h" 3 "Thu May 18 2023" "LibCE" \" -*- nroff -*-
+.ad l
+.nh
+.SH NAME
+R:/Owned/LibCE/WC/main/inc/Decoders.h \- Decoders\&.  
+
+.SH SYNOPSIS
+.br
+.PP
+\fC#include <stdint\&.h>\fP
+.br
+
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBDECODERS_INLINE\fP   static inline"
+.br
+.in -1c
+.SS "Functions"
+
+.in +1c
+.ti -1c
+.RI "int \fBDecoders_CanDecode\fP (int32_t neededSize, const void *src, int32_t srcSize)"
+.br
+.RI "デコード可能判定 
+.br
+ デコード元のバッファがデコード可能か判定する。 "
+.ti -1c
+.RI "\fBDECODERS_INLINE\fP int32_t \fBDecoders_16At\fP (int32_t index, const void *src, int bigEndian)"
+.br
+.RI "16ビットデコード 
+.br
+ 16ビットの値をデコードする。 
+.br
+ デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 "
+.ti -1c
+.RI "\fBDECODERS_INLINE\fP int32_t \fBDecoders_Defaulted16At\fP (int32_t index, const void *src, int32_t srcSize, int32_t orDefault, int bigEndian)"
+.br
+.RI "チェック付き16ビットデコード 
+.br
+ 16ビットの値をデコードする。 
+.br
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 "
+.ti -1c
+.RI "\fBDECODERS_INLINE\fP int32_t \fBDecoders_32At\fP (int32_t index, const void *src, int bigEndian)"
+.br
+.RI "32ビットデコード 
+.br
+ 32ビットの値をデコードする。 
+.br
+ デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 "
+.ti -1c
+.RI "\fBDECODERS_INLINE\fP int32_t \fBDecoders_Defaulted32At\fP (int32_t index, const void *src, int32_t srcSize, int32_t orDefault, int bigEndian)"
+.br
+.RI "チェック付き32ビットデコード 
+.br
+ 32ビットの値をデコードする。 
+.br
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 "
+.ti -1c
+.RI "\fBDECODERS_INLINE\fP int64_t \fBDecoders_64At\fP (int32_t index, const void *src, int bigEndian)"
+.br
+.RI "64ビットデコード 
+.br
+ 64ビットの値をデコードする。 
+.br
+ デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 "
+.ti -1c
+.RI "\fBDECODERS_INLINE\fP int64_t \fBDecoders_Defaulted64At\fP (int32_t index, const void *src, int32_t srcSize, int64_t orDefault, int bigEndian)"
+.br
+.RI "チェック付き64ビットデコード 
+.br
+ 64ビットの値をデコードする。 
+.br
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 "
+.in -1c
+.SH "Detailed Description"
+.PP 
+Decoders\&. 
+
+
+.PP
+.PP
+\fBAuthor\fP
+.RS 4
+H\&.Someya 
+.RE
+.PP
+\fBDate\fP
+.RS 4
+2023/05/18 
+.RE
+.PP
+
+.PP
+Definition in file \fBDecoders\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define DECODERS_INLINE   static inline"
+inline 
+.PP
+Definition at line 45 of file Decoders\&.h\&.
+.SH "Function Documentation"
+.PP 
+.SS "int Decoders_CanDecode (int32_t neededSize, const void * src, int32_t srcSize)"
+
+.PP
+デコード可能判定 
+.br
+ デコード元のバッファがデコード可能か判定する。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIneededSize\fP デコードに必要なサイズ。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIsrcSize\fP デコード元バッファのサイズ。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+0:不可、非0:可能。 
+.RE
+.PP
+
+.SS "\fBDECODERS_INLINE\fP int32_t Decoders_16At (int32_t index, const void * src, int bigEndian)"
+
+.PP
+16ビットデコード 
+.br
+ 16ビットの値をデコードする。 
+.br
+ デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP デコード元のインデックス。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+デコードした値。 
+.RE
+.PP
+
+.PP
+Definition at line 77 of file Decoders\&.h\&.
+.SS "\fBDECODERS_INLINE\fP int32_t Decoders_Defaulted16At (int32_t index, const void * src, int32_t srcSize, int32_t orDefault, int bigEndian)"
+
+.PP
+チェック付き16ビットデコード 
+.br
+ 16ビットの値をデコードする。 
+.br
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP デコード元のインデックス。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIsrcSize\fP デコード元バッファのサイズ。 
+.br
+\fIorDefault\fP デコードできない場合のデフォルト値。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+デコードした値。 
+.RE
+.PP
+
+.PP
+Definition at line 110 of file Decoders\&.h\&.
+.SS "\fBDECODERS_INLINE\fP int32_t Decoders_32At (int32_t index, const void * src, int bigEndian)"
+
+.PP
+32ビットデコード 
+.br
+ 32ビットの値をデコードする。 
+.br
+ デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP デコード元のインデックス。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+デコードした値。 
+.RE
+.PP
+
+.PP
+Definition at line 134 of file Decoders\&.h\&.
+.SS "\fBDECODERS_INLINE\fP int32_t Decoders_Defaulted32At (int32_t index, const void * src, int32_t srcSize, int32_t orDefault, int bigEndian)"
+
+.PP
+チェック付き32ビットデコード 
+.br
+ 32ビットの値をデコードする。 
+.br
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP デコード元のインデックス。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIsrcSize\fP デコード元バッファのサイズ。 
+.br
+\fIorDefault\fP デコードできない場合のデフォルト値。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+デコードした値。 
+.RE
+.PP
+
+.PP
+Definition at line 175 of file Decoders\&.h\&.
+.SS "\fBDECODERS_INLINE\fP int64_t Decoders_64At (int32_t index, const void * src, int bigEndian)"
+
+.PP
+64ビットデコード 
+.br
+ 64ビットの値をデコードする。 
+.br
+ デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。 ここではデコード元バッファのチェックは行わない。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP デコード元のインデックス。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+デコードした値。 
+.RE
+.PP
+
+.PP
+Definition at line 199 of file Decoders\&.h\&.
+.SS "\fBDECODERS_INLINE\fP int64_t Decoders_Defaulted64At (int32_t index, const void * src, int32_t srcSize, int64_t orDefault, int bigEndian)"
+
+.PP
+チェック付き64ビットデコード 
+.br
+ 64ビットの値をデコードする。 
+.br
+ デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。 
+.PP
+\fBParameters\fP
+.RS 4
+\fIindex\fP デコード元のインデックス。 
+.br
+\fIsrc\fP デコード元バッファ。 
+.br
+\fIsrcSize\fP デコード元バッファのサイズ。 
+.br
+\fIorDefault\fP デコードできない場合のデフォルト値。 
+.br
+\fIbigEndian\fP 非0でBig Endianでエンコードする。 
+.RE
+.PP
+\fBReturns\fP
+.RS 4
+デコードした値。 
+.RE
+.PP
+
+.PP
+Definition at line 256 of file Decoders\&.h\&.
+.SH "Author"
+.PP 
+Generated automatically by Doxygen for LibCE from the source code\&.

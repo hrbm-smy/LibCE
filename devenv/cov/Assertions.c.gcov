@@ -54,13 +54,13 @@
         -:   49:/// <para>共有インスタンスは初回取得時に初期化される。明示的な初期化は不要。</para>
         -:   50:/// </summary>
         -:   51:/// <returns>共有インスタンス。</returns>
-        6:   52:Assertions* Assertions_Instance(void)
+        7:   52:Assertions* Assertions_Instance(void)
         -:   53:{
-        6:   54:	if (m_instance.Items.Buffer == nullptr)
+        7:   54:	if (m_instance.Items.Buffer == nullptr)
         -:   55:	{
         1:   56:		Assertions_Init(SA_CAP_INSTANCE, m_instanceBuffer, &m_instance);
         -:   57:	}
-        6:   58:	return &m_instance;
+        7:   58:	return &m_instance;
         -:   59:}
         -:   60:
         -:   61:/// <summary>
@@ -94,12 +94,12 @@
         -:   89:/// <param name="line">行番号。</param>
         -:   90:/// <param name="ctxt">コンテキスト。</param>
         -:   91:/// <returns>なし。</returns>
-      544:   92:void Assertions_AssertWith(
+      565:   92:void Assertions_AssertWith(
         -:   93:	int condition,
         -:   94:	const char* fileName, int32_t line,
         -:   95:	Assertions* ctxt)
         -:   96:{
-      544:   97:	if ((ctxt != nullptr) &&
+      565:   97:	if ((ctxt != nullptr) &&
         -:   98:		(condition == 0))
         -:   99:	{
         -:  100:		// Assertionは、最古を上書きしない、最初のn個を記録するものとする
@@ -123,7 +123,7 @@
         3:  118:			RingedFrames_Push(&item, sizeof item, 0, &ctxt->Items);
         -:  119:		}
         -:  120:	}
-      544:  121:}
+      565:  121:}
         -:  122:
         -:  123:/// <summary>
         -:  124:/// <para>記憶されている項目の数を取得する。</para>

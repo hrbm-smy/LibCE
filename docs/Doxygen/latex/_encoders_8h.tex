@@ -6,21 +6,26 @@ Encoders.
 
 
 {\ttfamily \#include $<$stdint.\+h$>$}\newline
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}}~static inline
+\end{DoxyCompactItemize}
 \doxysubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
 int \mbox{\hyperlink{_encoders_8h_ad622e8b3fefcf3b157b8ba78e77f8236}{Encoders\+\_\+\+Can\+Encode}} (int32\+\_\+t needed\+Size, const void $\ast$dest, int32\+\_\+t dest\+Size)
 \begin{DoxyCompactList}\small\item\em エンコード可能判定 ~\newline
  編集先のバッファがエンコード可能か判定する。 \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{_encoders_8h_aa3ea65117d6a3f60b8008211559b7e04}{Encoders\+\_\+\+Encode16\+At}} (int32\+\_\+t index, int32\+\_\+t value, int big\+Endian, void $\ast$dest)
+\mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} void \mbox{\hyperlink{_encoders_8h_a9fd58a12997dc8260c4c4ddb7ebd46b0}{Encoders\+\_\+\+Encode16\+At}} (int32\+\_\+t index, int32\+\_\+t value, int big\+Endian, void $\ast$dest)
 \begin{DoxyCompactList}\small\item\em 16ビットエンコード ~\newline
  16ビットの値をエンコードする。 ~\newline
  エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{_encoders_8h_af8436c0294eb70df1a551e60e682b612}{Encoders\+\_\+\+Encode32\+At}} (int32\+\_\+t index, int32\+\_\+t value, int big\+Endian, void $\ast$dest)
+\mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} void \mbox{\hyperlink{_encoders_8h_ac57c38c31a6e4cba728445384c3e6384}{Encoders\+\_\+\+Encode32\+At}} (int32\+\_\+t index, int32\+\_\+t value, int big\+Endian, void $\ast$dest)
 \begin{DoxyCompactList}\small\item\em 32ビットエンコード ~\newline
  32ビットの値をエンコードする。 ~\newline
  エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{_encoders_8h_adb4350c26b030c844867fba98d97cc17}{Encoders\+\_\+\+Encode64\+At}} (int32\+\_\+t index, int64\+\_\+t value, int big\+Endian, void $\ast$dest)
+\mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} void \mbox{\hyperlink{_encoders_8h_a1b95ba16cf945c76647a44e1ce13824b}{Encoders\+\_\+\+Encode64\+At}} (int32\+\_\+t index, int64\+\_\+t value, int big\+Endian, void $\ast$dest)
 \begin{DoxyCompactList}\small\item\em 64ビットエンコード ~\newline
  64ビットの値をエンコードする。 ~\newline
  エンコード先バッファは、\+Encoders\+\_\+\+Can\+Encodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -38,6 +43,19 @@ H.\+Someya
 \begin{DoxyDate}{Date}
 2023/05/12 
 \end{DoxyDate}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}\label{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}} 
+\index{Encoders.h@{Encoders.h}!ENCODERS\_INLINE@{ENCODERS\_INLINE}}
+\index{ENCODERS\_INLINE@{ENCODERS\_INLINE}!Encoders.h@{Encoders.h}}
+\doxysubsubsection{\texorpdfstring{ENCODERS\_INLINE}{ENCODERS\_INLINE}}
+{\footnotesize\ttfamily \#define E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE~static inline}
+
+inline 
+
+Definition at line 45 of file Encoders.\+h.
+
 
 
 \doxysubsection{Function Documentation}
@@ -64,11 +82,11 @@ H.\+Someya
 \begin{DoxyReturn}{Returns}
 0\+:不可、非0\+:可能。 
 \end{DoxyReturn}
-\mbox{\Hypertarget{_encoders_8h_aa3ea65117d6a3f60b8008211559b7e04}\label{_encoders_8h_aa3ea65117d6a3f60b8008211559b7e04}} 
+\mbox{\Hypertarget{_encoders_8h_a9fd58a12997dc8260c4c4ddb7ebd46b0}\label{_encoders_8h_a9fd58a12997dc8260c4c4ddb7ebd46b0}} 
 \index{Encoders.h@{Encoders.h}!Encoders\_Encode16At@{Encoders\_Encode16At}}
 \index{Encoders\_Encode16At@{Encoders\_Encode16At}!Encoders.h@{Encoders.h}}
 \doxysubsubsection{\texorpdfstring{Encoders\_Encode16At()}{Encoders\_Encode16At()}}
-{\footnotesize\ttfamily void Encoders\+\_\+\+Encode16\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} void Encoders\+\_\+\+Encode16\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
 
 
 
@@ -90,11 +108,15 @@ H.\+Someya
 \begin{DoxyReturn}{Returns}
 なし。 
 \end{DoxyReturn}
-\mbox{\Hypertarget{_encoders_8h_af8436c0294eb70df1a551e60e682b612}\label{_encoders_8h_af8436c0294eb70df1a551e60e682b612}} 
+
+
+Definition at line 78 of file Encoders.\+h.
+
+\mbox{\Hypertarget{_encoders_8h_ac57c38c31a6e4cba728445384c3e6384}\label{_encoders_8h_ac57c38c31a6e4cba728445384c3e6384}} 
 \index{Encoders.h@{Encoders.h}!Encoders\_Encode32At@{Encoders\_Encode32At}}
 \index{Encoders\_Encode32At@{Encoders\_Encode32At}!Encoders.h@{Encoders.h}}
 \doxysubsubsection{\texorpdfstring{Encoders\_Encode32At()}{Encoders\_Encode32At()}}
-{\footnotesize\ttfamily void Encoders\+\_\+\+Encode32\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} void Encoders\+\_\+\+Encode32\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int32\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
 
 
 
@@ -116,11 +138,15 @@ H.\+Someya
 \begin{DoxyReturn}{Returns}
 なし。 
 \end{DoxyReturn}
-\mbox{\Hypertarget{_encoders_8h_adb4350c26b030c844867fba98d97cc17}\label{_encoders_8h_adb4350c26b030c844867fba98d97cc17}} 
+
+
+Definition at line 110 of file Encoders.\+h.
+
+\mbox{\Hypertarget{_encoders_8h_a1b95ba16cf945c76647a44e1ce13824b}\label{_encoders_8h_a1b95ba16cf945c76647a44e1ce13824b}} 
 \index{Encoders.h@{Encoders.h}!Encoders\_Encode64At@{Encoders\_Encode64At}}
 \index{Encoders\_Encode64At@{Encoders\_Encode64At}!Encoders.h@{Encoders.h}}
 \doxysubsubsection{\texorpdfstring{Encoders\_Encode64At()}{Encoders\_Encode64At()}}
-{\footnotesize\ttfamily void Encoders\+\_\+\+Encode64\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int64\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \mbox{\hyperlink{_encoders_8h_a7f586a75511ecccb5de62b50b83f907b}{E\+N\+C\+O\+D\+E\+R\+S\+\_\+\+I\+N\+L\+I\+NE}} void Encoders\+\_\+\+Encode64\+At (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index,  }\item[{int64\+\_\+t}]{value,  }\item[{int}]{big\+Endian,  }\item[{void $\ast$}]{dest }\end{DoxyParamCaption})}
 
 
 
@@ -142,3 +168,7 @@ H.\+Someya
 \begin{DoxyReturn}{Returns}
 なし。 
 \end{DoxyReturn}
+
+
+Definition at line 150 of file Encoders.\+h.
+

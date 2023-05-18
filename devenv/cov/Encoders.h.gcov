@@ -1,0 +1,208 @@
+        -:    0:Source:../../inc/Encoders.h
+        -:    0:Graph:obj/src/Encoders.gcno
+        -:    0:Data:obj/src/Encoders.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:﻿#ifndef __Encoders_H__
+        -:    2:#define __Encoders_H__
+        -:    3:
+        -:    4:/** -------------------------------------------------------------------------
+        -:    5: *
+        -:    6: *	@file	Encoders.h
+        -:    7: *	@brief	Encoders
+        -:    8: *	@author	H.Someya
+        -:    9: *	@date	2023/05/12
+        -:   10: *
+        -:   11: */
+        -:   12:/*
+        -:   13:MIT License
+        -:   14:
+        -:   15:Copyright (c) 2021 Hirobumi Someya
+        -:   16:
+        -:   17:Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:   18:of this software and associated documentation files (the "Software"), to deal
+        -:   19:in the Software without restriction, including without limitation the rights
+        -:   20:to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   21:copies of the Software, and to permit persons to whom the Software is
+        -:   22:furnished to do so, subject to the following conditions:
+        -:   23:
+        -:   24:The above copyright notice and this permission notice shall be included in all
+        -:   25:copies or substantial portions of the Software.
+        -:   26:
+        -:   27:THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   28:IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   29:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   30:AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   31:LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   32:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   33:SOFTWARE.
+        -:   34:*/
+        -:   35:#include <stdint.h>
+        -:   36:
+        -:   37:/* --------------------------------------------------------------------------
+        -:   38: *  P U B L I C   D E F I N I T I O N S
+        -:   39: */
+        -:   40:
+        -:   41:/**
+        -:   42: * inline
+        -:   43: */
+        -:   44:#define ENCODERS_INLINE static inline
+        -:   45:
+        -:   46:/* --------------------------------------------------------------------------
+        -:   47: *  P U B L I C   I N T E R F A C E S
+        -:   48: */
+        -:   49:
+        -:   50:#ifdef __cplusplus
+        -:   51:extern "C"
+        -:   52:{
+        -:   53:#endif
+        -:   54:
+        -:   55:	/**
+        -:   56:	 *  @brief エンコード可能判定 @n
+        -:   57:	 *    編集先のバッファがエンコード可能か判定する。
+        -:   58:	 *  @param neededSize エンコードに必要なサイズ。
+        -:   59:	 *  @param dest エンコード先バッファ。
+        -:   60:	 *  @param destSize エンコード先バッファのサイズ。
+        -:   61:	 *  @return 0:不可、非0:可能。
+        -:   62:	 */
+        -:   63:	int Encoders_CanEncode(
+        -:   64:		int32_t neededSize,
+        -:   65:		const void *dest, int32_t destSize);
+        -:   66:
+        -:   67:	/**
+        -:   68:	 *  @brief 16ビットエンコード @n
+        -:   69:	 *    16ビットの値をエンコードする。 @n
+        -:   70:	 *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
+        -:   71:	 *    ここではエンコード先バッファのチェックは行わない。
+        -:   72:	 *  @param index エンコード先のインデックス。
+        -:   73:	 *  @param value エンコードする値。
+        -:   74:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:   75:	 *  @param dest エンコード先バッファ。
+        -:   76:	 *  @return なし。
+        -:   77:	 */
+        2:   78:	ENCODERS_INLINE void Encoders_Encode16At(
+        -:   79:		int32_t index,
+        -:   80:		int32_t value,
+        -:   81:		int bigEndian,
+        -:   82:		void *dest)
+        -:   83:	{
+        2:   84:		uint8_t *buffer = (uint8_t *)dest;
+        2:   85:		if (bigEndian != 0)
+        -:   86:		{
+        1:   87:			buffer[index + 1] = (uint8_t)value;
+        1:   88:			value >>= 8;
+        1:   89:			buffer[index + 0] = (uint8_t)value;
+        -:   90:		}
+        -:   91:		else
+        -:   92:		{
+        1:   93:			buffer[index + 0] = (uint8_t)value;
+        1:   94:			value >>= 8;
+        1:   95:			buffer[index + 1] = (uint8_t)value;
+        -:   96:		}
+        2:   97:	}
+        -:   98:
+        -:   99:	/**
+        -:  100:	 *  @brief 32ビットエンコード @n
+        -:  101:	 *    32ビットの値をエンコードする。 @n
+        -:  102:	 *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
+        -:  103:	 *    ここではエンコード先バッファのチェックは行わない。
+        -:  104:	 *  @param index エンコード先のインデックス。
+        -:  105:	 *  @param value エンコードする値。
+        -:  106:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  107:	 *  @param dest エンコード先バッファ。
+        -:  108:	 *  @return なし。
+        -:  109:	 */
+        2:  110:	ENCODERS_INLINE void Encoders_Encode32At(
+        -:  111:		int32_t index,
+        -:  112:		int32_t value,
+        -:  113:		int bigEndian,
+        -:  114:		void *dest)
+        -:  115:	{
+        2:  116:		uint8_t *buffer = (uint8_t *)dest;
+        2:  117:		if (bigEndian != 0)
+        -:  118:		{
+        1:  119:			buffer[index + 3] = (uint8_t)value;
+        1:  120:			value >>= 8;
+        1:  121:			buffer[index + 2] = (uint8_t)value;
+        1:  122:			value >>= 8;
+        1:  123:			buffer[index + 1] = (uint8_t)value;
+        1:  124:			value >>= 8;
+        1:  125:			buffer[index + 0] = (uint8_t)value;
+        -:  126:		}
+        -:  127:		else
+        -:  128:		{
+        1:  129:			buffer[index + 0] = (uint8_t)value;
+        1:  130:			value >>= 8;
+        1:  131:			buffer[index + 1] = (uint8_t)value;
+        1:  132:			value >>= 8;
+        1:  133:			buffer[index + 2] = (uint8_t)value;
+        1:  134:			value >>= 8;
+        1:  135:			buffer[index + 3] = (uint8_t)value;
+        -:  136:		}
+        2:  137:	}
+        -:  138:
+        -:  139:	/**
+        -:  140:	 *  @brief 64ビットエンコード @n
+        -:  141:	 *    64ビットの値をエンコードする。 @n
+        -:  142:	 *    エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。
+        -:  143:	 *    ここではエンコード先バッファのチェックは行わない。
+        -:  144:	 *  @param index エンコード先のインデックス。
+        -:  145:	 *  @param value エンコードする値。
+        -:  146:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  147:	 *  @param dest エンコード先バッファ。
+        -:  148:	 *  @return なし。
+        -:  149:	 */
+        2:  150:	ENCODERS_INLINE void Encoders_Encode64At(
+        -:  151:		int32_t index,
+        -:  152:		int64_t value,
+        -:  153:		int bigEndian,
+        -:  154:		void *dest)
+        -:  155:	{
+        2:  156:		uint8_t *buffer = (uint8_t *)dest;
+        2:  157:		if (bigEndian != 0)
+        -:  158:		{
+        1:  159:			buffer[index + 7] = (uint8_t)value;
+        1:  160:			value >>= 8;
+        1:  161:			buffer[index + 6] = (uint8_t)value;
+        1:  162:			value >>= 8;
+        1:  163:			buffer[index + 5] = (uint8_t)value;
+        1:  164:			value >>= 8;
+        1:  165:			buffer[index + 4] = (uint8_t)value;
+        1:  166:			value >>= 8;
+        1:  167:			buffer[index + 3] = (uint8_t)value;
+        1:  168:			value >>= 8;
+        1:  169:			buffer[index + 2] = (uint8_t)value;
+        1:  170:			value >>= 8;
+        1:  171:			buffer[index + 1] = (uint8_t)value;
+        1:  172:			value >>= 8;
+        1:  173:			buffer[index + 0] = (uint8_t)value;
+        -:  174:		}
+        -:  175:		else
+        -:  176:		{
+        1:  177:			buffer[index + 0] = (uint8_t)value;
+        1:  178:			value >>= 8;
+        1:  179:			buffer[index + 1] = (uint8_t)value;
+        1:  180:			value >>= 8;
+        1:  181:			buffer[index + 2] = (uint8_t)value;
+        1:  182:			value >>= 8;
+        1:  183:			buffer[index + 3] = (uint8_t)value;
+        1:  184:			value >>= 8;
+        1:  185:			buffer[index + 4] = (uint8_t)value;
+        1:  186:			value >>= 8;
+        1:  187:			buffer[index + 5] = (uint8_t)value;
+        1:  188:			value >>= 8;
+        1:  189:			buffer[index + 6] = (uint8_t)value;
+        1:  190:			value >>= 8;
+        1:  191:			buffer[index + 7] = (uint8_t)value;
+        -:  192:		}
+        2:  193:	}
+        -:  194:
+        -:  195:#ifdef _UNIT_TEST
+        -:  196:	void Encoders_UnitTest(void);
+        -:  197:#endif
+        -:  198:
+        -:  199:#ifdef __cplusplus
+        -:  200:}
+        -:  201:#endif
+        -:  202:
+        -:  203:#endif

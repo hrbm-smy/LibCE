@@ -1,0 +1,283 @@
+        -:    0:Source:../../inc/Decoders.h
+        -:    0:Graph:obj/src/Decoders.gcno
+        -:    0:Data:obj/src/Decoders.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:﻿#ifndef __Decoders_H__
+        -:    2:#define __Decoders_H__
+        -:    3:
+        -:    4:/** -------------------------------------------------------------------------
+        -:    5: *
+        -:    6: *	@file	Decoders.h
+        -:    7: *	@brief	Decoders
+        -:    8: *	@author	H.Someya
+        -:    9: *	@date	2023/05/18
+        -:   10: *
+        -:   11: */
+        -:   12:/*
+        -:   13:MIT License
+        -:   14:
+        -:   15:Copyright (c) 2021 Hirobumi Someya
+        -:   16:
+        -:   17:Permission is hereby granted, free of charge, to any person obtaining a copy
+        -:   18:of this software and associated documentation files (the "Software"), to deal
+        -:   19:in the Software without restriction, including without limitation the rights
+        -:   20:to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        -:   21:copies of the Software, and to permit persons to whom the Software is
+        -:   22:furnished to do so, subject to the following conditions:
+        -:   23:
+        -:   24:The above copyright notice and this permission notice shall be included in all
+        -:   25:copies or substantial portions of the Software.
+        -:   26:
+        -:   27:THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        -:   28:IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        -:   29:FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        -:   30:AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        -:   31:LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        -:   32:OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        -:   33:SOFTWARE.
+        -:   34:*/
+        -:   35:#include <stdint.h>
+        -:   36:
+        -:   37:/* --------------------------------------------------------------------------
+        -:   38: *  P U B L I C   D E F I N I T I O N S
+        -:   39: */
+        -:   40:
+        -:   41:/**
+        -:   42: * inline
+        -:   43: */
+        -:   44:#define DECODERS_INLINE static inline
+        -:   45:
+        -:   46:/* --------------------------------------------------------------------------
+        -:   47: *  P U B L I C   I N T E R F A C E S
+        -:   48: */
+        -:   49:
+        -:   50:#ifdef __cplusplus
+        -:   51:extern "C"
+        -:   52:{
+        -:   53:#endif
+        -:   54:
+        -:   55:	/**
+        -:   56:	 *  @brief デコード可能判定 @n
+        -:   57:	 *    デコード元のバッファがデコード可能か判定する。
+        -:   58:	 *  @param neededSize デコードに必要なサイズ。
+        -:   59:	 *  @param src デコード元バッファ。
+        -:   60:	 *  @param srcSize デコード元バッファのサイズ。
+        -:   61:	 *  @return 0:不可、非0:可能。
+        -:   62:	 */
+        -:   63:	int Decoders_CanDecode(
+        -:   64:		int32_t neededSize,
+        -:   65:		const void *src, int32_t srcSize);
+        -:   66:
+        -:   67:	/**
+        -:   68:	 *  @brief 16ビットデコード @n
+        -:   69:	 *    16ビットの値をデコードする。 @n
+        -:   70:	 *    デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。
+        -:   71:	 *    ここではデコード元バッファのチェックは行わない。
+        -:   72:	 *  @param index デコード元のインデックス。
+        -:   73:	 *  @param src デコード元バッファ。
+        -:   74:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:   75:	 *  @return デコードした値。
+        -:   76:	 */
+        4:   77:	DECODERS_INLINE int32_t Decoders_16At(
+        -:   78:		int32_t index,
+        -:   79:		const void *src,
+        -:   80:		int bigEndian)
+        -:   81:	{
+        4:   82:		int32_t result = 0L;
+        4:   83:		uint8_t *buffer = (uint8_t *)src;
+        4:   84:		if (bigEndian != 0)
+        -:   85:		{
+        2:   86:			result = (buffer[index + 0] & 0xffL);
+        2:   87:			result <<= 8;
+        2:   88:			result |= (buffer[index + 1] & 0xffL);
+        -:   89:		}
+        -:   90:		else
+        -:   91:		{
+        2:   92:			result = (buffer[index + 1] & 0xffL);
+        2:   93:			result <<= 8;
+        2:   94:			result |= (buffer[index + 0] & 0xffL);
+        -:   95:		}
+        4:   96:		return result;
+        -:   97:	}
+        -:   98:
+        -:   99:	/**
+        -:  100:	 *  @brief チェック付き16ビットデコード @n
+        -:  101:	 *    16ビットの値をデコードする。 @n
+        -:  102:	 *    デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。
+        -:  103:	 *  @param index デコード元のインデックス。
+        -:  104:	 *  @param src デコード元バッファ。
+        -:  105:	 *  @param srcSize デコード元バッファのサイズ。
+        -:  106:	 *  @param orDefault デコードできない場合のデフォルト値。
+        -:  107:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  108:	 *  @return デコードした値。
+        -:  109:	 */
+        4:  110:	DECODERS_INLINE int32_t Decoders_Defaulted16At(
+        -:  111:		int32_t index,
+        -:  112:		const void *src, int32_t srcSize,
+        -:  113:		int32_t orDefault,
+        -:  114:		int bigEndian)
+        -:  115:	{
+        4:  116:		int32_t result = orDefault;
+        4:  117:		if (Decoders_CanDecode(index + 2, src, srcSize))
+        -:  118:		{
+        2:  119:			result = Decoders_16At(index, src, bigEndian);
+        -:  120:		}
+        4:  121:		return result;
+        -:  122:	}
+        -:  123:
+        -:  124:	/**
+        -:  125:	 *  @brief 32ビットデコード @n
+        -:  126:	 *    32ビットの値をデコードする。 @n
+        -:  127:	 *    デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。
+        -:  128:	 *    ここではデコード元バッファのチェックは行わない。
+        -:  129:	 *  @param index デコード元のインデックス。
+        -:  130:	 *  @param src デコード元バッファ。
+        -:  131:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  132:	 *  @return デコードした値。
+        -:  133:	 */
+        4:  134:	DECODERS_INLINE int32_t Decoders_32At(
+        -:  135:		int32_t index,
+        -:  136:		const void *src,
+        -:  137:		int bigEndian)
+        -:  138:	{
+        4:  139:		int32_t result = 0L;
+        4:  140:		uint8_t *buffer = (uint8_t *)src;
+        4:  141:		if (bigEndian != 0)
+        -:  142:		{
+        2:  143:			result = (buffer[index + 0] & 0xffL);
+        2:  144:			result <<= 8;
+        2:  145:			result |= (buffer[index + 1] & 0xffL);
+        2:  146:			result <<= 8;
+        2:  147:			result |= (buffer[index + 2] & 0xffL);
+        2:  148:			result <<= 8;
+        2:  149:			result |= (buffer[index + 3] & 0xffL);
+        -:  150:		}
+        -:  151:		else
+        -:  152:		{
+        2:  153:			result = (buffer[index + 3] & 0xffL);
+        2:  154:			result <<= 8;
+        2:  155:			result |= (buffer[index + 2] & 0xffL);
+        2:  156:			result <<= 8;
+        2:  157:			result |= (buffer[index + 1] & 0xffL);
+        2:  158:			result <<= 8;
+        2:  159:			result |= (buffer[index + 0] & 0xffL);
+        -:  160:		}
+        4:  161:		return result;
+        -:  162:	}
+        -:  163:
+        -:  164:	/**
+        -:  165:	 *  @brief チェック付き32ビットデコード @n
+        -:  166:	 *    32ビットの値をデコードする。 @n
+        -:  167:	 *    デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。
+        -:  168:	 *  @param index デコード元のインデックス。
+        -:  169:	 *  @param src デコード元バッファ。
+        -:  170:	 *  @param srcSize デコード元バッファのサイズ。
+        -:  171:	 *  @param orDefault デコードできない場合のデフォルト値。
+        -:  172:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  173:	 *  @return デコードした値。
+        -:  174:	 */
+        4:  175:	DECODERS_INLINE int32_t Decoders_Defaulted32At(
+        -:  176:		int32_t index,
+        -:  177:		const void *src, int32_t srcSize,
+        -:  178:		int32_t orDefault,
+        -:  179:		int bigEndian)
+        -:  180:	{
+        4:  181:		int32_t result = orDefault;
+        4:  182:		if (Decoders_CanDecode(index + 4, src, srcSize))
+        -:  183:		{
+        2:  184:			result = Decoders_32At(index, src, bigEndian);
+        -:  185:		}
+        4:  186:		return result;
+        -:  187:	}
+        -:  188:
+        -:  189:	/**
+        -:  190:	 *  @brief 64ビットデコード @n
+        -:  191:	 *    64ビットの値をデコードする。 @n
+        -:  192:	 *    デコード元バッファは、Decoders_CanDecodeによりチェックしておくこと。
+        -:  193:	 *    ここではデコード元バッファのチェックは行わない。
+        -:  194:	 *  @param index デコード元のインデックス。
+        -:  195:	 *  @param src デコード元バッファ。
+        -:  196:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  197:	 *  @return デコードした値。
+        -:  198:	 */
+        4:  199:	DECODERS_INLINE int64_t Decoders_64At(
+        -:  200:		int32_t index,
+        -:  201:		const void *src,
+        -:  202:		int bigEndian)
+        -:  203:	{
+        4:  204:		int64_t result = 0L;
+        4:  205:		uint8_t *buffer = (uint8_t *)src;
+        4:  206:		if (bigEndian != 0)
+        -:  207:		{
+        2:  208:			result = (buffer[index + 0] & 0xffL);
+        2:  209:			result <<= 8;
+        2:  210:			result |= (buffer[index + 1] & 0xffL);
+        2:  211:			result <<= 8;
+        2:  212:			result |= (buffer[index + 2] & 0xffL);
+        2:  213:			result <<= 8;
+        2:  214:			result |= (buffer[index + 3] & 0xffL);
+        2:  215:			result <<= 8;
+        2:  216:			result |= (buffer[index + 4] & 0xffL);
+        2:  217:			result <<= 8;
+        2:  218:			result |= (buffer[index + 5] & 0xffL);
+        2:  219:			result <<= 8;
+        2:  220:			result |= (buffer[index + 6] & 0xffL);
+        2:  221:			result <<= 8;
+        2:  222:			result |= (buffer[index + 7] & 0xffL);
+        -:  223:		}
+        -:  224:		else
+        -:  225:		{
+        2:  226:			result = (buffer[index + 7] & 0xffL);
+        2:  227:			result <<= 8;
+        2:  228:			result |= (buffer[index + 6] & 0xffL);
+        2:  229:			result <<= 8;
+        2:  230:			result |= (buffer[index + 5] & 0xffL);
+        2:  231:			result <<= 8;
+        2:  232:			result |= (buffer[index + 4] & 0xffL);
+        2:  233:			result <<= 8;
+        2:  234:			result |= (buffer[index + 3] & 0xffL);
+        2:  235:			result <<= 8;
+        2:  236:			result |= (buffer[index + 2] & 0xffL);
+        2:  237:			result <<= 8;
+        2:  238:			result |= (buffer[index + 1] & 0xffL);
+        2:  239:			result <<= 8;
+        2:  240:			result |= (buffer[index + 0] & 0xffL);
+        -:  241:		}
+        4:  242:		return result;
+        -:  243:	}
+        -:  244:
+        -:  245:	/**
+        -:  246:	 *  @brief チェック付き64ビットデコード @n
+        -:  247:	 *    64ビットの値をデコードする。 @n
+        -:  248:	 *    デコード元バッファのチェックを行い、不正の場合にはデフォルト値を返す。
+        -:  249:	 *  @param index デコード元のインデックス。
+        -:  250:	 *  @param src デコード元バッファ。
+        -:  251:	 *  @param srcSize デコード元バッファのサイズ。
+        -:  252:	 *  @param orDefault デコードできない場合のデフォルト値。
+        -:  253:	 *  @param bigEndian 非0でBig Endianでエンコードする。
+        -:  254:	 *  @return デコードした値。
+        -:  255:	 */
+        4:  256:	DECODERS_INLINE int64_t Decoders_Defaulted64At(
+        -:  257:		int32_t index,
+        -:  258:		const void *src, int32_t srcSize,
+        -:  259:		int64_t orDefault,
+        -:  260:		int bigEndian)
+        -:  261:	{
+        4:  262:		int64_t result = orDefault;
+        4:  263:		if (Decoders_CanDecode(index + 8, src, srcSize))
+        -:  264:		{
+        2:  265:			result = Decoders_64At(index, src, bigEndian);
+        -:  266:		}
+        4:  267:		return result;
+        -:  268:	}
+        -:  269:
+        -:  270:#ifdef _UNIT_TEST
+        -:  271:	void Decoders_UnitTest(void);
+        -:  272:#endif
+        -:  273:
+        -:  274:#ifdef __cplusplus
+        -:  275:}
+        -:  276:#endif
+        -:  277:
+        -:  278:#endif

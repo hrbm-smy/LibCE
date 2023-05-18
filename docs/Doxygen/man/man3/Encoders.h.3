@@ -10,6 +10,13 @@ R:/Owned/LibCE/WC/main/inc/Encoders.h \- Encoders\&.
 \fC#include <stdint\&.h>\fP
 .br
 
+.SS "Macros"
+
+.in +1c
+.ti -1c
+.RI "#define \fBENCODERS_INLINE\fP   static inline"
+.br
+.in -1c
 .SS "Functions"
 
 .in +1c
@@ -20,7 +27,7 @@ R:/Owned/LibCE/WC/main/inc/Encoders.h \- Encoders\&.
 .br
  編集先のバッファがエンコード可能か判定する。 "
 .ti -1c
-.RI "void \fBEncoders_Encode16At\fP (int32_t index, int32_t value, int bigEndian, void *dest)"
+.RI "\fBENCODERS_INLINE\fP void \fBEncoders_Encode16At\fP (int32_t index, int32_t value, int bigEndian, void *dest)"
 .br
 .RI "16ビットエンコード 
 .br
@@ -28,7 +35,7 @@ R:/Owned/LibCE/WC/main/inc/Encoders.h \- Encoders\&.
 .br
  エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 "
 .ti -1c
-.RI "void \fBEncoders_Encode32At\fP (int32_t index, int32_t value, int bigEndian, void *dest)"
+.RI "\fBENCODERS_INLINE\fP void \fBEncoders_Encode32At\fP (int32_t index, int32_t value, int bigEndian, void *dest)"
 .br
 .RI "32ビットエンコード 
 .br
@@ -36,7 +43,7 @@ R:/Owned/LibCE/WC/main/inc/Encoders.h \- Encoders\&.
 .br
  エンコード先バッファは、Encoders_CanEncodeによりチェックしておくこと。 ここではエンコード先バッファのチェックは行わない。 "
 .ti -1c
-.RI "void \fBEncoders_Encode64At\fP (int32_t index, int64_t value, int bigEndian, void *dest)"
+.RI "\fBENCODERS_INLINE\fP void \fBEncoders_Encode64At\fP (int32_t index, int64_t value, int bigEndian, void *dest)"
 .br
 .RI "64ビットエンコード 
 .br
@@ -64,6 +71,12 @@ H\&.Someya
 
 .PP
 Definition in file \fBEncoders\&.h\fP\&.
+.SH "Macro Definition Documentation"
+.PP 
+.SS "#define ENCODERS_INLINE   static inline"
+inline 
+.PP
+Definition at line 45 of file Encoders\&.h\&.
 .SH "Function Documentation"
 .PP 
 .SS "int Encoders_CanEncode (int32_t neededSize, const void * dest, int32_t destSize)"
@@ -88,7 +101,7 @@ Definition in file \fBEncoders\&.h\fP\&.
 .RE
 .PP
 
-.SS "void Encoders_Encode16At (int32_t index, int32_t value, int bigEndian, void * dest)"
+.SS "\fBENCODERS_INLINE\fP void Encoders_Encode16At (int32_t index, int32_t value, int bigEndian, void * dest)"
 
 .PP
 16ビットエンコード 
@@ -114,7 +127,9 @@ Definition in file \fBEncoders\&.h\fP\&.
 .RE
 .PP
 
-.SS "void Encoders_Encode32At (int32_t index, int32_t value, int bigEndian, void * dest)"
+.PP
+Definition at line 78 of file Encoders\&.h\&.
+.SS "\fBENCODERS_INLINE\fP void Encoders_Encode32At (int32_t index, int32_t value, int bigEndian, void * dest)"
 
 .PP
 32ビットエンコード 
@@ -140,7 +155,9 @@ Definition in file \fBEncoders\&.h\fP\&.
 .RE
 .PP
 
-.SS "void Encoders_Encode64At (int32_t index, int64_t value, int bigEndian, void * dest)"
+.PP
+Definition at line 110 of file Encoders\&.h\&.
+.SS "\fBENCODERS_INLINE\fP void Encoders_Encode64At (int32_t index, int64_t value, int bigEndian, void * dest)"
 
 .PP
 64ビットエンコード 
@@ -166,6 +183,8 @@ Definition in file \fBEncoders\&.h\fP\&.
 .RE
 .PP
 
+.PP
+Definition at line 150 of file Encoders\&.h\&.
 .SH "Author"
 .PP 
 Generated automatically by Doxygen for LibCE from the source code\&.

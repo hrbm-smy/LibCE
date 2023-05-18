@@ -30,6 +30,7 @@ OBJS += $(OBJS_01)
 # ../../src
 SRCS_02 += ../../src/Assertions.c
 SRCS_02 += ../../src/AvlTree.c
+SRCS_02 += ../../src/Decoders.c
 SRCS_02 += ../../src/Encoders.c
 SRCS_02 += ../../src/Indices.c
 SRCS_02 += ../../src/Map.c

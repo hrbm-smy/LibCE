@@ -7,6 +7,7 @@
 #include "SchmittTrigger.h"
 #include "MmIo.h"
 #include "Encoders.h"
+#include "Decoders.h"
 
 static int32_t ShowResults(const Assertions* assertions)
 {
@@ -58,7 +59,7 @@ int main(int argc, char** argv)
 	SchmittTrigger_UnitTest();
 	MmIo_UnitTest();
 	Encoders_UnitTest();
-
+	Decoders_UnitTest();
 
 
 	// 結果を表示する

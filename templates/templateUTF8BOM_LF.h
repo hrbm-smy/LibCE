@@ -1,10 +1,10 @@
 ﻿#ifndef __templateUTF8BOM_LF_H__
 #define __templateUTF8BOM_LF_H__
 
-/** ------------------------------------------------------------------
+/** -------------------------------------------------------------------------
  *
  *	@file	templateUTF8BOM_LF.h
- *	@brief	新規モジュール作成時のテンプレート
+ *	@brief	Template for the new module
  *	@author	H.Someya
  *	@date	2023/04/14
  *
@@ -33,9 +33,10 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-/*----------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *  P U B L I C   D E F I N I T I O N S
  */
+
 /**
  * 普通のdefine
  */
@@ -64,19 +65,7 @@ SOFTWARE.
 
 /** @}*/
 
-/**
- * @name defineグループ2
- *
- * グループ2。
- *
- * @{
- */
-#define TEMPLATE_GROUP2_VALUE1 (0) /**< 値1 */
-#define TEMPLATE_GROUP2_VALUE2 (2) /**< 値2 */
-
-/** @}*/
-
-/*----------------------------------------------------------------------
+/* --------------------------------------------------------------------------
  *  P U B L I C   I N T E R F A C E S
  */
 
