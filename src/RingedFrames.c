@@ -169,11 +169,12 @@ void RingedFrames_Push(
 
 		// ヘッダを記録
 		uint8_t* header = (uint8_t*)bp;
+		memset(header, 0, RF_FRAME_HEADER_SIZE);
 		// 0～7バイト目にタイムスタンプを記録
 		int64_t* tsp = (int64_t*)&header[0];
 		*tsp = timestamp;
-		// 8～9バイト目に長さを記録
-		int16_t* lenp = (int16_t*)&header[sizeof(int64_t)];
+		// 8～11バイト目に長さを記録
+		int32_t* lenp = (int32_t*)&header[sizeof(int64_t)];
 		*lenp = length;
 
 		// フレームを記録
@@ -240,10 +241,10 @@ const void* RingedFrames_ReferWithOld(
 			int64_t* tsp = (int64_t*)&header[0];
 			*timestamp = *tsp;
 		}
-		// 8～9バイト目に長さが記録されている
+		// 8～11バイト目に長さが記録されている
 		if (length != nullptr)
 		{
-			int16_t* lenp = (int16_t*)&header[sizeof(int64_t)];
+			int32_t* lenp = (int32_t*)&header[sizeof(int64_t)];
 			*length = *lenp;
 		}
 
