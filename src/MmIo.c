@@ -55,7 +55,7 @@ uint32_t MmIo_WriteBitsU32(
 {
 	uint32_t result = 0;
 
-	uint32_t mask = ~0;
+	uint32_t mask = (uint32_t)~0;
 	mask <<= (32 - bitCount);
 	mask >>= ((32 - bitCount) - bitStart);
 

@@ -149,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\src\Assertions.c" />
     <ClCompile Include="..\..\..\..\src\AvlTree.c" />
+    <ClCompile Include="..\..\..\..\src\bits.c" />
     <ClCompile Include="..\..\..\..\src\Decoders.c" />
     <ClCompile Include="..\..\..\..\src\Encoders.c" />
     <ClCompile Include="..\..\..\..\src\Indices.c" />
@@ -161,6 +162,7 @@
     <ClInclude Include="..\..\..\..\inc\ArrayCap.h" />
     <ClInclude Include="..\..\..\..\inc\Assertions.h" />
     <ClInclude Include="..\..\..\..\inc\AvlTree.h" />
+    <ClInclude Include="..\..\..\..\inc\bits.h" />
     <ClInclude Include="..\..\..\..\inc\Decoders.h" />
     <ClInclude Include="..\..\..\..\inc\Encoders.h" />
     <ClInclude Include="..\..\..\..\inc\Indices.h" />

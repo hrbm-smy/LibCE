@@ -153,6 +153,20 @@ extern "C"
 		int32_t index,
 		const Map* ctxt);
 
+	/// <summary>
+	/// <para>指定したインデックス位置のkeyを取得する。</para>
+	/// <para>※　Relateで関連付けたkeyを返すものである。
+	/// 従って、keyのスコープは、
+	/// Relateと合わせ、ユーザーが考慮しなければならない。　※</para>
+	/// </summary>
+	/// <param name="index">インデックス位置(0～)。</param>
+	/// <param name="orDefault">取得できない場合のデフォルト値。</param>
+	/// <param name="ctxt">コンテキスト。</param>
+	/// <returns>インデックス位置のkey。</returns>
+	MapKey_t Map_KeyAt(
+		int32_t index,
+		MapKey_t orDefault,
+		const Map *ctxt);
 
 #ifdef _UNIT_TEST
 	void Map_UnitTest(void);

@@ -105,7 +105,7 @@ void Assertions_AssertWith(
 			Assertions_Item item;
 			item.Line = line;
 			// ターミネータを含めたサイズをコピー
-			int32_t fnl = strlen(fileName) + 1;
+			size_t fnl = strlen(fileName) + 1;
 			if (fnl > sizeof item.FileName)
 			{
 				fnl = sizeof item.FileName;

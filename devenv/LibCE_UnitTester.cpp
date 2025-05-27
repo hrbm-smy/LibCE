@@ -8,6 +8,7 @@
 #include "MmIo.h"
 #include "Encoders.h"
 #include "Decoders.h"
+#include "bits.h"
 
 static int32_t ShowResults(const Assertions* assertions)
 {
@@ -60,6 +61,7 @@ int main(int argc, char** argv)
 	MmIo_UnitTest();
 	Encoders_UnitTest();
 	Decoders_UnitTest();
+	bits_UnitTest();
 
 
 	// 結果を表示する

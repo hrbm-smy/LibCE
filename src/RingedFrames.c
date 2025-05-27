@@ -182,7 +182,7 @@ void RingedFrames_Push(
 		if ((frame != nullptr) &&
 			(0 < length) && (length <= ctxt->FrameSize))
 		{
-			memcpy(fp, frame, length);
+			memcpy(fp, frame, (size_t)length);
 		}
 		else
 		{
@@ -316,7 +316,7 @@ int32_t RingedFrames_Pop(
 		if ((buffer != nullptr) &&
 			(length > 0))
 		{
-			memcpy(buffer, frame, length);
+			memcpy(buffer, frame, (size_t)length);
 		}
 
 		// タイムスタンプを報告
