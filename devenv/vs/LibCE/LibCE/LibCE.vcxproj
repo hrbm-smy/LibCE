@@ -157,6 +157,7 @@
     <ClCompile Include="..\..\..\..\src\MmIo.c" />
     <ClCompile Include="..\..\..\..\src\RingedFrames.c" />
     <ClCompile Include="..\..\..\..\src\SchmittTrigger.c" />
+    <ClCompile Include="..\..\..\..\src\Timers.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\inc\ArrayCap.h" />
@@ -171,6 +172,7 @@
     <ClInclude Include="..\..\..\..\inc\nullptr.h" />
     <ClInclude Include="..\..\..\..\inc\RingedFrames.h" />
     <ClInclude Include="..\..\..\..\inc\SchmittTrigger.h" />
+    <ClInclude Include="..\..\..\..\inc\Timers.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

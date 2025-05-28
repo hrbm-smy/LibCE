@@ -9,6 +9,7 @@
 #include "Encoders.h"
 #include "Decoders.h"
 #include "bits.h"
+#include "Timers.h"
 
 static int32_t ShowResults(const Assertions* assertions)
 {
@@ -62,6 +63,7 @@ int main(int argc, char** argv)
 	Encoders_UnitTest();
 	Decoders_UnitTest();
 	bits_UnitTest();
+	Timers_UnitTest();
 
 
 	// 結果を表示する
